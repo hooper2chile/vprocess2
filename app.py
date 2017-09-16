@@ -84,7 +84,9 @@ def viewDB():
     return render_template('dbase.html', title_html="Data Logger")
 
 
-
+@app.route('/autoclave', methods=['GET, 'POST'])
+def autoclave():
+    return render_template('autoclave.html', title_html="Auto Clave")
 
 
 
