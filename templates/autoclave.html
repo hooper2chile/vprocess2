@@ -6,12 +6,9 @@
   <form id="process" method="POST" action='#'>
   <fieldset>
       <select name="selection" id="select">
-            <option value="grabar" selected>Iniciar DataLogger</option>
-            <option value="no_grabar">Detener DataLogger</option>
             <option value="reiniciar">Reiniciar</option>
             <option value="apagar">Apagar</option>
-            <option value="limpiar">Borrar Archivos</option>
-            <option value="autoclave">Activar Auto Clave></option>
+            <option value="autoclave" selected>Activar Auto Clave></option>
       </select>
 
       <input type="checkbox" id="confirm">
@@ -42,6 +39,10 @@
 
 
 
+    <div class="caja_central">
+      <!CAJA CENTRAL PARA EL DIBUJO>
+    </div>
+
 
     <div class="caja_izquierda_centro"> Temperatura [ºC]: <br>
             <input type="number"
@@ -57,6 +58,13 @@
             <input  type="checkbox" id="temperatura_rst" /> Deshabilitar   <br>
             <input  type="checkbox" id="temperatura_dir" /> Invertir
     </div>
+
+
+
+
+    <div class="caja_derecha_arriba1" id="med1"></div>
+    <div class="caja_derecha_arriba2" id="med2"></div>
+    <div class="caja_derecha_arriba3" id="med3"></div>
 
 
 
