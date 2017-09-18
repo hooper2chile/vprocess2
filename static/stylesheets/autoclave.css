@@ -105,6 +105,20 @@ fieldset {
 
 
 
+.caja_central{
+  background-image: url("bioreactor.svg");
+  font-size: 16px;
+  font-family: verdana;
+  width: 300px;
+  height: 450px;
+  margin-top: 10px;
+  margin-right: 40px;
+  margin-bottom: 10px;
+  text-align: center;
+  border: 2px solid lightblue;
+  margin-left: 305px;
+}
+
 
 .caja3 {
     font-size: 16px;
