@@ -13,6 +13,8 @@ SPEED_MAX = 150 #150 [rpm]
 u_set_temp = [SPEED_MAX,0]
 u_set_ph   = [SPEED_MAX,SPEED_MAX]
 
+ac_sets = [0,0,False]
+
 ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
 temp_set = [0,0,0,0]
@@ -86,7 +88,7 @@ def viewDB():
 
 @app.route('/autoclave', methods=['GET', 'POST'])
 def autoclave():
-    return render_template('autoclave.html', title_html="Auto Clave")
+    return render_template('autoclave.html', title_html="AutoClave")
 
 
 
@@ -106,7 +108,9 @@ def function_thread():
     emit('u_calibrar_temp', {'set': u_set_temp})
     emit('power',           {'set': task})
 
+    emit('ac_setpoints',    {'set': ac_sets})
 
+    
     global thread1
     if thread1 is None:
         thread1 = socketio.start_background_task(target=background_thread1)
@@ -463,7 +467,28 @@ def calibrar_u_temp(dato):
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('u_calibrar_temp', {'set': u_set_temp}, namespace='/biocl', broadcast=True)
 
+@socketio.on('ac_setpoints', namespace='/biocl')
+def autoclave_functions(dato):
+    global ac_sets
 
+    try: 
+        ac_sets[0] = int(dato['ac_temp'])
+        ac_sets[1] = int(dato['ac_time'])
+   	ac_sets[2] = str(dato['enabled'])
+    except:
+        ac_sets[0] = 22
+        ac_sets[1] = 11
+	ac_sets[2] = "no_llego"	
+
+    try:
+        f = open(DIR + "autoclave.txt","w")
+ 	f.write(str(ac_sets) + '\n')
+	f.close()
+
+	loggin.info("no se pudo guardar en autoclave.txt")
+
+    except:
+	loggin.info("no se pudo guardar en autoclave.txt")
 
 
 #CONFIGURACION DE THREADS
