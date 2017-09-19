@@ -36,14 +36,14 @@ $(document).ready(function() {
     socket.on('ac_setpoints', function(msg) {
         document.getElementById('temp').value   = msg.set[0];
         document.getElementById('time').value   = msg.set[1];
-        //document.getElementById('good').checked = msg.set[2];
-
+        document.getElementById('temp').checked = msg.set[2];
+	document.getElementById('time').checked = msg.set[3];
         //para depurar
         console.log('Checkeds Recibidos');
-        //console.log($('#temp').val());
-        //console.log($('#time').val());
-	//console.log($('#time_enable').is(':checked'));
-	//cosnole.log($('#temp_enable').is(':checked'));
+        console.log($('#temp').val());
+        console.log($('#time').val());
+	console.log($('#time_enable').is(':checked'));
+	console.log($('#temp_enable').is(':checked'));
     });
 
 
@@ -52,7 +52,7 @@ $(document).ready(function() {
         socket.emit('power',
                     { action  : $('select[name=selection]').val(),
                       checked : $('#confirm').is(':checked')
-                   });
+                    });
         //para depurar
         console.log('Emitiendo Valores de Acción');
         console.log($('select[name=selection]').val())

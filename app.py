@@ -473,15 +473,15 @@ def autoclave_functions(dato):
     try:
         ac_sets[0] = int(dato['ac_temp'])
         ac_sets[1] = int(dato['ac_time'])
-   	    ac_sets[2] = dato['time_enable'])
-        ac_sets[3] = dato['temp_enable'])
+	ac_sets[2] = dato['time_en']
+        ac_sets[3] = dato['temp_en']
     except:
         ac_sets[0] = 22
         ac_sets[1] = 11
-	#ac_sets[2] = "no_llego"
-
+	ac_sets[2] = "no_llego"
+	ac_sets[3] = "no_llego"
     try:
-        f = open(DIR + "autoclave.txt","w")
+        f = open(DIR + "autoclave.txt","a+")
  	f.write(str(ac_sets) + '\n')
 	f.close()
 
