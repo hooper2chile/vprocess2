@@ -35,6 +35,7 @@ app = Flask(__name__, static_url_path="")
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 thread1 = None
+thread2 = None
 error = None
 
 #CONFIGURACION DE PAGINAS WEB
@@ -473,14 +474,14 @@ def autoclave_functions(dato):
     try:
         ac_sets[0] = int(dato['ac_temp'])
         ac_sets[1] = int(dato['ac_time'])
-	ac_sets[2] = dato['time_en']
+	    ac_sets[2] = dato['time_en']
         ac_sets[3] = dato['temp_en']
 
     except:
         ac_sets[0] = 22
         ac_sets[1] = 11
-	ac_sets[2] = "no_llego"
-	ac_sets[3] = "no_llego"
+    	ac_sets[2] = "no_llego"
+    	ac_sets[3] = "no_llego"
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
@@ -488,8 +489,8 @@ def autoclave_functions(dato):
 
     try:
         f = open(DIR + "autoclave.txt","a+")
- 	f.write(str(ac_sets) + '\n')
-	f.close()
+     	f.write(str(ac_sets) + '\n')
+    	f.close()
 
 	logging.info("se guardo en autoclave.txt")
 
@@ -500,17 +501,25 @@ def autoclave_functions(dato):
 
 
 
-    #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
-    #socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
-
 
 #CONFIGURACION DE THREADS
+def background_thread2():
+    global ac_sets
+    while flag_autoclave and ac_sets[1] >= 0:
+        ac_sets[1] -= 1  # ac_sets[1]=: timer set
+        time.sleep(60)
+
+        socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
+
+
+
+
 def background_thread1():
     measures = [0,0,0,0,0,0,0]
     save_set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
 
+    global set_data
     while True:
-        global set_data
         #se emiten las mediciones y setpoints para medir y graficar
         socketio.emit('Medidas', {'data': measures, 'set': set_data}, namespace='/biocl')
 
