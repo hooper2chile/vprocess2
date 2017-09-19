@@ -19,7 +19,8 @@ $(document).ready(function() {
         socket.emit('ac_setpoints',
                     { ac_temp: $('#temp').val(),
                       ac_time: $('#time').val(),
-                      //enabled: $('#good').is(':checked'),  //good for security
+                      temp_en: $('#temp_enable').is(':checked'),
+                      time_en: $('#time_enable').is(':checked')
                      });
 
         //para depurar
