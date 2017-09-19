@@ -5,7 +5,7 @@ from flask_socketio import SocketIO, emit, disconnect
 
 import os, sys, logging, communication, reviewDB, tocsv
 
-logging.basicConfig(filename='/home/pi/biocl_system/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess2/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 DIR="/home/pi/vprocess2/"
 SPEED_MAX = 150 #150 [rpm]
@@ -13,7 +13,7 @@ SPEED_MAX = 150 #150 [rpm]
 u_set_temp = [SPEED_MAX,0]
 u_set_ph   = [SPEED_MAX,SPEED_MAX]
 
-ac_sets = [0,0,False]
+ac_sets = [0,0,False,False]
 
 ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
@@ -109,7 +109,7 @@ def function_thread():
     emit('power',           {'set': task})
     emit('ac_setpoints',    {'set': ac_sets})
 
-    
+
     global thread1
     if thread1 is None:
         thread1 = socketio.start_background_task(target=background_thread1)
@@ -118,9 +118,9 @@ def function_thread():
 
 
 @socketio.on('power', namespace='/biocl')
-def setpoints(dato):
+def system(dato):
     global task, flag_database
-    #se reciben los nuevos setpoints
+    #se reciben las nuevos acciones: apagar, reiniciar, borrar archivos, etc
     task = [ dato['action'], dato['checked'] ]
 
     #guardo task en un archivo para depurar
@@ -158,20 +158,20 @@ def setpoints(dato):
                 logging.info("no se pudo guardar el flag_database para detener grabacion\n")
 
         elif task[0] == "reiniciar":
-            os.system(DIR+"bash killall")
+            os.system(DIR + "bash killall")
             os.system("sudo reboot")
 
         elif task[0] == "apagar":
-            os.system(DIR+"bash killall")
+            os.system(DIR + "bash killall")
             os.system("sudo shutdown -h now")
 
         elif task[0] == "limpiar":
             try:
-                os.system("rm -rf /home/pi/biocl_system/csv/*.csv")
-                os.system("rm -rf /home/pi/biocl_system/log/*.log")
-                os.system("rm -rf /home/pi/biocl_system/log/my.log.*")
-                os.system("rm -rf /home/pi/biocl_system/database/*.db")
-                os.system("rm -rf /home/pi/biocl_system/database/*.db-journal")
+                os.system("rm -rf /home/pi/vprocess2/csv/*.csv")
+                os.system("rm -rf /home/pi/vprocess2/log/*.log")
+                os.system("rm -rf /home/pi/vprocess2/log/my.log.*")
+                os.system("rm -rf /home/pi/vprocess2/database/*.db")
+                os.system("rm -rf /home/pi/vprocess2/database/*.db-journal")
 
             except:
                 logging.info("no se pudo completar limpiar\n")
@@ -470,14 +470,16 @@ def calibrar_u_temp(dato):
 def autoclave_functions(dato):
     global ac_sets
 
-    try: 
+    try:
         ac_sets[0] = int(dato['ac_temp'])
         ac_sets[1] = int(dato['ac_time'])
+        ac_sets[2] =
+        ac_sets[3] =
    	#ac_sets[2] = str(dato['enabled'])
     except:
         ac_sets[0] = 22
         ac_sets[1] = 11
-	#ac_sets[2] = "no_llego"	
+	#ac_sets[2] = "no_llego"
 
     try:
         f = open(DIR + "autoclave.txt","w")
@@ -488,6 +490,9 @@ def autoclave_functions(dato):
 
     except:
 	logging.info("no se pudo guardar en autoclave.txt")
+
+    #función TimeCounter: poner acá, posiblemente con thread2, falta recibir los enable y la confirmación de activación
+
 
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
