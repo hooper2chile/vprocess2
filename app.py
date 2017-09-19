@@ -473,7 +473,8 @@ def autoclave_functions(dato):
     try: 
         ac_sets[0] = int(dato['ac_temp'])
         ac_sets[1] = int(dato['ac_time'])
-   	#ac_sets[2] = str(dato['enabled'])
+   	ac_sets[2] = dato['time_enable'])
+        ac_sets[3] = dato['temp_enable'])
     except:
         ac_sets[0] = 22
         ac_sets[1] = 11
@@ -504,7 +505,7 @@ def background_thread1():
         #se emiten las mediciones y setpoints para medir y graficar
         socketio.emit('Medidas', {'data': measures, 'set': set_data}, namespace='/biocl')
 
-        #ZMQ DAQmx download data from micro controller
+        #ZMQ DAQmx download data from micro controller: app.py<->communication.py<->myserial.py<->uc
         temp_ = communication.zmq_client().split()
 
         try:
