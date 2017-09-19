@@ -5,9 +5,9 @@
 '''
 import os, sys, time, datetime, sqlite3, sqlitebck, logging, communication
 
-logging.basicConfig(filename='/home/pi/biocl_system/log/database.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess2/log/database.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 TIME_MIN_BD = 1 # 1 [s]
-DIR="/home/pi/biocl_system/"
+DIR="/home/pi/vprocess2/"
 flag_database = "False"
 flag_database_local = False
 
@@ -37,15 +37,15 @@ def update_db(real_data, connector, c, first_time, BACKUP):
     #Backup DB in RAM to DISK SD
     if BACKUP:
 
-        filedb='/home/pi/biocl_system/database/backup__' + first_time + '__.db'
+        filedb='/home/pi/vprocess2/database/backup__' + first_time + '__.db'
 
         bck = sqlite3.connect(filedb)
         sqlitebck.copy(connector, bck)
 
         try:
-            os.system('sqlite3 -header -csv %s "select * from ph;"   > /home/pi/biocl_system/csv/%s' % (filedb,filedb[31:-3])+'full_ph.csv' )
-            os.system('sqlite3 -header -csv %s "select * from od;"   > /home/pi/biocl_system/csv/%s' % (filedb,filedb[31:-3])+'full_od.csv' )
-            os.system('sqlite3 -header -csv %s "select * from temp;" > /home/pi/biocl_system/csv/%s' % (filedb,filedb[31:-3])+'full_temp.csv' )
+            os.system('sqlite3 -header -csv %s "select * from ph;"   > /home/pi/vprocess2/csv/%s' % (filedb,filedb[31:-3])+'full_ph.csv' )
+            os.system('sqlite3 -header -csv %s "select * from od;"   > /home/pi/vprocess2/csv/%s' % (filedb,filedb[31:-3])+'full_od.csv' )
+            os.system('sqlite3 -header -csv %s "select * from temp;" > /home/pi/vprocess2/csv/%s' % (filedb,filedb[31:-3])+'full_temp.csv' )
 
             logging.info("\n Backup FULL REALIZADO \n")
 

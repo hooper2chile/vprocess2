@@ -19,14 +19,14 @@ $(document).ready(function() {
         socket.emit('ac_setpoints',
                     { ac_temp: $('#temp').val(),
                       ac_time: $('#time').val(),
-                      enabled: $('#good').is(':checked'),  //good for security
+                      //enabled: $('#good').is(':checked'),  //good for security
                      });
 
         //para depurar
         console.log('Emitiendo Valores: temp, timer, good checked: ');
         console.log($('#temp').val());
         console.log($('#time').val());
-        console.log($('#good').is(':checked'));
+	//console.log($('#good').is(':checked'));
         return false;
     });
 
@@ -35,12 +35,14 @@ $(document).ready(function() {
     socket.on('ac_setpoints', function(msg) {
         document.getElementById('temp').value   = msg.set[0];
         document.getElementById('time').value   = msg.set[1];
-        document.getElementById('good').checked = msg.set[2];
+        //document.getElementById('good').checked = msg.set[2];
 
         //para depurar
         console.log('Checkeds Recibidos');
-        console.log($('#alimentar_rst').is(':checked'));
-        console.log($('#mezclar_rst').is(':checked'));
+        //console.log($('#temp').val());
+        //console.log($('#time').val());
+	//console.log($('#time_enable').is(':checked'));
+	//cosnole.log($('#temp_enable').is(':checked'));
     });
 
 
@@ -60,7 +62,7 @@ $(document).ready(function() {
 
     //se escuchan desde el servidor señal de reinicio,apagado, grabacion y limpiaza
     //para ser desplegados en todos los clientes.
-    socket.on('ac_power', function(msg) {
+    socket.on('power', function(msg) {
         document.getElementById("select").value = msg.set[0]
         document.getElementById('confirm').checked = msg.set[1]
 

@@ -7,7 +7,7 @@ import os, sys, logging, communication, reviewDB, tocsv
 
 logging.basicConfig(filename='/home/pi/biocl_system/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
-DIR="/home/pi/biocl_system/"
+DIR="/home/pi/vprocess2/"
 SPEED_MAX = 150 #150 [rpm]
 
 u_set_temp = [SPEED_MAX,0]
@@ -107,7 +107,6 @@ def function_thread():
     emit('u_calibrar',      {'set': u_set_ph})
     emit('u_calibrar_temp', {'set': u_set_temp})
     emit('power',           {'set': task})
-
     emit('ac_setpoints',    {'set': ac_sets})
 
     
@@ -474,21 +473,25 @@ def autoclave_functions(dato):
     try: 
         ac_sets[0] = int(dato['ac_temp'])
         ac_sets[1] = int(dato['ac_time'])
-   	ac_sets[2] = str(dato['enabled'])
+   	#ac_sets[2] = str(dato['enabled'])
     except:
         ac_sets[0] = 22
         ac_sets[1] = 11
-	ac_sets[2] = "no_llego"	
+	#ac_sets[2] = "no_llego"	
 
     try:
         f = open(DIR + "autoclave.txt","w")
  	f.write(str(ac_sets) + '\n')
 	f.close()
 
-	loggin.info("no se pudo guardar en autoclave.txt")
+	logging.info("se guardo en autoclave.txt")
 
     except:
-	loggin.info("no se pudo guardar en autoclave.txt")
+	logging.info("no se pudo guardar en autoclave.txt")
+
+
+    #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
+    socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
 
 
 #CONFIGURACION DE THREADS
