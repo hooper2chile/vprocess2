@@ -475,11 +475,17 @@ def autoclave_functions(dato):
         ac_sets[1] = int(dato['ac_time'])
 	ac_sets[2] = dato['time_en']
         ac_sets[3] = dato['temp_en']
+
     except:
         ac_sets[0] = 22
         ac_sets[1] = 11
 	ac_sets[2] = "no_llego"
 	ac_sets[3] = "no_llego"
+
+    #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
+    socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
+
+
     try:
         f = open(DIR + "autoclave.txt","a+")
  	f.write(str(ac_sets) + '\n')
@@ -495,7 +501,7 @@ def autoclave_functions(dato):
 
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
-    socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
+    #socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
 
 
 #CONFIGURACION DE THREADS

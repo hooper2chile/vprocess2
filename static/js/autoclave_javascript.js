@@ -27,7 +27,8 @@ $(document).ready(function() {
         console.log('Emitiendo Valores: temp, timer, good checked: ');
         console.log($('#temp').val());
         console.log($('#time').val());
-	//console.log($('#good').is(':checked'));
+	console.log($('#time_enable').is(':checked'));
+	console.log($('#temp_enable').is(':checked'));
         return false;
     });
 
@@ -36,14 +37,15 @@ $(document).ready(function() {
     socket.on('ac_setpoints', function(msg) {
         document.getElementById('temp').value   = msg.set[0];
         document.getElementById('time').value   = msg.set[1];
-        document.getElementById('temp').checked = msg.set[2];
-	document.getElementById('time').checked = msg.set[3];
+        document.getElementById('temp_enable').checked = msg.set[2];
+	document.getElementById('time_enable').checked = msg.set[3];
         //para depurar
         console.log('Checkeds Recibidos');
         console.log($('#temp').val());
         console.log($('#time').val());
-	console.log($('#time_enable').is(':checked'));
-	console.log($('#temp_enable').is(':checked'));
+	console.log($('#time_enable').is(':checked')); console.log("_"); console.log(msg.set[2]);
+	console.log("\n")
+	console.log($('#temp_enable').is(':checked')); console.log("_"); console.log(msg.set[3]);
     });
 
 
