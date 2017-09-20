@@ -36,7 +36,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 thread1 = None
 thread2 = None
-error = None
+error   = None
 
 #CONFIGURACION DE PAGINAS WEB
 @app.route('/'     , methods=['POST', 'GET'])
