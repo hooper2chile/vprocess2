@@ -507,6 +507,7 @@ def autoclave_functions(dato):
 #CONFIGURACION DE THREADS
 def background_thread2():
     global ac_sets
+    flag_autoclave = True
     while flag_autoclave and ac_sets[1] > 0:
         ac_sets[1] -= 1  # ac_sets[1]=: timer set
     	socketio.sleep(60)
