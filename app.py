@@ -61,7 +61,6 @@ def login():
 @app.route('/calibrar', methods=['POST', 'GET'])
 def test():
     global error
-
     if request.method == 'POST':
         if request.form['username'] != 'biocl' or request.form['password'] != 'felipe':
             error = "Credencial Invalida"
@@ -73,8 +72,6 @@ def test():
 
     error = 'No Validado en Calibracion'
     return render_template("login.html", error=error)
-
-
 
 
 @app.route('/graphics')
@@ -115,7 +112,10 @@ def function_thread():
     if thread1 is None:
         thread1 = socketio.start_background_task(target=background_thread1)
 
-
+    global thread2
+    if thread2 is None:
+	thread2 = socketio.start_background_task(target=background_thread2)
+	
 
 
 @socketio.on('power', namespace='/biocl')
@@ -467,6 +467,8 @@ def calibrar_u_temp(dato):
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('u_calibrar_temp', {'set': u_set_temp}, namespace='/biocl', broadcast=True)
 
+
+
 @socketio.on('ac_setpoints', namespace='/biocl')
 def autoclave_functions(dato):
     global ac_sets
@@ -505,10 +507,11 @@ def autoclave_functions(dato):
 #CONFIGURACION DE THREADS
 def background_thread2():
     global ac_sets
+    flag_autoclave = True
     while flag_autoclave and ac_sets[1] >= 0:
+	socketio.sleep(60)
         ac_sets[1] -= 1  # ac_sets[1]=: timer set
-        time.sleep(60)
-
+        
         socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
 
 
