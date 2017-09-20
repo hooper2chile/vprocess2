@@ -505,12 +505,13 @@ def autoclave_functions(dato):
 #CONFIGURACION DE THREADS
 def background_thread2():
     global ac_sets
-    while flag_autoclave and ac_sets[1] >= 0:
+    while flag_autoclave and ac_sets[1] > 0:
         ac_sets[1] -= 1  # ac_sets[1]=: timer set
         time.sleep(60)
 
         socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
 
+        #acá habria que implementar una función que haga la comunicación con uc2
 
 
 
