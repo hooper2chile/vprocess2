@@ -484,11 +484,6 @@ def autoclave_functions(dato):
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
 
-    global thread2
-    if thread2 is None:
-        thread2 = socketio.start_background_task(target=background_thread2)
-
-
     try:
         f = open(DIR + "autoclave.txt","a+")
      	f.write(str(ac_sets) + '\n')
@@ -499,8 +494,10 @@ def autoclave_functions(dato):
     except:
 	logging.info("no se pudo guardar en autoclave.txt")
 
-    #función TimeCounter: poner acá, posiblemente con thread2, falta recibir los enable y la confirmación de activación
-
+    #función TimeCounter: poner acá, posiblemente con thread2, falta recibir la confirmación de activación
+    global thread2
+    if thread2 is None:
+        thread2 = socketio.start_background_task(target=background_thread2)
 
 
 
