@@ -511,7 +511,7 @@ def autoclave_functions(dato):
 
 #CONFIGURACION DE THREADS
 def background_thread2():
-    global ac_sets
+    global ac_sets, time_save, temp_save
     flag_autoclave = True
     while flag_autoclave and ac_sets[1] > 0:
         ac_sets[1] -= 1   # ac_sets[1]=: timer set
