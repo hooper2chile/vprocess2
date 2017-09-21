@@ -41,8 +41,8 @@ $(document).ready(function() {
         document.getElementById('time').value   = msg.set[1];
         document.getElementById('temp_enable').checked = msg.set[2];
 	      document.getElementById('time_enable').checked = msg.set[3];
-        document.getElementById('time_set').value = msg.set[4];
-        document.getElementById('temp_set').value = msg.set[5];
+        document.getElementById('time_set').value = msg.save[0];
+        document.getElementById('temp_set').value = msg.save[1];
         //para depurar
         console.log('Checkeds Recibidos');
         console.log($('#temp').val());
