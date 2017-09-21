@@ -49,6 +49,9 @@ $(document).ready(function() {
         console.log($('#time').val());
 	      console.log($('#time_enable').is(':checked'));
 	      console.log($('#temp_enable').is(':checked'));
+        console.log('probando:');
+        console.log(msg.set[4]);
+        console.log(msg.set[5]);
     });
 
 
