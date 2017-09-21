@@ -494,7 +494,7 @@ def autoclave_functions(dato):
     if ac_sets[0] > TEMP_MAX:
         ac_sets[0] = TEMP_MAX
 
-    if ac_sets[1] > TIME_MAX
+    if ac_sets[1] > TIME_MAX:
         ac_sets[1] = TIME_MAX
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
