@@ -13,6 +13,8 @@ SPEED_MAX = 150 #150 [rpm]
 u_set_temp = [SPEED_MAX,0]
 u_set_ph   = [SPEED_MAX,SPEED_MAX]
 
+time_save = 0
+temp_save = 0
 ac_sets = [0,0,False,False]
 
 ph_set = [0,0,0,0]
@@ -467,13 +469,16 @@ def calibrar_u_temp(dato):
 
 @socketio.on('ac_setpoints', namespace='/biocl')
 def autoclave_functions(dato):
-    global ac_sets
+    global ac_sets, time_save, temp_save
 
     try:
         ac_sets[0] = int(dato['ac_temp'])
         ac_sets[1] = int(dato['ac_time'])
-	ac_sets[2] = dato['time_en']
+        ac_sets[2] = dato['time_en']
         ac_sets[3] = dato['temp_en']
+
+        time_save = int(dato['ac_temp'])
+        temp_save = int(dato['ac_time'])
 
     except:
         ac_sets[0] = 22
@@ -481,12 +486,15 @@ def autoclave_functions(dato):
     	ac_sets[2] = "no_llego"
     	ac_sets[3] = "no_llego"
 
+        time_save = "vacio"
+        temp_save = "vacio"
+
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
-    socketio.emit('ac_setpoints', {'set': ac_sets}, namespace='/biocl', broadcast=True)
+    socketio.emit('ac_setpoints', {'set': [ac_sets,time_save,temp_save]}, namespace='/biocl', broadcast=True)
 
     try:
         f = open(DIR + "autoclave.txt","a+")
-     	f.write(str(ac_sets) + '\n')
+     	f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + '\n')
     	f.close()
 
 	logging.info("se guardo en autoclave.txt")

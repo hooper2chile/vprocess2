@@ -44,10 +44,10 @@ var socket = io.connect(location.protocol + '//' +
 
           //se escuchan desde el servidor los valores seteados para calibración.
           socket.on('ph_calibrar', function(msg) {
-            $('#ph1_set').text('Set pH1 :   ' + msg.set[0]).html();
-            $('#iph1_set').text('Set IpH1: '  + msg.set[1]).html();
-            $('#ph2_set').text('Set pH2 :   ' + msg.set[2]).html();
-            $('#iph2_set').text('Set IpH2: '  + msg.set[3]).html();
+            $('#ph1_set' ).text('Set pH1 :   ' + msg.set[0]).html();
+            $('#iph1_set').text('Set IpH1: '   + msg.set[1]).html();
+            $('#ph2_set' ).text('Set pH2 :   ' + msg.set[2]).html();
+            $('#iph2_set').text('Set IpH2: '   + msg.set[3]).html();
           });
 
 
@@ -70,10 +70,10 @@ var socket = io.connect(location.protocol + '//' +
 
           //se escuchan desde el servidor los valores seteados para calibración.
           socket.on('od_calibrar', function(msg) {
-            $('#od1_set').text('Set OD1 :   ' + msg.set[0]).html();
-            $('#iod1_set').text('Set IOd1: '  + msg.set[1]).html();
-            $('#od2_set').text('Set OD2 :   ' + msg.set[2]).html();
-            $('#iod2_set').text('Set IOd2: '  + msg.set[3]).html();
+            $('#od1_set' ).text('Set OD1 :   ' + msg.set[0]).html();
+            $('#iod1_set').text('Set IOd1: '   + msg.set[1]).html();
+            $('#od2_set' ).text('Set OD2 :   ' + msg.set[2]).html();
+            $('#iod2_set').text('Set IOd2: '   + msg.set[3]).html();
           });
 
 
@@ -96,9 +96,9 @@ var socket = io.connect(location.protocol + '//' +
 
           //se escuchan desde el servidor los valores seteados para calibración.
           socket.on('temp_calibrar', function(msg) {
-            $('#temp1_set').text('Set Temp1 :   ' + msg.set[0]).html();
+            $('#temp1_set' ).text('Set Temp1 :   ' + msg.set[0]).html();
             $('#itemp1_set').text('Set Itemp1: '  + msg.set[1]).html();
-            $('#temp2_set').text('Set Temp2 :   ' + msg.set[2]).html();
+            $('#temp2_set' ).text('Set Temp2 :   ' + msg.set[2]).html();
             $('#itemp2_set').text('Set Itemp2: '  + msg.set[3]).html();
           });
 
