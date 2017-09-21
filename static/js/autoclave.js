@@ -53,7 +53,8 @@ $(document).ready(function() {
         console.log(msg.set[4]);
         console.log(msg.set[5]);
         console.log('probando2');
-        console.log(msg.time_save[0]);
+        console.log(msg.time_save);
+        console.log(msg.temp_save);
     });
 
 
