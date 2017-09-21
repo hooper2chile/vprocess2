@@ -70,11 +70,12 @@ aside{
 }
 
 footer{
-  font-size: 16px;
-  background: lightblue;
+  font-size: 20px;
+  background: rgb(65, 182, 230);
   height: 70px;
   text-align: center;
   margin-top: 5px;
+  border-radius: 50px;
 }
 
 fieldset {
@@ -198,7 +199,7 @@ fieldset {
   height: 100px;
   padding: 20px;
   border: 2px solid lightblue;
-  margin-top: 2px;
+  margin-top: 6px;
   margin-right: -50px;
   text-align: left;
 
@@ -220,7 +221,7 @@ fieldset {
   margin-left: 610px;
 
   margin-top: 110px;
-  margin-bottom: -10px;
+  margin-bottom: -130px;
   border-radius: 50px;
 }
 
