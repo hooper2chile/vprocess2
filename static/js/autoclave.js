@@ -55,7 +55,8 @@ $(document).ready(function() {
         $('#time_set' ).text('Timer Set: ' + msg.save[1]).html();
     });
 
-
+    $('#temp_set').css({ 'color': 'red'  , 'font-size': '110%' });
+    $('#time_set').css({ 'color': 'green', 'font-size': '110%' });
 
 
     //se emiten señal de reinicio, apagado, grabacion y limpiaza hacia el servidor
