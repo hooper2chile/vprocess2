@@ -51,11 +51,8 @@ $(document).ready(function() {
 	      console.log($('#temp_enable').is(':checked'));
 
         console.log('Variables Guardadas');
-        //console.log(msg.save[0]);
-        //console.log(msg.save[1]);
-
-        $('#time_set' ).text('Timer Set: ' + msg.save[1]).html();
         $('#temp_set' ).text('Temp  Set: ' + msg.save[0]).html();
+        $('#time_set' ).text('Timer Set: ' + msg.save[1]).html();
     });
 
 

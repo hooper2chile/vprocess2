@@ -477,8 +477,8 @@ def autoclave_functions(dato):
         ac_sets[2] = dato['time_en']
         ac_sets[3] = dato['temp_en']
 
-        time_save = int(dato['ac_temp'])
-        temp_save = int(dato['ac_time'])
+        temp_save = int(dato['ac_temp'])
+        time_save = int(dato['ac_time'])
 
     except:
         ac_sets[0] = 22
@@ -490,7 +490,7 @@ def autoclave_functions(dato):
         temp_save = "vacio"
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
-    socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
+    socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
     try:
         f = open(DIR + "autoclave.txt","a+")
@@ -520,7 +520,9 @@ def background_thread2():
     	socketio.sleep(1) # debe ser 60
 
         socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
+
     #permite volver a correr el thread una vez terminado un timer
+
     thread2 = None
 
     #acá habria que implementar una función que haga la comunicación con uc2
