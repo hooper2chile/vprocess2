@@ -502,6 +502,7 @@ def autoclave_functions(dato):
     except:
 	logging.info("no se pudo guardar en autoclave.txt")
 
+
     #función TimeCounter: poner acá, posiblemente con thread2, falta recibir la confirmación de activación
     global thread2
     if thread2 is None:
@@ -513,13 +514,18 @@ def autoclave_functions(dato):
 def background_thread2():
     global ac_sets, time_save, temp_save
     flag_autoclave = True
+
     while flag_autoclave and ac_sets[1] > 0:
         ac_sets[1] -= 1   # ac_sets[1]=: timer set
     	socketio.sleep(1) # debe ser 60
 
         socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
-        #acá habria que implementar una función que haga la comunicación con uc2
 
+
+    #acá habria que implementar una función que haga la comunicación con uc2
+
+    #permite volver a correr el thread una vez terminado un timer
+    thread2 = None
 
 
 def background_thread1():
