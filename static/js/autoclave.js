@@ -51,12 +51,12 @@ $(document).ready(function() {
 	      console.log($('#temp_enable').is(':checked'));
 
         console.log('Variables Guardadas');
-        $('#temp_set' ).text('Temp  Set: ' + msg.save[0]).html();
-        $('#time_set' ).text('Timer Set: ' + msg.save[1]).html();
+        $('#temp_set' ).text('Temp  Set: ' + msg.save[0] + '[ºC] ' ).html();
+        $('#time_set' ).text('Timer Set: ' + msg.save[1] + '[MIN]' ).html();
     });
 
-    $('#temp_set').css({ 'color': 'red'  , 'font-size': '110%' });
-    $('#time_set').css({ 'color': 'green', 'font-size': '110%' });
+      $('#temp_set').css({ 'color': 'red', 'font-size': '110%' });
+      $('#time_set').css({ 'color': 'red', 'font-size': '110%' });
 
 
     //se emiten señal de reinicio, apagado, grabacion y limpiaza hacia el servidor
