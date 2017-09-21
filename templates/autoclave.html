@@ -20,33 +20,8 @@
 </form>
 </section>
 
-
-<!caja1: Timer Set>
-<form id="ac_setpoints" method="POST" action='#'>
+    <!caja1: Temperature Set>
     <div class="caja1">
-      <div id="time_set">Timer Set:</div>
-        Tiempo [Min]:
-              <br>
-              <input type="number"
-                     id="time"
-                     style="width: 50px;"
-                     value="30"
-                     MIN="0"
-                     MAX="120"
-                     step="1"
-              />
-              <button  type="submit" class="button_apply"> + </button>
-              <br><input  type="checkbox" id="time_enable" /> habilitar
-    </div>
-
-
-    <div class="caja_central">
-      <!CAJA CENTRAL PARA EL DIBUJO>
-    </div>
-
-
-    <!caja3: Temperature Set>
-    <div class="caja3">
       <div id="temp_set">Temp Set:</div>
         Temperatura [ºC]:
             <br>
@@ -62,6 +37,30 @@
             <button  type="submit" class="button_apply"> + </button>     <br>
             <input  type="checkbox" id="temp_enable" /> habilitar        <br>
     </div>
+
+
+    <div class="caja_central">
+      <!CAJA CENTRAL PARA EL DIBUJO>
+    </div>
+
+
+    <!caja3: Timer Set>
+    <form id="ac_setpoints" method="POST" action='#'>
+        <div class="caja3">
+          <div id="time_set">Timer Set:</div>
+            Tiempo [Min]:
+                  <br>
+                  <input type="number"
+                         id="time"
+                         style="width: 50px;"
+                         value="30"
+                         MIN="0"
+                         MAX="120"
+                         step="1"
+                  />
+                  <button  type="submit" class="button_apply"> + </button>
+                  <br><input  type="checkbox" id="time_enable" /> habilitar
+        </div>
 
 
     <div class="caja_derecha_arriba1" id="med1"></div>
