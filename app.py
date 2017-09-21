@@ -512,7 +512,7 @@ def autoclave_functions(dato):
 
 #CONFIGURACION DE THREADS
 def background_thread2():
-    global ac_sets, time_save, temp_save
+    global ac_sets, time_save, temp_save, thread2
     flag_autoclave = True
 
     while flag_autoclave and ac_sets[1] > 0:
@@ -520,12 +520,12 @@ def background_thread2():
     	socketio.sleep(1) # debe ser 60
 
         socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
-
+    #permite volver a correr el thread una vez terminado un timer
+    thread2 = None
 
     #acá habria que implementar una función que haga la comunicación con uc2
 
-    #permite volver a correr el thread una vez terminado un timer
-    thread2 = None
+
 
 
 def background_thread1():
