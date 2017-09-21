@@ -45,9 +45,9 @@ var socket = io.connect(location.protocol + '//' +
           //se escuchan desde el servidor los valores seteados para calibración.
           socket.on('ph_calibrar', function(msg) {
             $('#ph1_set').text('Set pH1 :   ' + msg.set[0]).html();
-            $('#iph1_set').text('Set IpH1: ' + msg.set[1]).html();
+            $('#iph1_set').text('Set IpH1: '  + msg.set[1]).html();
             $('#ph2_set').text('Set pH2 :   ' + msg.set[2]).html();
-            $('#iph2_set').text('Set IpH2: ' + msg.set[3]).html();
+            $('#iph2_set').text('Set IpH2: '  + msg.set[3]).html();
           });
 
 
