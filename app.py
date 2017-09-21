@@ -9,6 +9,8 @@ logging.basicConfig(filename='/home/pi/vprocess2/log/app.log', level=logging.INF
 
 DIR="/home/pi/vprocess2/"
 SPEED_MAX = 150 #150 [rpm]
+TEMP_MAX  = 130 #130 [ºC]
+TIME_MAX  = 360 #360 [min] = 6 [HR]
 
 u_set_temp = [SPEED_MAX,0]
 u_set_ph   = [SPEED_MAX,SPEED_MAX]
@@ -488,6 +490,12 @@ def autoclave_functions(dato):
 
         time_save = "vacio"
         temp_save = "vacio"
+
+    if ac_sets[0] > TEMP_MAX:
+        ac_sets[0] = TEMP_MAX
+
+    if ac_sets[1] > TIME_MAX
+        ac_sets[1] = TIME_MAX
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
