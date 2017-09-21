@@ -490,7 +490,7 @@ def autoclave_functions(dato):
         temp_save = "vacio"
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
-    socketio.emit('ac_setpoints', {'set': ac_sets, {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
+    socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
 
     try:
         f = open(DIR + "autoclave.txt","a+")
