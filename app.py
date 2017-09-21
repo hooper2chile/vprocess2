@@ -54,7 +54,7 @@ def login():
             return render_template("login.html", error=error)
         else:
             error='validado'
-            return render_template("index.html", error=error)
+            return render_template("proceso.html", error=error)
 
     error="No Validado en login"
     return render_template("login.html", error=error)
@@ -529,7 +529,6 @@ def background_thread2():
         socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
     #permite volver a correr el thread una vez terminado un timer
-
     thread2 = None
 
     #acá habria que implementar una función que haga la comunicación con uc2
