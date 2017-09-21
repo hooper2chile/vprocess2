@@ -107,7 +107,7 @@ def function_thread():
     emit('u_calibrar',      {'set': u_set_ph})
     emit('u_calibrar_temp', {'set': u_set_temp})
     emit('power',           {'set': task})
-    emit('ac_setpoints',    {'set': ac_sets})
+    emit('ac_setpoints',    {'set': [ac_sets,time_save,temp_save]})
 
 
     global thread1
