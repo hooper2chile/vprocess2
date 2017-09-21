@@ -107,7 +107,7 @@ def function_thread():
     emit('u_calibrar',      {'set': u_set_ph})
     emit('u_calibrar_temp', {'set': u_set_temp})
     emit('power',           {'set': task})
-    emit('ac_setpoints',    {'set': [ac_sets,time_save,temp_save]})
+    emit('ac_setpoints',    {'set': ac_sets, 'save': [time_save, temp_save]})
 
 
     global thread1
@@ -490,7 +490,7 @@ def autoclave_functions(dato):
         temp_save = "vacio"
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
-    socketio.emit('ac_setpoints', {'set': [ac_sets,time_save,temp_save]}, namespace='/biocl', broadcast=True)
+    socketio.emit('ac_setpoints', {'set': ac_sets, {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
 
     try:
         f = open(DIR + "autoclave.txt","a+")
@@ -517,8 +517,7 @@ def background_thread2():
         ac_sets[1] -= 1  # ac_sets[1]=: timer set
     	socketio.sleep(60)
 
-        socketio.emit('ac_setpoints', {'set': [ac_sets,time_save,temp_save]}, namespace='/biocl', broadcast=True)
-
+        socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
         #acá habria que implementar una función que haga la comunicación con uc2
 
 
