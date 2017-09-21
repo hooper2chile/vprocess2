@@ -42,8 +42,7 @@ $(document).ready(function() {
         document.getElementById('temp_enable').checked = msg.set[2];
 	      document.getElementById('time_enable').checked = msg.set[3];
 
-        //document.getElementById('time_set').value = msg.save[0];
-        //document.getElementById('temp_set').value = msg.save[1];
+
         //para depurar
         console.log('Checkeds Recibidos');
         console.log($('#temp').val());
@@ -51,12 +50,12 @@ $(document).ready(function() {
 	      console.log($('#time_enable').is(':checked'));
 	      console.log($('#temp_enable').is(':checked'));
 
-        console.log('probando2');
+        console.log('Variables Guardadas');
         console.log(msg.save[0]);
         console.log(msg.save[1]);
 
-        $('#time_set' ).text('Timer Set: ' + msg.save[0]).html();
-        $('#temp_set' ).text('Temp  Set: ' + msg.save[1]).html();
+        $('#time_set' ).text('Timer Set: ' + msg.save[1]).html();
+        $('#temp_set' ).text('Temp  Set: ' + msg.save[0]).html();
     });
 
 
