@@ -107,7 +107,7 @@ def function_thread():
     emit('u_calibrar',      {'set': u_set_ph})
     emit('u_calibrar_temp', {'set': u_set_temp})
     emit('power',           {'set': task})
-    emit('ac_setpoints',    {'set': ac_sets, 'save': [time_save, temp_save]})
+    emit('ac_setpoints',    {'set': ac_sets, 'save': [temp_save, time_save]})
 
 
     global thread1
@@ -519,7 +519,7 @@ def background_thread2():
         ac_sets[1] -= 1   # ac_sets[1]=: timer set
     	socketio.sleep(1) # debe ser 60
 
-        socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [time_save, temp_save]}, namespace='/biocl', broadcast=True)
+        socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
     #permite volver a correr el thread una vez terminado un timer
 
