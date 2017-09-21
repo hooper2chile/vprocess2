@@ -49,12 +49,10 @@ $(document).ready(function() {
         console.log($('#time').val());
 	      console.log($('#time_enable').is(':checked'));
 	      console.log($('#temp_enable').is(':checked'));
-        console.log('probando:');
-        console.log(msg.set[4]);
-        console.log(msg.set[5]);
+
         console.log('probando2');
-        console.log(msg.time_save);
-        console.log(msg.temp_save);
+        console.log(msg.save[0]);
+        console.log(msg.save[1]);
     });
 
 
