@@ -528,15 +528,16 @@ def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
     flag_autoclave = True
 
-    while flag_autoclave and float(measures[2]) >= temp_save and ac_sets[1] > 0:
-        socketio.sleep(1) # 60[s]
-        ac_sets[1] -= 1   # ac_sets[1]=: timer set
-        socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+    while flag_autoclave:
+        while float(measures[2]) >= temp_save and ac_sets[1] > 0:
+            socketio.sleep(1) # 60[s]
+            ac_sets[1] -= 1   # ac_sets[1]=: timer set
+            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
-        f = open(DIR + "deg.txt","a+")
-        f.write("entre en thread2:\n")
-        f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
-        f.close()
+            f = open(DIR + "deg.txt","a+")
+            f.write("entre en thread2:\n")
+            f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
+            f.close()
 
 
     #permite volver a correr el thread una vez terminado un timer
