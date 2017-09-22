@@ -542,6 +542,11 @@ def background_thread2():
      	f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
     	f.close()
 
+
+    f = open(DIR + "debugging2.txt","a+")
+    f.write("no entro al while\n...")
+    f.write('b='str(b) + ' ' + 'float(temp_save)=' + str(temp_save) + '\n' )
+    f.close()
     #permite volver a correr el thread una vez terminado un timer
     thread2 = None
     socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
