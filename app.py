@@ -531,9 +531,8 @@ def background_thread2():
 
     #depurando
     f = open(DIR + "debugging.txt","a+")
-    f.write('type(temp_save): ' + type(temp_save) + '\n')
-    f.write('type(measures[2]): ' + type(measures[2]) + '\n')
-
+    f.write('type(temp_save):   ' + str(type(temp_save))   + '\n')
+    f.write('type(measures[2]): ' + str(type(measures[2])) + '\n')
     f.write("str(ac_sets[1])" + ' ' + "str(measures[2])" + ' ' + "str(temp_save)" + '\n')
     f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
     f.close()
