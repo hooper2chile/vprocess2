@@ -52,7 +52,7 @@ $(document).ready(function() {
 
         console.log('Variables Guardadas');
         $('#temp_set' ).text('Temp  Set: ' + msg.save[0] + '[ºC] ' ).html();
-        $('#time_set' ).text('Timer Set: ' + msg.save[1] + '[MIN]' ).html();
+        $('#time_set' ).text('Timer Set: ' + msg.set[1]  + '[MIN]' ).html();
     });
 
       $('#temp_set').css({ 'color': 'red', 'font-size': '110%' });
