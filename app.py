@@ -530,27 +530,28 @@ def background_thread2():
     flag_autoclave = True
 
     b = float(measures[2])
-    while b >= float(temp_save):
-        if ac_sets[1] > 0:
-            socketio.sleep(1) # 60[s]
-            ac_sets[1] -= 1   # ac_sets[1]=: timer set
-            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+    while flag_autoclave:
+        while b >= float(temp_save) and ac_sets[1] > 0:
+            if ac_sets[1] > 0:
+                socketio.sleep(1) # 60[s]
+                ac_sets[1] -= 1   # ac_sets[1]=: timer set
+                socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
-        #depurando
+            #depurando
+            f = open(DIR + "debugging2.txt","a+")
+            f.write("str(ac_sets[1])" + ' ' + "str(measures[2])" + ' ' + "str(temp_save)" + '\n')
+         	f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
+        	f.close()
+
+
         f = open(DIR + "debugging2.txt","a+")
-        f.write("str(ac_sets[1])" + ' ' + "str(measures[2])" + ' ' + "str(temp_save)" + '\n')
-     	f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
-    	f.close()
-
-
-    f = open(DIR + "debugging2.txt","a+")
-    f.write("no entro al while\n...")
-    f.write('b='+ str(b) + ' ' + 'float(temp_save)=' + str(temp_save) + '\n' )
-    f.close()
-    #permite volver a correr el thread una vez terminado un timer
-    thread2 = None
-    socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
-    #acá habria que implementar una función que haga la comunicación con uc2
+        f.write("no entro al while\n...")
+        f.write('b='+ str(b) + ' ' + 'float(temp_save)=' + str(temp_save) + '\n' )
+        f.close()
+        #permite volver a correr el thread una vez terminado un timer
+        thread2 = None
+        socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
+        #acá habria que implementar una función que haga la comunicación con uc2
 
 
 
