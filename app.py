@@ -27,6 +27,8 @@ task = ["grabar", False]
 flag_database = False
 
 set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
+measures = [0,0,0,0,0,0,0]
+
 
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
@@ -523,7 +525,7 @@ def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
     flag_autoclave = True
 
-    while flag_autoclave and ac_sets[1] > 0 and measures[2] >= temp_save:
+    while flag_autoclave and ac_sets[1] > 0: and measures[2] >= temp_save:
         socketio.sleep(1) # 60[s]
         ac_sets[1] -= 1   # ac_sets[1]=: timer set
         socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
@@ -538,10 +540,9 @@ def background_thread2():
 
 
 def background_thread1():
-    measures = [0,0,0,0,0,0,0]
     save_set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
 
-    global set_data
+    global set_data, measures
     while True:
         #se emiten las mediciones y setpoints para medir y graficar
         socketio.emit('Medidas', {'data': measures, 'set': set_data}, namespace='/biocl')
