@@ -533,7 +533,7 @@ def background_thread2():
     while flag_autoclave:
         while ac_sets[1] > float(1):
             if float(measures[2]) > temp_save:
-                socketio.sleep(1) # 60[s]
+                socketio.sleep(3) # 60[s]
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
