@@ -533,16 +533,17 @@ def background_thread2():
         ac_sets[1] -= 1   # ac_sets[1]=: timer set
         socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
+        f = open(DIR + "deg.txt","a+")
+        f.write("entre en thread2:\n")
+        f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
+        f.close()
+
 
     #permite volver a correr el thread una vez terminado un timer
     thread2 = None
     socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
     #acá habria que implementar una función que haga la comunicación con uc2
 
-    f = open(DIR + "deg.txt","a+")
-    f.write("entre en thread2:\n")
-    f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
-    f.close()
 
 
 def background_thread1():
@@ -577,6 +578,9 @@ def background_thread1():
             logging.info("\n no se actualizaron las mediciones")
 
         socketio.sleep(0.25)
+
+
+
 
 
 if __name__ == '__main__':
