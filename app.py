@@ -537,19 +537,19 @@ def background_thread2():
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
                 #depurando
-                f = open(DIR + "debugging.txt","a+")
+                f = open(DIR + "debugging.txt","w")
                 f.write("str(ac_sets[1])" + ' ' + "str(measures[2])" + ' ' + "str(temp_save)" + '\n')
              	f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
             	f.close()
 
             #depurando
-            f = open(DIR + "debugging2.txt","a+")
+            f = open(DIR + "debugging2.txt","w")
             f.write("str(ac_sets[1])" + ' ' + "str(measures[2])" + ' ' + "str(temp_save)" + '\n')
             f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
             f.close()
 
 
-        f = open(DIR + "debugging3.txt","a+")
+        f = open(DIR + "debugging3.txt","w")
         f.write("no entro al while\n...")
         f.write('b='+ str(b) + ' ' + 'float(temp_save)=' + str(temp_save) + '\n' )
         f.close()
