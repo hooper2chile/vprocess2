@@ -530,17 +530,18 @@ def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
     flag_autoclave = True
 
-    while flag_autoclave:
-        while float(measures[2]) >= temp_save and ac_sets[1] > 0:
-            socketio.sleep(1) # 60[s]
-            ac_sets[1] -= 1   # ac_sets[1]=: timer set
-            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+    while flag_autoclave and float(measures[2]) >= temp_save and ac_sets[1] > 0:
+        socketio.sleep(1) # 60[s]
+        ac_sets[1] -= 1   # ac_sets[1]=: timer set
+        emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]})
 
-        ac_sets[1] = 0
-        #permite volver a correr el thread una vez terminado un timer
-        thread2 = None
-        socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
-        #acá habria que implementar una función que haga la comunicación con uc2
+
+    ac_sets[0] = 0
+    ac_sets[1] = 0
+    #permite volver a correr el thread una vez terminado un timer
+    thread2 = None
+    socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
+    #acá habria que implementar una función que haga la comunicación con uc2
 
 
 
