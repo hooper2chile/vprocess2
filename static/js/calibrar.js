@@ -36,9 +36,9 @@ var socket = io.connect(location.protocol + '//' +
                             medx : $('#medx_ph').val()
                            });
 
-                console.log("en socket.emit PH:");
-                console.log( $('#ph').val() );
-                console.log(Iph);
+              console.log("en socket.emit PH:");
+              console.log( $('#ph').val() );
+              console.log(Iph);
               return false;
           });
 
@@ -62,9 +62,9 @@ var socket = io.connect(location.protocol + '//' +
                             medx : $('#medx_od').val()
                            });
 
-                console.log("en socket.emit OD:");
-                console.log( $('#od').val() );
-                console.log(Iod);
+              console.log("en socket.emit OD:");
+              console.log( $('#od').val() );
+              console.log(Iod);
               return false;
           });
 
@@ -97,9 +97,9 @@ var socket = io.connect(location.protocol + '//' +
           //se escuchan desde el servidor los valores seteados para calibración.
           socket.on('temp_calibrar', function(msg) {
             $('#temp1_set' ).text('Set Temp1 :   ' + msg.set[0]).html();
-            $('#itemp1_set').text('Set Itemp1: '  + msg.set[1]).html();
+            $('#itemp1_set').text('Set Itemp1: '   + msg.set[1]).html();
             $('#temp2_set' ).text('Set Temp2 :   ' + msg.set[2]).html();
-            $('#itemp2_set').text('Set Itemp2: '  + msg.set[3]).html();
+            $('#itemp2_set').text('Set Itemp2: '   + msg.set[3]).html();
           });
 
 
@@ -137,8 +137,8 @@ var socket = io.connect(location.protocol + '//' +
                           {   u_temp : $('#u_temp').val()
                           });
 
-                //console.log("en socket.emit actuador temp:");
-                //console.log( $('#u_temp').val() );
+              //console.log("en socket.emit actuador temp:");
+              //console.log( $('#u_temp').val() );
               return false;
           });
 

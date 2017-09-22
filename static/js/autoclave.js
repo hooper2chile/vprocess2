@@ -42,21 +42,19 @@ $(document).ready(function() {
         document.getElementById('temp_enable').checked = msg.set[2];
 	      document.getElementById('time_enable').checked = msg.set[3];
 
+        $('#temp_set' ).text('Temp  Set: ' + msg.save[0] + '[ºC] ' ).html();
+        $('#time_set' ).text('Timer Set: ' + msg.save[1] + '[MIN]' ).html();
 
         //para depurar
         console.log('Checkeds Recibidos');
         console.log($('#temp').val());
         console.log($('#time').val());
-	      console.log($('#time_enable').is(':checked'));
-	      console.log($('#temp_enable').is(':checked'));
-
-        console.log('Variables Guardadas');
-        $('#temp_set' ).text('Temp  Set: ' + msg.save[0] + '[ºC] ' ).html();
-        $('#time_set' ).text('Timer Set: ' + msg.set[1]  + '[MIN]' ).html();
+        console.log($('#time_enable').is(':checked'));
+        console.log($('#temp_enable').is(':checked'));
     });
 
-      $('#temp_set').css({ 'color': 'red', 'font-size': '110%' });
-      $('#time_set').css({ 'color': 'red', 'font-size': '110%' });
+    $('#temp_set').css({ 'color': 'red', 'font-size': '110%' });
+    $('#time_set').css({ 'color': 'red', 'font-size': '110%' });
 
 
     //se emiten señal de reinicio, apagado, grabacion y limpiaza hacia el servidor
@@ -69,7 +67,6 @@ $(document).ready(function() {
         console.log('Emitiendo Valores de Acción');
         console.log($('select[name=selection]').val())
         console.log($('#confirm').is(':checked'));
-
         return false;
     });
 
