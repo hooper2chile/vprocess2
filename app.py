@@ -28,7 +28,7 @@ flag_database = False
 
 set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
 measures = [0,0,0,0,0,0,0]
-
+b = 0
 
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
@@ -473,7 +473,7 @@ def calibrar_u_temp(dato):
 
 @socketio.on('ac_setpoints', namespace='/biocl')
 def autoclave_functions(dato):
-    global ac_sets, time_save, temp_save
+    global ac_sets, time_save, temp_save, b
 
     try:
         ac_sets[0] = int(dato['ac_temp'])
@@ -498,6 +498,8 @@ def autoclave_functions(dato):
 
     if ac_sets[1] > TIME_MAX:
         ac_sets[1] = TIME_MAX
+
+    b = float(measures[2])
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
@@ -526,10 +528,9 @@ def autoclave_functions(dato):
 
 #CONFIGURACION DE THREADS
 def background_thread2():
-    global ac_sets, time_save, temp_save, thread2, measures
+    global ac_sets, time_save, temp_save, thread2, measures, b
     flag_autoclave = True
 
-    b = float(measures[2])
     while flag_autoclave:
         while b >= temp_save and ac_sets[1] > 0:
             if ac_sets[1] > 0:
