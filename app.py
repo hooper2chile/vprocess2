@@ -520,13 +520,14 @@ def autoclave_functions(dato):
 
 #CONFIGURACION DE THREADS
 def background_thread2():
-    global ac_sets, time_save, temp_save, thread2
+    global ac_sets, time_save, temp_save, thread2, measures
     flag_autoclave = True
-
-    while flag_autoclave and ac_sets[1] > 0:
-        socketio.sleep(60) # 60[s]∫
-        ac_sets[1] -= 1    # ac_sets[1]=: timer set
-        socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+    
+    if measures[2] >= temp_save:  #empezar a descontar tiempo solo una vez que se haya alcanzado la temperatura seteada
+        while flag_autoclave and ac_sets[1] > 0:
+            socketio.sleep(1) # 60[s]∫
+            ac_sets[1] -= 1    # ac_sets[1]=: timer set
+            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
     #permite volver a correr el thread una vez terminado un timer
     thread2 = None
