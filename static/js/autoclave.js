@@ -28,10 +28,10 @@ $(document).ready(function() {
 
         //para depurar
         console.log('Emitiendo Valores: temp, timer, good checked: ');
-        console.log($('#temp').val());
+      //  console.log($('#temp').val());
         console.log($('#time').val());
-	      console.log($('#time_enable').is(':checked'));
-	      console.log($('#temp_enable').is(':checked'));
+	    //  console.log($('#time_enable').is(':checked'));
+	    //  console.log($('#temp_enable').is(':checked'));
         return false;
     });
     //se escuchan desde el servidor los setpoints aplicados
@@ -47,10 +47,10 @@ $(document).ready(function() {
 
         //para depurar
         console.log('Checkeds Recibidos');
-        console.log($('#temp').val());
+      //  console.log($('#temp').val());
         console.log($('#time').val());
-        console.log($('#time_enable').is(':checked'));
-        console.log($('#temp_enable').is(':checked'));
+      //  console.log($('#time_enable').is(':checked'));
+      //  console.log($('#temp_enable').is(':checked'));
     });
 
     $('#temp_set').css({ 'color': 'red', 'font-size': '110%' });
@@ -64,10 +64,10 @@ $(document).ready(function() {
                       checked : $('#confirm').is(':checked')
                     });
         //para depurar
-        console.log('Emitiendo Valores de Acción');
-        console.log($('select[name=selection]').val())
-        console.log($('#confirm').is(':checked'));
-        return false;
+      //  console.log('Emitiendo Valores de Acción');
+      //  console.log($('select[name=selection]').val())
+      //  console.log($('#confirm').is(':checked'));
+      return false;
     });
 
     //se escuchan desde el servidor señal de reinicio,apagado, grabacion y limpiaza
@@ -76,8 +76,8 @@ $(document).ready(function() {
         document.getElementById("select").value = msg.set[0]
         document.getElementById('confirm').checked = msg.set[1]
 
-        console.log('Recibiendo Valores de Acción');
-        console.log(msg.set[0]);
-        console.log(msg.set[1]);
+      //  console.log('Recibiendo Valores de Acción');
+      //  console.log(msg.set[0]);
+      //  console.log(msg.set[1]);
     });
 });
