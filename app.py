@@ -537,7 +537,8 @@ def background_thread2():
     f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
     f.close()
 
-    while ac_sets[1] > 0 and float(measures[2]) >= float(temp_save) :
+    b = float(measures[2])
+    while ac_sets[1] > 0 and b >= temp_save :
         socketio.sleep(1) # 60[s]
         ac_sets[1] -= 1   # ac_sets[1]=: timer set
         socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
