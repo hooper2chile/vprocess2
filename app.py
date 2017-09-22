@@ -3,7 +3,7 @@
 from flask import Flask, render_template, session, request, Response, send_from_directory, make_response
 from flask_socketio import SocketIO, emit, disconnect
 
-import os, sys, logging, communication, reviewDB, tocsv
+import time, os, sys, logging, communication, reviewDB, tocsv
 
 logging.basicConfig(filename='/home/pi/vprocess2/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
