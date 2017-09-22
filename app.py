@@ -531,7 +531,7 @@ def background_thread2():
 
     b = float(measures[2])
     while flag_autoclave:
-        while b >= float(temp_save) and ac_sets[1] > 0:
+        while b >= temp_save and ac_sets[1] > 0:
             if ac_sets[1] > 0:
                 socketio.sleep(1) # 60[s]
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set
