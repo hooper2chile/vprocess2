@@ -523,17 +523,15 @@ def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
     flag_autoclave = True
 
-    while flag_autoclave and ac_sets[1] > 0:
-        if measures[2] >= temp_save:  #empezar a descontar tiempo solo una vez que se haya alcanzado la temperatura seteada
-            socketio.sleep(1) # 60[s]
-            ac_sets[1] -= 1    # ac_sets[1]=: timer set
-            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
-        else:
-            socketio.sleep(1)
+    while flag_autoclave and ac_sets[1] > 0 and measures[2] >= temp_save::
+        socketio.sleep(1) # 60[s]
+        ac_sets[1] -= 1    # ac_sets[1]=: timer set
+        socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+
 
     #permite volver a correr el thread una vez terminado un timer
     thread2 = None
-
+    socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
     #acá habria que implementar una función que haga la comunicación con uc2
 
 
