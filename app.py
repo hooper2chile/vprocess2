@@ -529,19 +529,12 @@ def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
     flag_autoclave = True
 
-    #depurando
-    f = open(DIR + "debugging.txt","a+")
-    f.write('type(temp_save):   ' + str(type(temp_save))   + '\n')
-    f.write('type(measures[2]): ' + str(type(measures[2])) + '\n')
-    f.write("str(ac_sets[1])" + ' ' + "str(measures[2])" + ' ' + "str(temp_save)" + '\n')
-    f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
-    f.close()
-
     b = float(measures[2])
-    while ac_sets[1] > 0 and b >= temp_save :
-        socketio.sleep(1) # 60[s]
-        ac_sets[1] -= 1   # ac_sets[1]=: timer set
-        socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+    while b >= temp_save :
+        if ac_sets[1] > 0
+            socketio.sleep(1) # 60[s]
+            ac_sets[1] -= 1   # ac_sets[1]=: timer set
+            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
         #depurando
         f = open(DIR + "debugging2.txt","a+")
