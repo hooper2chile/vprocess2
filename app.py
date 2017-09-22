@@ -118,10 +118,6 @@ def function_thread():
     if thread1 is None:
         thread1 = socketio.start_background_task(target=background_thread1)
 
-    #función TimeCounter: poner acá, posiblemente con thread2, falta recibir la confirmación de activación
-    global thread2
-    if thread2 is None:
-        thread2 = socketio.start_background_task(target=background_thread2)
 
 
 @socketio.on('power', namespace='/biocl')
@@ -506,6 +502,12 @@ def autoclave_functions(dato):
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+
+
+    #función TimeCounter: poner acá, posiblemente con thread2, falta recibir la confirmación de activación
+    global thread2
+    if thread2 is None:
+        thread2 = socketio.start_background_task(target=background_thread2)
 
 
     try:
