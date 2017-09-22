@@ -502,6 +502,13 @@ def autoclave_functions(dato):
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
+    #función TimeCounter: poner acá, posiblemente con thread2, falta recibir la confirmación de activación
+    global thread2
+    if thread2 is None:
+        thread2 = socketio.start_background_task(target=background_thread2)
+
+
+
     try:
         f = open(DIR + "autoclave.txt","a+")
      	f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + '\n')
@@ -513,10 +520,7 @@ def autoclave_functions(dato):
 	logging.info("no se pudo guardar en autoclave.txt")
 
 
-    #función TimeCounter: poner acá, posiblemente con thread2, falta recibir la confirmación de activación
-    global thread2
-    if thread2 is None:
-        thread2 = socketio.start_background_task(target=background_thread2)
+
 
 
 
@@ -527,8 +531,8 @@ def background_thread2():
 
     #depurando
     f = open(DIR + "debugging.txt","a+")
-    f.write('type(temp_save): ' + type(temp_save))
-    f.write('type(measures[2]): ' + type(measures[2]))
+    f.write('type(temp_save): ' + type(temp_save) + '\n')
+    f.write('type(measures[2]): ' + type(measures[2]) + '\n')
 
     f.write("str(ac_sets[1])" + ' ' + "str(measures[2])" + ' ' + "str(temp_save)" + '\n')
     f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
