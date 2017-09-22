@@ -531,7 +531,8 @@ def background_thread2():
     while flag_autoclave and float(measures[2]) >= temp_save and ac_sets[1] > 0:
         socketio.sleep(1) # 60[s]
         ac_sets[1] -= 1   # ac_sets[1]=: timer set
-        emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]})
+        socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+
 
     #permite volver a correr el thread una vez terminado un timer
     thread2 = None
