@@ -530,6 +530,10 @@ def background_thread2():
         ac_sets[1] -= 1   # ac_sets[1]=: timer set
         socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
+        #depurando
+        f = open(DIR + "debugging.txt","a+")
+     	f.write(str(ac_sets[1]) + ' ' + str(measures[2]) + ' ' + str(temp_save) + '\n')
+    	f.close()
 
     #permite volver a correr el thread una vez terminado un timer
     thread2 = None
