@@ -539,7 +539,10 @@ def background_thread2():
     socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
     #acá habria que implementar una función que haga la comunicación con uc2
 
-
+    f = open(DIR + "deg.txt","a+")
+    f.write("entre en thread2:\n")
+ 	f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + measures[2] + '\n')
+	f.close()
 
 
 def background_thread1():
