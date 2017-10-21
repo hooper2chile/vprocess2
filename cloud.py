@@ -6,7 +6,7 @@
 
 import os, sys, time, datetime, logging
 
-logging.basicConfig(filename='/home/pi/vprocess2/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/hooper/vprocess2/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
 
@@ -20,9 +20,9 @@ if(sys.platform=='darwin'):
 
 else:
     time.sleep(15)
-    gdrive = '/home/pi/vprocess2/config/./gdrive-linux-rpi'
+    gdrive = '/home/hooper/vprocess2/config/./gdrive-linux-rpi'
     DIR1   = ' ' #'/home/pi/vprocess2/config/'
-    DIR2   = '/home/pi/vprocess2/csv/'
+    DIR2   = '/home/hooper/vprocess2/csv/'
 
 
 while True:
