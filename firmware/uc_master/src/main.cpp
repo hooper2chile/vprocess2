@@ -1,5 +1,5 @@
 /*
-*  uc_master
+uc_master
 Write by: Felipe Hooper
 Electronic Engineer
 */
@@ -13,7 +13,7 @@ void setup() {
 
   Serial.begin(9600);
   mySerial.begin(9600);
-  mixer1.begin(9600);
+  granotec.begin(9600);
 
   message.reserve(65);
 
