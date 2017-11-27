@@ -538,7 +538,7 @@ def background_thread2():
 
                 #Revisar si necesita dos while anidados.
                 #Revisar por que no estoy guardando la temperatura en temp_save y tiempo en time_save
-	            f = open(DIR + "deg.txt","a+")
+	        f = open(DIR + "deg.txt","a+")
                 f.write("entre en thread2:\n")
                 f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
                 f.close()
