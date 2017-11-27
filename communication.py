@@ -191,6 +191,9 @@ def actuador(var,u_set):
 
     except:
         logging.info("no se pudo guardar set de actuador()")
+
+
+
 ###############################################################################
 def cook_autoclave(ac_sets):
     ac_sets[0] = int(ac_sets[0])  #temperatura
@@ -220,6 +223,9 @@ def cook_autoclave(ac_sets):
 
     return True
 ###############################################################################
+
+
+
 def cook_setpoint(set_data):
     #format string
     #convert true or false in checkbox to 0 or 1

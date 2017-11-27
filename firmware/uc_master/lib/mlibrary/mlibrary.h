@@ -444,8 +444,8 @@ void uc_granotec(char option) {
   //opcion "c" calentar: destinado a operar los relay para agua caliente ('a') o vapor ('v')
   else if (option == 'c')  granotec.println(message[2]);
 
-
-  Serial.println("comandos_autoclave_seteados");
+  //debuging
+  //Serial.println("comandos_autoclave_seteados");
 }
 
 
