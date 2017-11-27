@@ -1,3 +1,10 @@
+/*
+uc_master
+Write by: Felipe Hooper
+Electronic Engineer
+*/
+
+
 #include "Arduino.h"
 
 #include "SoftwareSerial.h"
@@ -170,7 +177,6 @@ void write_crumble() {
   myfeed   = feed_set.toInt();
   myunload = unload_set.toInt();
   mymix    = mix_set.toInt();
-
 
   //setting rst
   rst1 = INT(message[40]);  rst2 = INT(message[41]);  rst3 = INT(message[42]);
@@ -429,10 +435,17 @@ void control_ph() {
 
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
-void uc_granotec(uint16_t SPEED, char RST) {
+void uc_granotec(char option) {
+  //opcion "m" motor: destinado a operar las rpm del motor
+  if (option == 'm' and rst2 == '1') {
+    String command = 'm' + String(mymix);
+    granotec.println(command);
+  }
+  //opcion "c" calentar: destinado a operar los relay para agua caliente ('a') o vapor ('v')
+  else if (option == 'c')  granotec.println(message[2]);
 
 
-  granotec.println("comandos");
+  Serial.println("comandos_autoclave_seteados");
 }
 
 
@@ -441,8 +454,8 @@ void setpoint() {
   write_crumble();
 
   //aca hay que programar el mezclador y usar crumble() para obtener el dato
-  uc_granotec(mymix,rst2);
-
+  //uc_granotec(mymix,rst2);
+  uc_granotec('m');
 
   Serial.println("good setpoint");
   return;
@@ -481,6 +494,9 @@ void broadcast_setpoint(uint8_t select) {
       new_write0 = "";
       new_write0 = new_write.substring(0,3) + uset_ph + new_write.substring(7,34) + uset_temp + new_write.substring(37,55) + "\n";
       mySerial.print(new_write0);
+      //testing
+      granotec.print("a");
+      //testing
       break;
 
     case 1: //update command and re-tx.
@@ -561,7 +577,7 @@ int validate() {
         )
         { return 1; }
 
-      // Validate CALIBRATE
+      //Validate CALIBRATE
       else if ( message[0]  == 'c' &&
                (message[2]  == '+' || message[2] == '-') &&
                (message[8]  == '+' || message[8] == '-') &&
@@ -578,9 +594,16 @@ int validate() {
               )
           return 1;
 
-      //Validete umbral actuador temp: u2t003e
+      //Validate umbral actuador temp: u2t003e
       else if ( message[0] == 'u' && message[1] == '2' &&
                 message[2] == 't' && message[6] == 'e'
+              )
+          return 1;
+
+      //Validate actions for autoclave, relay states: Agua o Vapor
+      else if ( message[0] == 'a' && message[1] == 'c' &&
+               (message[2] == 'a' || message[2] == 'v' || message[2] == 'd') &&
+                message[3] == 'e'
               )
           return 1;
 

@@ -8,7 +8,7 @@ if [ "$EUID" -ne 0 ]
 	exit
 fi
 
-if [[ $# -lt 1 ]]; 
+if [[ $# -lt 1 ]];
 	then echo "You need to pass a password!"
 	echo "Usage:"
 	echo "sudo $0 yourChosenPassword [apName]"
@@ -43,7 +43,7 @@ EOF
 
 cat > /etc/dnsmasq.conf <<EOF
 interface=wlan0
-dhcp-range=10.0.0.2,10.0.0.5,255.255.255.0,12h
+dhcp-range=10.0.0.2,10.0.0.9,255.255.255.0,12h
 EOF
 
 cat > /etc/hostapd/hostapd.conf <<EOF

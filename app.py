@@ -17,7 +17,7 @@ u_set_ph   = [SPEED_MAX,SPEED_MAX]
 
 time_save = 0
 temp_save = 0
-ac_sets = [0,0,False,False]
+ac_sets = [0,0,False,False]  #ac_sets = auto clave setpoints
 
 ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
@@ -28,7 +28,7 @@ flag_database = False
 
 set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
 measures = [0,0,0,0,0,0,0]
-b = 0
+
 
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
@@ -51,7 +51,7 @@ def login():
     global error
 
     if request.method == 'POST':
-        if request.form['username'] != 'biocl' or request.form['password'] != 'felipe':
+        if request.form['username'] != 'granotec' or request.form['password'] != 'felipe':
             error = "Credencial Invalida"
             return render_template("login.html", error=error)
         else:
@@ -68,7 +68,7 @@ def login():
 def test():
     global error
     if request.method == 'POST':
-        if request.form['username'] != 'biocl' or request.form['password'] != 'felipe':
+        if request.form['username'] != 'granotec' or request.form['password'] != 'felipe':
             error = "Credencial Invalida"
             return render_template("login.html", error=error)
         else:
@@ -523,24 +523,24 @@ def autoclave_functions(dato):
 
 
 
-
-
 #CONFIGURACION DE THREADS
 def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
     flag_autoclave = True
 
     while flag_autoclave:
-        while ac_sets[1] > 0:
-            if float(measures[2]) > temp_save:
+        while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
+            if float(measures[2]) > temp_save:  # "si la temperatura es mayor que la temperatura seteada"
                 socketio.sleep(1) # 60[s]
-                ac_sets[1] -= 1   # ac_sets[1]=: timer set
+                ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
-                f = open(DIR + "deg.txt","a+")
-                f.write("entre en thread2:\n")
-                f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
-                f.close()
+                #Revisar si necesita dos while anidados.
+                #Revisar por que no estoy guardando la temperatura en temp_save y tiempo en time_save
+                #f = open(DIR + "deg.txt","a+")
+                #f.write("entre en thread2:\n")
+                #f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
+                #tyuf.close()
 
 
         #permite volver a correr el thread una vez terminado un timer

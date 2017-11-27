@@ -113,11 +113,7 @@ String  temp_var   = "";   String  temp_set   = "";
 
 
 //_BV(x) = 1 << x
-inline void set_motor ( uint16_t *count,
-                        uint16_t *count_set,
-                        volatile uint8_t *MOT,
-                                 uint8_t START )
-{
+inline void set_motor ( uint16_t *count, uint16_t *count_set, volatile uint8_t *MOT, uint8_t START ) {
   if ( *count == *count_set ) {
     *MOT |= START;
     *count = 0;
@@ -133,11 +129,8 @@ inline void set_motor ( uint16_t *count,
 
 //_BV(x) = 1 << x
 //rstx=0 (enable); dirx=1 (cw), else ccw.
-inline void setup_dir_rst ( uint8_t RST,    uint8_t DIR,  uint8_t *var_x,
-                            uint8_t *rst_x, uint8_t *dir_x,
-                            volatile uint8_t *PORT_1,
-                            volatile uint8_t *PORT_2 )
-{ //PORT_1:
+inline void setup_dir_rst ( uint8_t RST, uint8_t DIR, uint8_t *var_x, uint8_t *rst_x, uint8_t *dir_x, volatile uint8_t *PORT_1, volatile uint8_t *PORT_2 ) {
+  //PORT_1:
   if( !(*rst_x) ) {
     if ( !(*var_x) )
       *PORT_1 &= ~RST;

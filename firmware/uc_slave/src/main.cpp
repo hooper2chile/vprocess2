@@ -5,7 +5,7 @@
   * rst3, dir2: myphset
   * rst1, dir1: myfeed
   * rst4, dir456: unload  (dir4 para unload, no se usa)
-  * rst2, dir456: mymix
+  * rst2, dir456: my0mix
   * rst5, dir3: mytemp
   * rst6, dir6: FREE !
 
@@ -44,10 +44,8 @@ void loop() {
     if ( validate_write() ) {
       Serial.println("Good message");
 
-
       //se "desmenuza" el command de setpoints
       crumble();
-
 
       //Time setup for counters:
       if ( myfeed != myfeed_save ) {
@@ -78,25 +76,17 @@ void loop() {
 
       //RST and DIR SETTING:
       //feed: rst1=0 (enable); dir1=1 (cw), else ccw.
-      setup_dir_rst( _BV(RST_FEED), _BV(DIR_FEED),
-                     &myfeed, &rst1, &dir1,
-                     &PORTC,  &PORTC );
+      setup_dir_rst( _BV(RST_FEED), _BV(DIR_FEED), &myfeed, &rst1, &dir1, &PORTC, &PORTC );
 
       //unload: rst4, dir4=null, PORT_2 = NULL.
-      setup_dir_rst( _BV(RST_UNLOAD), _BV(NULL),
-                     &myunload, &rst4, NULL,
-                     &PORTC,    &PORTC );
+      setup_dir_rst( _BV(RST_UNLOAD), _BV(NULL), &myunload, &rst4, NULL, &PORTC, &PORTC );
 
       //temp: rst5, dir3: PORT_1 distinto a PORT_2.
-      setup_dir_rst( _BV(RST_TEMP), _BV(DIR_TEMP),
-                     &mytemp, &rst5, &dir3,
-                     &PORTC,  &PORTB );
+      setup_dir_rst( _BV(RST_TEMP), _BV(DIR_TEMP), &mytemp, &rst5, &dir3, &PORTC, &PORTB );
 
       //PH
       setup_dir_rst( _BV(RST_PHa), _BV(DIR_PH), &myph_a, &rst3, &dir2, &PORTD, &PORTC );
       setup_dir_rst( _BV(RST_PHb), _BV(DIR_PH), &myph_b, &rst6, &dir2, &PORTD, &PORTC );
-
-
 
 
       clean_strings();

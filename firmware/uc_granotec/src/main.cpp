@@ -1,8 +1,9 @@
 /*
-  uc_granotec, Specific design for IDIN-BIOCL: Granotec Client
-  write by: Felipe Hooper
-  Electronic Engineer
+  uc_granotec,
+  Specific design for IDIN-BIOCL: Granotec Client
 
+  writed by: Felipe Hooper
+  Electronic Engineer
 */
 
 #include <avr/wdt.h>
@@ -12,47 +13,56 @@ void setup() {
   wdt_disable();
 
   Serial.begin(9600);
-  DDRB  = DDRB  | (1<<PB1) | (1<<PB2) | (1<<PB3) | (1<<PB4);  //Pin out setup
-  PORTB = PORTB | (1<<PB1) | (1<<PB2) | (1<<PB3) | (1<<PB4);  //pin out low level
+  pinMode(PWM_PIN, OUTPUT);
+  pinMode(13, OUTPUT);
+  digitalWrite(13, HIGH);
+
+  DDRB  = DDRB  | (1<<PB1) | (1<<PB2) | (1<<PB3) | (1<<PB4) | (1<<PB0);  //Pin out setup
+  PORTB = PORTB | (1<<PB1) | (1<<PB2) | (1<<PB3) | (1<<PB4) | (1<<PB0);  //pin out high level <=> off relay pin
+
+  DDRD  = DDRD  | (1<<PD7) | (1<<PD6);
+  PORTD = PORTB | (1<<PD7) | (1<<PD6);
 
   message.reserve(65);
+  setup_default();
+
   wdt_enable(WDTO_8S);
 }
 
 //Relay with inverter logical
 void loop() {
   if ( stringComplete ) {
-    switch ( message[0] )
-    {
-      case 'a': //a-gua
-        digitalWrite(v1, LOW);
-        digitalWrite(v2, LOW);
-        digitalWrite(v3, HIGH);
-        digitalWrite(v4, HIGH);
-        break;
+      //wdt_reset();
+      switch ( message[0] )
+      {
+          case 'a': //a-gua
+            setup_default();
+            bomb();
+            hot_water_valve();
+            break;
 
-      case 'v': //v-apor
-        digitalWrite(v3, LOW);
-        digitalWrite(v4, LOW);
-        digitalWrite(v1, HIGH);
-        digitalWrite(v2, HIGH);
-        break;
+          case 'v': //v-apor
+            setup_default();
+            bomb();
+            steam_valve();
+            break;
 
-      default:
-        digitalWrite(v1, HIGH);
-        digitalWrite(v2, HIGH);
-        digitalWrite(v3, HIGH);
-        digitalWrite(v4, HIGH);
-        break;
-    }
+          case 'm': //m-otor
+            motor_set();
+            break;
 
-    Serial.print("Se recibio:\t");
-    Serial.println(message);
+          default:
+            setup_default();
+            break;
+      }
+      Serial.print("Se recibio:\t");
+      Serial.println(message);
 
-    stringComplete = false;
-    message = "";
+      stringComplete = false;
+      message = "";
   }
-delay(500);
-wdt_reset();
+  //else setup_default();
+  wdt_reset();
+  delay(500);
 
 }

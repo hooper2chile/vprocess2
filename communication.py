@@ -15,11 +15,13 @@ DIR="/home/pi/vprocess2/"
 temp_save_set_data = None
 tau_zmq_connect = 0.3 #0.3 [s]: no ha funcionado con menos
 
-SPEED_MAX_MIX = 1500
-SPEED_MAX = 150
-TEMP_MAX  = 130
-PH_MIN = 0
-PH_MAX = 14
+SPEED_MAX_MIX = 750 #1500
+SPEED_MAX = 100     #150
+TEMP_MAX  = 120     #130
+PH_MIN = 2   #0
+PH_MAX = 12  #14
+TEMP_THRESHOLD_AUTOCLAVE = 70
+TEMP_MIN = 20
 
 
 #download data measures with client zmq
@@ -189,12 +191,37 @@ def actuador(var,u_set):
 
     except:
         logging.info("no se pudo guardar set de actuador()")
+###############################################################################
+def cook_autoclave(ac_sets):
+    ac_sets[0] = int(ac_sets[0])  #temperatura
+    ac_sets[1] = int(ac_sets[1])  #tiempo
 
+    if ac_sets[0] >= TEMP_THRESHOLD_AUTOCLAVE:
+        relay = 'v' #v-apor
+    elif ac_sets[0] >= TEMP_MIN:
+        relay = 'a' #a-gua
+    else:
+        relay = 'd' #default
 
+    #armando el comando para autoclave que se enviara por zmq a myserial.py y desde ahí al uc master, desde ahí al uc granotec
+    #ejemplos:    acve  /  acae  /  acde
+    command_ac = 'ac' +  relay  + 'e'
+    logging.info('\n' + command_ac + '_autoclave_sets' + '\n')
 
+    published_setpoint(command_ac)
+
+    try:
+        f = open(DIR + "auto_clave_command.txt","a+")
+        f.write(command)
+        f.close()
+
+    except OSError:
+        logging.info("no se pudo guardar el command del autoclave en el archivo de texto")
+
+    return True
+###############################################################################
 def cook_setpoint(set_data):
     #format string
-
     #convert true or false in checkbox to 0 or 1
     for i in range(5,13):
         if set_data[i] is True:
@@ -235,8 +262,8 @@ def cook_setpoint(set_data):
 
     #threshold setting:
     #alimentar
-    if set_data[0] > SPEED_MAX_MIX:
-        set_data[0] = SPEED_MAX_MIX
+    if set_data[0] > SPEED_MAX:     #SPEED_MAX_MIX:
+        set_data[0] = SPEED_MAX     #SPEED_MAX_MIX
 
     elif set_data[0] < 0:
         set_data[0] = 0
@@ -248,7 +275,7 @@ def cook_setpoint(set_data):
     elif set_data[1] < 50:
         set_data[1] = 50
 
-    #ph
+    #pH
     if set_data[2] > PH_MAX:
         set_data[2] = PH_MAX
 

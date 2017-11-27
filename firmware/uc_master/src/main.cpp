@@ -30,7 +30,7 @@ void loop() {
           PORTB = 1<<PB0;
 
           switch ( message[0] ) {
-              case 'r':
+              case 'r':  //lectura de sensores
                 hamilton_sensors();
                 daqmx();
                 control_ph();
@@ -38,21 +38,24 @@ void loop() {
                 broadcast_setpoint(0);
                 break;
 
-              case 'w':
+              case 'w':  //setpoints
                 setpoint();
                 control_ph();
                 control_temp();
                 broadcast_setpoint(1);
                 break;
 
-              case 'c':
+              case 'c':  //calibracion de sensores
                 sensor_calibrate();
                 break;
 
-              case 'u':
+              case 'u':  //umbrales actuadores motores
                 actuador_umbral();
                 break;
 
+              case 'a':  //setpoint electrovalvulas y motor
+                uc_granotec('c');
+                break;
 
               default:
                 break;
