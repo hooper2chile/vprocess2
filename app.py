@@ -534,21 +534,21 @@ def background_thread2():
                 socketio.sleep(1) # 60[s]
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
-<<<<<<< HEAD
+
 
                 #Revisar si necesita dos while anidados.
                 #Revisar por que no estoy guardando la temperatura en temp_save y tiempo en time_save
                 #f = open(DIR + "deg.txt","a+")
                 #f.write("entre en thread2:\n")
                 #f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
-                #tyuf.close()
-=======
+                #f.close()
+
 
 	        f = open(DIR + "deg.txt","a+")
                 f.write("entre en thread2:\n")
                 f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
                 f.close()
->>>>>>> 60babc3a3ece50be2a9fe4b38aefd36f34ccf73a
+
 
         #permite volver a correr el thread una vez terminado un timer
         #thread2 = None
