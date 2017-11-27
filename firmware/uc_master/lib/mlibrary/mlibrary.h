@@ -495,7 +495,7 @@ void broadcast_setpoint(uint8_t select) {
       new_write0 = new_write.substring(0,3) + uset_ph + new_write.substring(7,34) + uset_temp + new_write.substring(37,55) + "\n";
       mySerial.print(new_write0);
       //testing
-      granotec.print("a");
+      granotec.println("a");
       //testing
       break;
 
