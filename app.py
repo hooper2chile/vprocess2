@@ -5,9 +5,9 @@ from flask_socketio import SocketIO, emit, disconnect
 
 import os, sys, logging, communication, reviewDB, tocsv
 
-logging.basicConfig(filename='/home/hooper/vprocess2/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess2/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
-DIR="/home/hooper/vprocess2/"
+DIR="/home/pi/vprocess2/"
 SPEED_MAX = 150 #150 [rpm]
 TEMP_MAX  = 130 #130 [ºC]
 TIME_MAX  = 360 #360 [min] = 6 [HR]
@@ -543,7 +543,7 @@ def background_thread2():
                 #f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
                 #tyuf.close()
 =======
-        
+
 	        f = open(DIR + "deg.txt","a+")
                 f.write("entre en thread2:\n")
                 f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')

@@ -6,23 +6,18 @@
 
 import os, sys, time, datetime, logging
 
-logging.basicConfig(filename='/home/hooper/vprocess2/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess2/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
 
 TIME_SYNC = 5 #3600 #sync for 3600 [s] = 1 [hr]
 ID = '0B3jT9_WfcyT9SXg3eExUdWoxRUU'
 
-if(sys.platform=='darwin'):
-    gdrive = './gdrive-osx-x64'
-    DIR1 = '/Users/hooper/Dropbox/BIOCL/vprocess2/config/'
-    DIR2 = '/Users/hooper/Dropbox/BIOCL/vprocess2/csv/'
 
-else:
-    time.sleep(15)
-    gdrive = '/home/hooper/vprocess2/config/./gdrive-linux-rpi'
-    DIR1   = ' ' #'/home/pi/vprocess2/config/'
-    DIR2   = '/home/hooper/vprocess2/csv/'
+time.sleep(15)
+gdrive = '/home/pi/vprocess2/config/./gdrive-linux-rpi'
+DIR1   = ' ' #'/home/pi/vprocess2/config/'
+DIR2   = '/home/pi/vprocess2/csv/'
 
 
 while True:
