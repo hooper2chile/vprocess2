@@ -5,9 +5,9 @@ from flask_socketio import SocketIO, emit, disconnect
 
 import os, sys, logging, communication, reviewDB, tocsv
 
-logging.basicConfig(filename='/home/pi/vprocess2/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/hooper/vprocess2/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
-DIR="/home/pi/vprocess2/"
+DIR="/home/hooper/vprocess2/"
 SPEED_MAX = 150 #150 [rpm]
 TEMP_MAX  = 130 #130 [ºC]
 TIME_MAX  = 360 #360 [min] = 6 [HR]
@@ -534,6 +534,7 @@ def background_thread2():
                 socketio.sleep(1) # 60[s]
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+<<<<<<< HEAD
 
                 #Revisar si necesita dos while anidados.
                 #Revisar por que no estoy guardando la temperatura en temp_save y tiempo en time_save
@@ -541,7 +542,13 @@ def background_thread2():
                 #f.write("entre en thread2:\n")
                 #f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
                 #tyuf.close()
-
+=======
+        
+	        f = open(DIR + "deg.txt","a+")
+                f.write("entre en thread2:\n")
+                f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
+                f.close()
+>>>>>>> 60babc3a3ece50be2a9fe4b38aefd36f34ccf73a
 
         #permite volver a correr el thread una vez terminado un timer
         #thread2 = None

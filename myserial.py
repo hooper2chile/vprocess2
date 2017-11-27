@@ -5,7 +5,7 @@ if(sys.platform=='darwin'):
     logging.basicConfig(filename='./log/myserial.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 else:
-    logging.basicConfig(filename='/home/pi/vprocess2/log/myserial.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+    logging.basicConfig(filename='/home/hooper/vprocess2/log/myserial.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
 #5556: for listen data
