@@ -53,7 +53,7 @@ void loop() {
                 actuador_umbral();
                 break;
 
-              case 'a':  //setpoint electrovalvulas y motor
+              case 'a':  //setpoint autoclave
                 uc_granotec('a');
                 break;
 

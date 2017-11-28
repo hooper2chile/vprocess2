@@ -530,11 +530,6 @@ def background_thread2():
 
 
     while flag_autoclave:
-        f = open(DIR + "deg_valores.txt","a+")
-        f.write("entre en thread2:\n")
-        f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
-        f.close()
-
         while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
             if float(measures[2]) > temp_save:  # "si la temperatura es mayor que la temperatura seteada"
                 socketio.sleep(1) # 60[s]

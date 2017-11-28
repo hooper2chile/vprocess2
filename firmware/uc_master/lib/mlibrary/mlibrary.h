@@ -441,18 +441,18 @@ void uc_granotec(char option) {
   //opcion "a" (a-uto clave): destinado a operar los relay para agua caliente ('a') o vapor ('v')
   if (option == 'a') {
     signal = 'v';
-    //granotec.println('v');  //modo autoclave
+    Serial.println("full vapor seteado");  //modo autoclave
   }
   //opcion p-roceso: se switchea las electrovalvulas para controlar temperatura
   else if (option == 'p'){
       if (Temp1 < mytempset ) signal = 'v';
       if (Temp1 > mytempset ) signal = 'a';
-      //granotec.println(message[2]);
+      Serial.println("control temperatura proceso seteado");
   }
   //opcion "m" motor: destinado a operar las rpm del motor
   else if (option == 'm' and rst2 == '1') {
     String command = 'm' + String(mymix);
-    granotec.println(command);
+    Serial.println("motor seteado");
   }
 
 }
