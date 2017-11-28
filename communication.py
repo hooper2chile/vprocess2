@@ -196,8 +196,8 @@ def actuador(var,u_set):
 
 ###############################################################################
 def cook_autoclave(ac_sets):
-    ac_sets[0] = int(ac_sets[0])  #temperatura
-    ac_sets[1] = int(ac_sets[1])  #tiempo
+    #ac_sets[0] = int(ac_sets[0])  #temperatura
+    #ac_sets[1] = int(ac_sets[1])  #tiempo
 
     if ac_sets[0] >= TEMP_THRESHOLD_AUTOCLAVE:
         relay = 'v' #v-apor
@@ -208,7 +208,7 @@ def cook_autoclave(ac_sets):
 
     #armando el comando para autoclave que se enviara por zmq a myserial.py y desde ahí al uc master, desde ahí al uc granotec
     #ejemplos:    acve  /  acae  /  acde
-    command_ac = 'ac' +  relay  + 'e'
+    command_ac = 'ac' +  relay  + 'e\n'
     logging.info('\n' + command_ac + '_autoclave_sets' + '\n')
 
     published_setpoint(command_ac)
