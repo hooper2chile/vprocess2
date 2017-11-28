@@ -216,7 +216,7 @@ def cook_autoclave(ac_sets):
 
     try:
         f = open(DIR + "auto_clave_command.txt","a+")
-        f.write(command)
+        f.write(command_ac)
         f.close()
 
     except OSError:
