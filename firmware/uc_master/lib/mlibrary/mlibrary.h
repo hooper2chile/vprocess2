@@ -441,9 +441,16 @@ void uc_granotec(char option) {
     String command = 'm' + String(mymix);
     granotec.println(command);
   }
-  //opcion "c" calentar: destinado a operar los relay para agua caliente ('a') o vapor ('v')
-  else if (option == 'c')  granotec.println(message[2]);
-
+  //opcion "a" (a-uto clave): destinado a operar los relay para agua caliente ('a') o vapor ('v')
+  if (option == 'a') {
+    granotec.println('v');  //modo autoclave
+  }
+//opcion proceso: se switchea las electrovalvulas para controlar temperatura
+  else {
+      if (Temp1 < mytempset ) granotec.println('v');
+      if (Temp1 > mytempset ) granotec.println('a');
+      //granotec.println(message[2]);
+  }
   //debuging
   //Serial.println("comandos_autoclave_seteados");
 }
@@ -466,18 +473,16 @@ void setpoint() {
 void format_message(int var) {
   //reset to svar string
   svar = "";
-
   if (var < 10)
     svar = "00"+ String(var);
-
   else if (var < 100)
     svar = "0" + String(var);
-
   else
     svar = String(var);
 
   return;
 }
+
 //Re-transmition commands to slave micro controller
 void broadcast_setpoint(uint8_t select) {
 
@@ -496,7 +501,7 @@ void broadcast_setpoint(uint8_t select) {
       mySerial.print(new_write0);
       //*******************************************
       //testing serial communication to uc_granotec
-      granotec.println("a");
+      //granotec.println();
       //testing
       //*******************************************
       break;

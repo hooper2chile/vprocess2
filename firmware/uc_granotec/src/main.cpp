@@ -35,6 +35,14 @@ void loop() {
       //wdt_reset();
       switch ( message[0] )
       {
+       /*
+        *   
+        *
+        *
+        */
+
+
+
           case 'a': //a-gua
             setup_default();
             bomb();

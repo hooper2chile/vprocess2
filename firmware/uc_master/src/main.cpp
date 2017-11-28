@@ -54,7 +54,7 @@ void loop() {
                 break;
 
               case 'a':  //setpoint electrovalvulas y motor
-                uc_granotec('c');
+                uc_granotec('a');
                 break;
 
               default:
