@@ -55,7 +55,7 @@ void loop() {
             setup_default();
             break;
       }
-      Serial.print("uc_granotec command update:\t");
+      //Serial.print("uc_granotec command update:\t");
       Serial.println(message);
 
       stringComplete = false;

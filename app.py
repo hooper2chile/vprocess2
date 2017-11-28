@@ -543,12 +543,12 @@ def background_thread2():
                 f.write("entre en thread2:\n")
                 f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
                 f.close()
-                communication.cook_autoclave(ac_sets)
+                communication.cook_autoclave('v')
 
             else:
                 socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
 
-
+        communication.cook_autoclave('d')
         #permite volver a correr el thread una vez terminado un timer
         #thread2 = None
         socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
