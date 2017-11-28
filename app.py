@@ -8,7 +8,7 @@ import os, sys, logging, communication, reviewDB, tocsv
 logging.basicConfig(filename='/home/pi/vprocess2/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 DIR="/home/pi/vprocess2/"
-SPEED_MAX = 150 #150 [rpm]
+SPEED_MAX = 100 #150 [rpm]
 TEMP_MAX  = 130 #130 [ºC]
 TIME_MAX  = 360 #360 [min] = 6 [HR]
 
