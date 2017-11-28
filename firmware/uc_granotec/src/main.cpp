@@ -35,14 +35,6 @@ void loop() {
       //wdt_reset();
       switch ( message[0] )
       {
-       /*
-        *   
-        *
-        *
-        */
-
-
-
           case 'a': //a-gua
             setup_default();
             bomb();
@@ -57,7 +49,6 @@ void loop() {
 
           case 'm': //m-otor
             motor_set();
-
             break;
 
           default:

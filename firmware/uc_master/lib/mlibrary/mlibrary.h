@@ -16,8 +16,8 @@ SoftwareSerial granotec(4, 5);  //for control of motor and electro valvules
 #define iINT(x)   (x+48)  //inverse ascii convertion
 
 #define SPEED_MIN 2.0
-#define SPEED_MAX 150     //[RPM]
-#define TEMP_MAX  130     //[ºC]
+#define SPEED_MAX 100     //[RPM]
+#define TEMP_MAX  120     //[ºC]
 
 //#define Ts        1000     //1000ms
 
@@ -52,6 +52,8 @@ String  uset_temp = "";
 String  uset_ph   = "";
 String  svar      = "";
 
+//for uc granotec
+char signal = 'd';  //d: default
 
 //RESET SETUP
 char rst1 = 1;  char rst2 = 1;  char rst3 = 1;
@@ -66,7 +68,7 @@ float   mytempset = 0;
 
 uint8_t myfeed    = 0;
 uint8_t myunload  = 0;
-uint16_t mymix     = 0;
+uint16_t mymix    = 0;
 
 int i = 0;
 int data = 0;
@@ -436,23 +438,23 @@ void control_ph() {
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 void uc_granotec(char option) {
+  //opcion "a" (a-uto clave): destinado a operar los relay para agua caliente ('a') o vapor ('v')
+  if (option == 'a') {
+    signal = 'v';
+    //granotec.println('v');  //modo autoclave
+  }
+  //opcion p-roceso: se switchea las electrovalvulas para controlar temperatura
+  else if (option == 'p'){
+      if (Temp1 < mytempset ) signal = 'v';
+      if (Temp1 > mytempset ) signal = 'a';
+      //granotec.println(message[2]);
+  }
   //opcion "m" motor: destinado a operar las rpm del motor
-  if (option == 'm' and rst2 == '1') {
+  else if (option == 'm' and rst2 == '1') {
     String command = 'm' + String(mymix);
     granotec.println(command);
   }
-  //opcion "a" (a-uto clave): destinado a operar los relay para agua caliente ('a') o vapor ('v')
-  if (option == 'a') {
-    granotec.println('v');  //modo autoclave
-  }
-//opcion proceso: se switchea las electrovalvulas para controlar temperatura
-  else {
-      if (Temp1 < mytempset ) granotec.println('v');
-      if (Temp1 > mytempset ) granotec.println('a');
-      //granotec.println(message[2]);
-  }
-  //debuging
-  //Serial.println("comandos_autoclave_seteados");
+
 }
 
 
@@ -461,7 +463,6 @@ void setpoint() {
   write_crumble();
 
   //aca hay que programar el mezclador y usar crumble() para obtener el dato
-  //uc_granotec(mymix,rst2);
   uc_granotec('m');
 
   Serial.println("good setpoint");
@@ -501,7 +502,7 @@ void broadcast_setpoint(uint8_t select) {
       mySerial.print(new_write0);
       //*******************************************
       //testing serial communication to uc_granotec
-      //granotec.println();
+      granotec.println(signal);
       //testing
       //*******************************************
       break;
@@ -560,7 +561,7 @@ int validate() {
 
           //mix number
           ( message.substring(26, 30).toInt() >= 0    ) &&
-          ( message.substring(26, 30).toInt() <= 1500 ) &&
+          ( message.substring(26, 30).toInt() <= 750 ) &&
 
           //temp number
           ( message.substring(34, 37).toInt() >= 0        ) &&
@@ -609,8 +610,7 @@ int validate() {
 
       //Validate actions for autoclave, relay states: Agua o Vapor
       else if ( message[0] == 'a' && message[1] == 'c' &&
-               (message[2] == 'a' || message[2] == 'v' || message[2] == 'd') &&
-                message[3] == 'e'
+                message[2] == 'v' && message[3] == 'e'
               )
           return 1;
 

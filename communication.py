@@ -18,10 +18,9 @@ tau_zmq_connect = 0.3 #0.3 [s]: no ha funcionado con menos
 SPEED_MAX_MIX = 750 #1500
 SPEED_MAX = 100     #150
 TEMP_MAX  = 120     #130
-PH_MIN = 2   #0
-PH_MAX = 12  #14
-TEMP_THRESHOLD_AUTOCLAVE = 70
-TEMP_MIN = 20
+PH_MIN = 0   #0
+PH_MAX = 14  #14
+
 
 
 #download data measures with client zmq
@@ -198,17 +197,10 @@ def actuador(var,u_set):
 def cook_autoclave(ac_sets):
     #ac_sets[0] = int(ac_sets[0])  #temperatura
     #ac_sets[1] = int(ac_sets[1])  #tiempo
-    '''
-    if ac_sets[0] >= TEMP_THRESHOLD_AUTOCLAVE:
-        relay = 'v' #v-apor
-    elif ac_sets[0] >= TEMP_MIN:
-        relay = 'a' #a-gua
-    else:
-        relay = 'd' #default
-    '''
+
     relay = 'v'
     #armando el comando para autoclave que se enviara por zmq a myserial.py y desde ahí al uc master, desde ahí al uc granotec
-    #ejemplos:    acve  /  acae  /  acde
+    #ejemplo:    acve
     command_ac = 'ac' +  relay  + 'e\n'
     logging.info('\n' + command_ac + '_autoclave_sets' + '\n')
 
