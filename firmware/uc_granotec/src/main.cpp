@@ -49,13 +49,14 @@ void loop() {
 
           case 'm': //m-otor
             motor_set();
+
             break;
 
           default:
             setup_default();
             break;
       }
-      Serial.print("Se recibio:\t");
+      Serial.print("uc_granotec command update:\t");
       Serial.println(message);
 
       stringComplete = false;

@@ -38,37 +38,37 @@ void serialEvent() {
 }
 
 void bomb() {
-  digitalWrite(Bomba1, LOW);  //bomba on
-  digitalWrite(Bomba2, LOW);  //bomba on
+  digitalWrite(Bomba1, LOW);  //Contactor bomba on
+  digitalWrite(Bomba2, LOW);  //Contactor bomba on
 }
 
 void hot_water_valve() {
-  digitalWrite(v1, LOW);   //valve hot water on
-  digitalWrite(v2, LOW);   //valve hot water on
+  digitalWrite(v1, LOW);   //Contactor valve hot water on
+  digitalWrite(v2, LOW);   //Contactor valve hot water on
 }
 
 void steam_valve() {
-  digitalWrite(v3, LOW); //valve steam on
-  digitalWrite(v4, LOW); //valve steam on
+  digitalWrite(v3, LOW); //Contactor valve steam on
+  digitalWrite(v4, LOW); //Contactor valve steam on
 }
 
-// default setup:  ALL OFF (HIGH => OFF)
+// default setup:  ALL Contactor OFF (HIGH => OFF)
 void setup_default() {
-  digitalWrite(v1, HIGH);  //valve hot water on
-  digitalWrite(v2, HIGH);  //valve hot water on
+  digitalWrite(v1, HIGH);  //Contactor valve hot water on
+  digitalWrite(v2, HIGH);  //Contactor valve hot water on
 
-  digitalWrite(v3, HIGH);  //valve steam off
-  digitalWrite(v4, HIGH);  //valve steam off
+  digitalWrite(v3, HIGH);  //Contactor valve steam off
+  digitalWrite(v4, HIGH);  //Contactor valve steam off
 
-  digitalWrite(Bomba1, HIGH);  //bomba off
-  digitalWrite(Bomba2, HIGH);  //bomba off
+  digitalWrite(Bomba1, HIGH);  //Contactor bomba off
+  digitalWrite(Bomba2, HIGH);  //Contactor bomba off
 
   digitalWrite(VDF_ENABLE, HIGH);  //VDF OFF
 }
 
+uint16_t rpm_set   = 0;
 void motor_set() {
-
-  uint16_t rpm_set =  message.substring(1).toFloat();
+  rpm_set =  message.substring(1).toFloat();
 
   Serial.print("message[1:end]:\t");
   Serial.println(message.substring(1).length());
