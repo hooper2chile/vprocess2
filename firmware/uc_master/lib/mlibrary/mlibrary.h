@@ -112,8 +112,8 @@ float m1 = +6.02;
 float n1 = -20.42;
 
 //Temp1=:(m2,n2)
-float m2 = +5.31;
-float n2 = -42.95;
+float m2 = +12.42;
+float n2 = -116.72;
 
 
 float Iph = 0;
@@ -439,17 +439,11 @@ void control_ph() {
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
-<<<<<<< HEAD
-void heat_exchanger_controller(char option) {
-  if ( (option == 'v' ||  option == 'd') and rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
-    if      ( option == 'v' ) signal = 'v';  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
-    else if ( option == 'd' ) signal = 'd';  //opcion 'd' (d-efault): modo todo apagado
-=======
+
 void heat_exchanger_controller() {
   if ( rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
     if      ( message[2] == 'v' ) signal = 'v';  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
     else if ( message[2] == 'd' ) signal = 'd';  //opcion 'd' (d-efault): modo todo apagado
->>>>>>> 1975b26e9262b89e962243940918d0de36fbbd3a
   }
 
   //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
