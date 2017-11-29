@@ -537,7 +537,6 @@ def autoclave_functions(dato):
 
 
 
-
 #CONFIGURACION DE THREADS
 def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
