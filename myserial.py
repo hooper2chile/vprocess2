@@ -71,10 +71,7 @@ def rs232(q1,q2):
     flag = False
     while not flag:
         try:
-            if sys.platform=='darwin':
-                ser = serial.Serial(port='/dev/cu.wchusbserial1420', baudrate=9600)
-            else:
-                ser = serial.Serial(port='/dev/ttyUSB0', baudrate=9600)
+            ser = serial.Serial(port='/dev/ttyUSB0', baudrate=9600)
 
             #necesario para setear correctamente el puerto serial
             ser.setDTR(True)
@@ -94,6 +91,11 @@ def rs232(q1,q2):
                 logging.info("Reenviando ultimo SETPOINT %s", save_setpoint)
                 ser.write(save_setpoint+'\n')
                 result = ser.readline().split()
+                ### uc granotec default ##########
+                time.sleep(1)
+                ser.write('acde'+'\n')
+                result = ser.readline().split()
+                ##################################
                 logging.info(result)
 
             flag = ser.is_open
