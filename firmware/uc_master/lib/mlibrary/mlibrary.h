@@ -441,13 +441,13 @@ void heat_exchanger_controller(char option) {
   //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
   if (option == 'v') {
     signal = 'v';
-    Serial.print("full vapor seteado\t");  //modo autoclave
+    //Serial.println("full vapor seteado");  //modo autoclave
   }
   //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
   else if (option == 'p'){
       if (Temp1 < mytempset ) signal = 'v';
       if (Temp1 > mytempset ) signal = 'a';
-      Serial.print("control temperatura proceso seteado\t");
+      //Serial.println("control temperatura proceso seteado");
   }
 }
 
@@ -455,7 +455,7 @@ void heat_exchanger_controller(char option) {
 void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
   if (rst2 == '1') {
     String command = 'm' + String(mymix);
-    Serial.print("motor seteado\t");
+    //Serial.println("motor seteado");
   }
 }
 
