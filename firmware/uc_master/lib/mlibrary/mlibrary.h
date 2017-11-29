@@ -53,7 +53,7 @@ String  uset_ph   = "";
 String  svar      = "";
 
 //for uc granotec
-char signal = 'd';  //d: default
+String signal = "d";  //d: default
 
 //RESET SETUP
 char rst1 = 1;  char rst2 = 1;  char rst3 = 1;
@@ -442,14 +442,14 @@ void control_ph() {
 
 void heat_exchanger_controller() {
   if ( rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
-    if      ( message[2] == 'v' ) signal = 'v';  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
-    else if ( message[2] == 'd' ) signal = 'd';  //opcion 'd' (d-efault): modo todo apagado
+    if      ( message[2] == 'v' ) signal = "v";  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
+    else if ( message[2] == 'd' ) signal = "d";  //opcion 'd' (d-efault): modo todo apagado
   }
 
   //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
   if ( rst5 == 0 ) {
-      if ( Temp1 < mytempset ) signal = 'v';
-      if ( Temp1 > mytempset ) signal = 'a';
+      if ( Temp1 < mytempset ) signal = "v";
+      if ( Temp1 > mytempset ) signal = "a";
   }
   return;
 }
@@ -457,7 +457,7 @@ void heat_exchanger_controller() {
 
 void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
   if ( rst2 == 0 ) {
-    String command = 'm' + String(mymix);
+    signal= 'm' + String(mymix);
     //"motor seteado"
   }
   return;
@@ -468,8 +468,6 @@ void setpoint() {
   //acá se leen los nuevos setpoint para los lazos de control
   write_crumble();
 
-  //aca hay que programar el mezclador y usar crumble() para obtener el dato
-  //uc_granotec('m');
 
   Serial.println("good setpoint");
   return;
