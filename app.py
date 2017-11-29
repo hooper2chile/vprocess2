@@ -148,7 +148,7 @@ def system(dato):
                 f.close()
 
             except:
-                logging.info("no se pudo guardar el flag_database para iniciar grabacion\n")
+                #logging.info("no se pudo guardar el flag_database para iniciar grabacion\n")
 
         elif task[0] == "no_grabar":
             flag_database = "False"
@@ -158,7 +158,7 @@ def system(dato):
                 f.close()
 
             except:
-                logging.info("no se pudo guardar el flag_database para detener grabacion\n")
+                #logging.info("no se pudo guardar el flag_database para detener grabacion\n")
 
         elif task[0] == "reiniciar":
             os.system(DIR + "bash killall")
@@ -177,7 +177,7 @@ def system(dato):
                 os.system("rm -rf /home/pi/vprocess2/database/*.db-journal")
 
             except:
-                logging.info("no se pudo completar limpiar\n")
+                #logging.info("no se pudo completar limpiar\n")
 
 
 
@@ -198,7 +198,7 @@ def my_json(dato):
 
     except:
         #print "no se logro escribir la ventana solicitada en el archivo window.txt"
-        logging.info("no se logro escribir la ventana solicitada en el archivo window.txt")
+        #logging.info("no se logro escribir la ventana solicitada en el archivo window.txt")
 
     #Se buscan los datos de la consulta en database
     try:
@@ -208,7 +208,7 @@ def my_json(dato):
 
     except:
         #print "no se logro leer nombre de ultimo archivo en name_db.txt"
-        logging.info("no se logro leer nombre de ultimo archivo en name_db.txt")
+        #logging.info("no se logro leer nombre de ultimo archivo en name_db.txt")
 
     global APIRest
     APIRest = reviewDB.window_db(filedb, var, dt)
@@ -236,7 +236,7 @@ def setpoints(dato):
         f.close()
 
     except:
-        logging.info("no se pudo guardar en set_data en setpoints.txt")
+        #logging.info("no se pudo guardar en set_data en setpoints.txt")
 
 
 #Sockets de calibración de instrumentación
@@ -279,7 +279,7 @@ def calibrar_ph(dato):
             communication.calibrate(0,coef_ph_set)
 
         except:
-            logging.info("no se pudo guardar en coef_ph_set.txt. Tampoco actualizar los coef_ph_set al uc.")
+            #logging.info("no se pudo guardar en coef_ph_set.txt. Tampoco actualizar los coef_ph_set al uc.")
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('ph_calibrar', {'set': ph_set}, namespace='/biocl', broadcast=True)
@@ -292,7 +292,7 @@ def calibrar_ph(dato):
         f.close()
 
     except:
-        logging.info("no se pudo guardar parameters en ph_set.txt")
+        #logging.info("no se pudo guardar parameters en ph_set.txt")
 
 
 
@@ -337,7 +337,7 @@ def calibrar_od(dato):
 
 
         except:
-            logging.info("no se pudo guardar en coef_ph_set en coef_od_set.txt")
+            #logging.info("no se pudo guardar en coef_ph_set en coef_od_set.txt")
 
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
@@ -351,7 +351,7 @@ def calibrar_od(dato):
         f.close()
 
     except:
-        logging.info("no se pudo guardar parameters en od_set.txt")
+        #logging.info("no se pudo guardar parameters en od_set.txt")
 
 
 #CALIBRACIÓN TEMPERATURA
@@ -394,7 +394,7 @@ def calibrar_temp(dato):
 
 
         except:
-            logging.info("no se pudo guardar en coef_ph_set en coef_od_set.txt")
+            #logging.info("no se pudo guardar en coef_ph_set en coef_od_set.txt")
 
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
@@ -408,7 +408,7 @@ def calibrar_temp(dato):
         f.close()
 
     except:
-        logging.info("no se pudo guardar parameters en temp_set.txt")
+        #logging.info("no se pudo guardar parameters en temp_set.txt")
 
 
 
@@ -434,7 +434,7 @@ def calibrar_u_ph(dato):
         communication.actuador(1,u_set_ph)  #FALTA IMPLEMENTARIO EN communication.py
 
     except:
-        logging.info("no se pudo guardar umbrales u_set_ph en umbral_set_ph.txt")
+        #logging.info("no se pudo guardar umbrales u_set_ph en umbral_set_ph.txt")
 
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
@@ -463,7 +463,7 @@ def calibrar_u_temp(dato):
         communication.actuador(2,u_set_temp)  #FALTA IMPLEMENTARIO EN communication.py
 
     except:
-        logging.info("no se pudo guardar u_set_temp en umbral_set_temp.txt")
+        #logging.info("no se pudo guardar u_set_temp en umbral_set_temp.txt")
 
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
@@ -518,7 +518,7 @@ def autoclave_functions(dato):
 	logging.info("se guardo en autoclave.txt")
 
     except:
-	logging.info("no se pudo guardar en autoclave.txt")
+	#logging.info("no se pudo guardar en autoclave.txt")
 
 
 
@@ -531,7 +531,10 @@ def background_thread2():
 
     while flag_autoclave:
         while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
-            if float(measures[2]) >= temp_save:  # "si la temperatura es mayor que la temperatura seteada"
+            if float(measures[2]) >= temp_save:  # "si la temperatura es mayor que la temperatura seteada
+                #Se enciende el intercabiador de calor en modo autoclave
+                communication.cook_autoclave('v')
+
                 socketio.sleep(1) # 60[s]
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
@@ -545,8 +548,9 @@ def background_thread2():
             else:
                 socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
 
-            communication.cook_autoclave('v')
+            #communication.cook_autoclave('v')
 
+        #El while termina dejando el intercambiador en default (APAGADO, SIN CONTROL TEMPERATURA, SIN MODO AUTOCLAVE)
         communication.cook_autoclave('d')
         #permite volver a correr el thread una vez terminado un timer
         #thread2 = None
@@ -581,10 +585,10 @@ def background_thread1():
                     communication.cook_setpoint(set_data)
                     save_set_data = set_data
 
-            logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
+            #logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
 
         except:
-            logging.info("\n no se actualizaron las mediciones")
+            #logging.info("\n no se actualizaron las mediciones")
 
         socketio.sleep(0.25)
 

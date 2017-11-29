@@ -438,25 +438,25 @@ void control_ph() {
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 void heat_exchanger_controller(char option) {
-  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
-  if (option == 'v') {
-    signal = 'v';
-    //Serial.println("full vapor seteado");  //modo autoclave
-  }
+  if      ( option == 'v' ) signal = 'v';  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
+  else if ( option == 'd' ) signal = 'd';  //opcion 'd' (d-efault): modo todo apagado
+
   //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
-  else if (option == 'p'){
+  else if ( option == 'p' ) {
       if (Temp1 < mytempset ) signal = 'v';
       if (Temp1 > mytempset ) signal = 'a';
-      //Serial.println("control temperatura proceso seteado");
+      //"control temperatura proceso seteado"
   }
+  return;
 }
 
 
 void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
   if (rst2 == '1') {
     String command = 'm' + String(mymix);
-    //Serial.println("motor seteado");
+    //"motor seteado"
   }
+  return;
 }
 
 

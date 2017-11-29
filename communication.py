@@ -3,7 +3,6 @@
 import sys, zmq, time, logging
 
 logging.basicConfig(filename='/home/pi/vprocess2/log/communication.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-
 DIR="/home/pi/vprocess2/"
 
 #5556: for download data
@@ -118,7 +117,7 @@ def calibrate(var, coef):
         published_setpoint(coef_cook)
 
     except:
-        logging.info("no se pudo guardar set de calibrate()")
+        #logging.info("no se pudo guardar set de calibrate()")
 
 
 
@@ -189,7 +188,7 @@ def actuador(var,u_set):
         published_setpoint(u_cook);
 
     except:
-        logging.info("no se pudo guardar set de actuador()")
+        #logging.info("no se pudo guardar set de actuador()")
 
 
 
@@ -212,7 +211,7 @@ def cook_autoclave(action):
         f.close()
 
     except OSError:
-        logging.info("no se pudo guardar el command del autoclave en el archivo de texto")
+        #logging.info("no se pudo guardar el command del autoclave en el archivo de texto")
 
     return True
 ###############################################################################
@@ -257,7 +256,7 @@ def cook_setpoint(set_data):
 
     except ValueError:
         set_data = temp_save_set_data #esto permite reenviar el ultimo si hay una exception
-        logging.info("exception de set_data")
+        #logging.info("exception de set_data")
 
     #threshold setting:
     #alimentar
@@ -365,7 +364,7 @@ def cook_setpoint(set_data):
         f.close()
 
     except OSError:
-        logging.info("no se pudo guardar el command en el archivo de texto")
+        #logging.info("no se pudo guardar el command en el archivo de texto")
 
     return True
 
