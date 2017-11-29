@@ -60,7 +60,7 @@ void loop() {
               case 'a':  //setpoint autoclave
                 //message[2] tiene que ser 'v' para setear vapor para autoclave
                 heat_exchanger_controller(message[2]);
-                Serial.println("AUTOCLAVE ON");
+                Serial.println(message[2]); //"AUTOCLAVE ON");
                 break;
 
               default:
