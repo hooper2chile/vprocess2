@@ -440,15 +440,15 @@ void control_ph() {
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
 void heat_exchanger_controller(char option) {
-  if ( rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
+  if ( option == 'v' and rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
     if      ( option == 'v' ) signal = 'v';  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
     else if ( option == 'd' ) signal = 'd';  //opcion 'd' (d-efault): modo todo apagado
   }
 
   //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
   if ( option == 'p' and rst5 == 0 ) {
-      if (Temp1 < mytempset ) signal = 'v';
-      if (Temp1 > mytempset ) signal = 'a';
+      if ( Temp1 < mytempset ) signal = 'v';
+      if ( Temp1 > mytempset ) signal = 'a';
   }
   return;
 }
@@ -501,7 +501,7 @@ void broadcast_setpoint(uint8_t select) {
 
 
   switch (select) {
-    case 0: //only re-tx and update pid uset's.
+    case 0: //only re-tx and update controller uset's.
       new_write0 = "";
       new_write0 = new_write.substring(0,3) + uset_ph + new_write.substring(7,34) + uset_temp + new_write.substring(37,55) + "\n";
       mySerial.print(new_write0);

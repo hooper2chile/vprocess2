@@ -35,7 +35,7 @@ void loop() {
                 daqmx();
                 control_ph();
                 //control_temp();
-                heat_exchanger_controller('p');
+                //heat_exchanger_controller('p');
                 broadcast_setpoint(0);
                 break;
 
@@ -43,7 +43,7 @@ void loop() {
                 setpoint();
                 control_ph();
                 //control_temp();
-                heat_exchanger_controller('p');
+                //heat_exchanger_controller('p');
                 motor_set();
 
                 broadcast_setpoint(1);
