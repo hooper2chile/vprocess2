@@ -532,6 +532,7 @@ def autoclave_functions(dato):
 	logging.info("se guardo en autoclave.txt")
 
     except:
+        pass
 	#logging.info("no se pudo guardar en autoclave.txt")
 
 
