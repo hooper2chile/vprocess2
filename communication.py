@@ -117,6 +117,7 @@ def calibrate(var, coef):
         published_setpoint(coef_cook)
 
     except:
+        pass
         #logging.info("no se pudo guardar set de calibrate()")
 
 
@@ -188,6 +189,7 @@ def actuador(var,u_set):
         published_setpoint(u_cook);
 
     except:
+        pass
         #logging.info("no se pudo guardar set de actuador()")
 
 
@@ -211,6 +213,7 @@ def cook_autoclave(action):
         f.close()
 
     except OSError:
+        pass
         #logging.info("no se pudo guardar el command del autoclave en el archivo de texto")
 
     return True
@@ -364,6 +367,7 @@ def cook_setpoint(set_data):
         f.close()
 
     except OSError:
+        pass
         #logging.info("no se pudo guardar el command en el archivo de texto")
 
     return True
