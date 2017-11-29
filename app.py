@@ -565,7 +565,7 @@ def background_thread2():
                 f.close()
 
             else:
-                g.write("entre en el else por que no cumplí el if z\n")
+                g.write("entre en el else por que no cumplí el if: measures[2]) >= %s\n" % temp_save )
                 socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
 
             #communication.cook_autoclave('v')
