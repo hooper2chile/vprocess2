@@ -158,6 +158,7 @@ def system(dato):
                 f.close()
 
             except:
+		pass
                 #logging.info("no se pudo guardar el flag_database para detener grabacion\n")
 
         elif task[0] == "reiniciar":
