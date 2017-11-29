@@ -544,10 +544,6 @@ def background_thread2():
     flag_autoclave = True
 
 
-        f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
-
-
-
     while flag_autoclave:
         while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
             g = open(DIR + "testing.txt","a+")
