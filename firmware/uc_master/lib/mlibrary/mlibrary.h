@@ -440,7 +440,7 @@ void control_ph() {
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
 void heat_exchanger_controller(char option) {
-  if ( option == 'v' and rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
+  if ( (option == 'v' ||  option == 'd') and rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
     if      ( option == 'v' ) signal = 'v';  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
     else if ( option == 'd' ) signal = 'd';  //opcion 'd' (d-efault): modo todo apagado
   }
