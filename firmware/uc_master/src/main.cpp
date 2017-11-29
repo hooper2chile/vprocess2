@@ -34,14 +34,18 @@ void loop() {
                 hamilton_sensors();
                 daqmx();
                 control_ph();
-                control_temp();
+                //control_temp();
+                heat_exchanger_controller('p');
                 broadcast_setpoint(0);
                 break;
 
               case 'w':  //setpoints
                 setpoint();
                 control_ph();
-                control_temp();
+                //control_temp();
+                heat_exchanger_controller('p');
+                motor_set();
+
                 broadcast_setpoint(1);
                 break;
 
@@ -54,7 +58,8 @@ void loop() {
                 break;
 
               case 'a':  //setpoint autoclave
-                uc_granotec('a');
+                //message[2] tiene que ser 'v' para setear vapor para autoclave
+                heat_exchanger_controller(message[2]);
                 break;
 
               default:

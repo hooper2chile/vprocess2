@@ -437,24 +437,26 @@ void control_ph() {
 
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
-void uc_granotec(char option) {
-  //opcion "a" (a-uto clave): destinado a operar los relay para agua caliente ('a') o vapor ('v')
-  if (option == 'a') {
+void heat_exchanger_controller(char option) {
+  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
+  if (option == 'v') {
     signal = 'v';
     Serial.println("full vapor seteado");  //modo autoclave
   }
-  //opcion p-roceso: se switchea las electrovalvulas para controlar temperatura
+  //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
   else if (option == 'p'){
       if (Temp1 < mytempset ) signal = 'v';
       if (Temp1 > mytempset ) signal = 'a';
       Serial.println("control temperatura proceso seteado");
   }
-  //opcion "m" motor: destinado a operar las rpm del motor
-  else if (option == 'm' and rst2 == '1') {
+}
+
+
+void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
+  if (rst2 == '1') {
     String command = 'm' + String(mymix);
     Serial.println("motor seteado");
   }
-
 }
 
 
@@ -463,7 +465,7 @@ void setpoint() {
   write_crumble();
 
   //aca hay que programar el mezclador y usar crumble() para obtener el dato
-  uc_granotec('m');
+  //uc_granotec('m');
 
   Serial.println("good setpoint");
   return;
@@ -610,7 +612,7 @@ int validate() {
 
       //Validate actions for autoclave, relay states: Agua o Vapor
       else if ( message[0] == 'a' && message[1] == 'c' &&
-               (message[2] == 'v' || message[2] == 'd' || message[2] == 'a') && 
+               (message[2] == 'v' || message[2] == 'd' || message[2] == 'a') &&
                 message[3] == 'e'
               )
           return 1;
