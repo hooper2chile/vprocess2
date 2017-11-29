@@ -334,7 +334,7 @@ void daqmx() {
 }
 
 
-
+/*
 void control_temp() {
   //for debug
   //mytemp  = 50;
@@ -364,6 +364,7 @@ void control_temp() {
 
   return;
 }
+*/
 
 
 
@@ -437,22 +438,24 @@ void control_ph() {
 
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
+//rst5 = : flag for heat heat_exchanger_controller
 void heat_exchanger_controller(char option) {
-  if      ( option == 'v' ) signal = 'v';  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
-  else if ( option == 'd' ) signal = 'd';  //opcion 'd' (d-efault): modo todo apagado
+  if ( rst5 == '1' ) { //and flag de autoclave (falta agregarlo)
+    if      ( option == 'v' ) signal = 'v';  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
+    else if ( option == 'd' ) signal = 'd';  //opcion 'd' (d-efault): modo todo apagado
+  }
 
   //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
-  else if ( option == 'p' ) {
+  if ( option == 'p' and rst5 == '0') {
       if (Temp1 < mytempset ) signal = 'v';
       if (Temp1 > mytempset ) signal = 'a';
-      //"control temperatura proceso seteado"
   }
   return;
 }
 
 
 void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
-  if (rst2 == '1') {
+  if (rst2 == '0') {
     String command = 'm' + String(mymix);
     //"motor seteado"
   }
