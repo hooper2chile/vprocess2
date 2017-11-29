@@ -546,8 +546,10 @@ def background_thread2():
 
     while flag_autoclave:
         while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
+            logging.info("\n Se ejecuto Thread 2, entrando al if\n")
             if float(measures[2]) >= temp_save:  # "si la temperatura es mayor que la temperatura seteada
                 #Se enciende el intercabiador de calor en modo autoclave
+                logging.info("\n Se ejecuto Thread 2, entrando al while y el if\n")
                 communication.cook_autoclave('v')
 
                 socketio.sleep(1) # 60[s]
@@ -559,6 +561,8 @@ def background_thread2():
                 f.write("entre en thread2:\n")
                 f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
                 f.close()
+
+                logging.info("\n Se ejecuto Thread 2, enviando 'v', descontando tiempo, y escribiendo archivo deg.txt\n")
 
             else:
                 socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
