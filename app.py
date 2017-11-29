@@ -133,7 +133,8 @@ def system(dato):
         f.close()
 
     except:
-        logging.info("no se pudo guardar en realizar en task.txt")
+        pass
+        #logging.info("no se pudo guardar en realizar en task.txt")
 
 
     #Con cada cambio en los setpoints, se vuelven a emitir a todos los clientes.
@@ -159,7 +160,7 @@ def system(dato):
                 f.close()
 
             except:
-		pass
+                pass
                 #logging.info("no se pudo guardar el flag_database para detener grabacion\n")
 
         elif task[0] == "reiniciar":
@@ -528,12 +529,11 @@ def autoclave_functions(dato):
         f = open(DIR + "autoclave.txt","a+")
      	f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + '\n')
     	f.close()
-
-	logging.info("se guardo en autoclave.txt")
+	    #logging.info("se guardo en autoclave.txt")
 
     except:
         pass
-	#logging.info("no se pudo guardar en autoclave.txt")
+	   #logging.info("no se pudo guardar en autoclave.txt")
 
 
 
