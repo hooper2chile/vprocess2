@@ -148,6 +148,7 @@ def system(dato):
                 f.close()
 
             except:
+                pass
                 #logging.info("no se pudo guardar el flag_database para iniciar grabacion\n")
 
         elif task[0] == "no_grabar":
@@ -178,6 +179,7 @@ def system(dato):
                 os.system("rm -rf /home/pi/vprocess2/database/*.db-journal")
 
             except:
+                pass
                 #logging.info("no se pudo completar limpiar\n")
 
 
@@ -198,6 +200,7 @@ def my_json(dato):
         f.close()
 
     except:
+        pass
         #print "no se logro escribir la ventana solicitada en el archivo window.txt"
         #logging.info("no se logro escribir la ventana solicitada en el archivo window.txt")
 
@@ -208,6 +211,7 @@ def my_json(dato):
         f.close()
 
     except:
+        pass
         #print "no se logro leer nombre de ultimo archivo en name_db.txt"
         #logging.info("no se logro leer nombre de ultimo archivo en name_db.txt")
 
@@ -237,6 +241,7 @@ def setpoints(dato):
         f.close()
 
     except:
+        pass
         #logging.info("no se pudo guardar en set_data en setpoints.txt")
 
 
@@ -280,6 +285,7 @@ def calibrar_ph(dato):
             communication.calibrate(0,coef_ph_set)
 
         except:
+            pass
             #logging.info("no se pudo guardar en coef_ph_set.txt. Tampoco actualizar los coef_ph_set al uc.")
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
@@ -293,6 +299,7 @@ def calibrar_ph(dato):
         f.close()
 
     except:
+        pass
         #logging.info("no se pudo guardar parameters en ph_set.txt")
 
 
@@ -338,6 +345,7 @@ def calibrar_od(dato):
 
 
         except:
+            pass
             #logging.info("no se pudo guardar en coef_ph_set en coef_od_set.txt")
 
 
@@ -352,6 +360,7 @@ def calibrar_od(dato):
         f.close()
 
     except:
+        pass
         #logging.info("no se pudo guardar parameters en od_set.txt")
 
 
@@ -395,6 +404,7 @@ def calibrar_temp(dato):
 
 
         except:
+            pass
             #logging.info("no se pudo guardar en coef_ph_set en coef_od_set.txt")
 
 
@@ -409,6 +419,7 @@ def calibrar_temp(dato):
         f.close()
 
     except:
+        pass
         #logging.info("no se pudo guardar parameters en temp_set.txt")
 
 
@@ -435,6 +446,7 @@ def calibrar_u_ph(dato):
         communication.actuador(1,u_set_ph)  #FALTA IMPLEMENTARIO EN communication.py
 
     except:
+        pass
         #logging.info("no se pudo guardar umbrales u_set_ph en umbral_set_ph.txt")
 
 
@@ -589,6 +601,7 @@ def background_thread1():
             #logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
 
         except:
+            pass
             #logging.info("\n no se actualizaron las mediciones")
 
         socketio.sleep(0.25)
