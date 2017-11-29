@@ -92,9 +92,9 @@ def rs232(q1,q2):
                 ser.write(save_setpoint+'\n')
                 result = ser.readline().split()
                 ### uc granotec default ##########
-                time.sleep(1)
-                ser.write('acde'+'\n')
-                result = ser.readline().split()
+                #time.sleep(1)
+                #ser.write('acde'+'\n')
+                #result = ser.readline().split()
                 ##################################
                 logging.info(result)
 
