@@ -112,7 +112,7 @@ def main():
 
                 except:
                     logging.info("no se pudo leer grabar el log de grabar off")
-                #depuracion log
+                    #depuracion log
 
         i += 1
         while flag_database_local:
