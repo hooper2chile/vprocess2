@@ -531,22 +531,21 @@ def background_thread2():
 
     while flag_autoclave:
         while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
-            if float(measures[2]) > temp_save:  # "si la temperatura es mayor que la temperatura seteada"
+            if float(measures[2]) >= temp_save:  # "si la temperatura es mayor que la temperatura seteada"
                 socketio.sleep(1) # 60[s]
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
-
                 #Revisar si necesita dos while anidados.
-                #Revisar por que no estoy guardando la temperatura en temp_save y tiempo en time_save
                 f = open(DIR + "deg.txt","a+")
                 f.write("entre en thread2:\n")
                 f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
                 f.close()
-                communication.cook_autoclave('v')
 
             else:
                 socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
+
+            communication.cook_autoclave('v')
 
         communication.cook_autoclave('d')
         #permite volver a correr el thread una vez terminado un timer

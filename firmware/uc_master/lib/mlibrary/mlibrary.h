@@ -610,7 +610,8 @@ int validate() {
 
       //Validate actions for autoclave, relay states: Agua o Vapor
       else if ( message[0] == 'a' && message[1] == 'c' &&
-                message[2] == 'v' && message[3] == 'e'
+               (message[2] == 'v' || message[2] == 'd' || message[2] == 'a') && 
+                message[3] == 'e'
               )
           return 1;
 
