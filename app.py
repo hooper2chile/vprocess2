@@ -476,6 +476,7 @@ def calibrar_u_temp(dato):
         communication.actuador(2,u_set_temp)  #FALTA IMPLEMENTARIO EN communication.py
 
     except:
+        pass
         #logging.info("no se pudo guardar u_set_temp en umbral_set_temp.txt")
 
 
