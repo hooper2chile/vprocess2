@@ -48,10 +48,10 @@ void loop() {
             break;
 
           case 'm': //m-otor
-            motor_set();
+            motor_set(0);
             break;
 
-          default:
+          case 'd':
             setup_default();
             break;
       }
@@ -61,8 +61,10 @@ void loop() {
       stringComplete = false;
       message = "";
   }
+  motor_set(1);
+
   //else setup_default();
   wdt_reset();
-  delay(500);
+  delay(250);
 
 }

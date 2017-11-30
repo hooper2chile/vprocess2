@@ -66,15 +66,19 @@ void setup_default() {
   digitalWrite(VDF_ENABLE, HIGH);  //VDF OFF
 }
 
-uint16_t rpm_set   = 0;
-void motor_set() {
-  rpm_set =  message.substring(1).toFloat();
+uint16_t rpm_set = 0;
+void motor_set(char option) {
+  if ( option == 0 ) {
+    rpm_set =  message.substring(1).toFloat();
 
-  Serial.print("message[1:end]:\t");
-  Serial.println(message.substring(1).length());
+    Serial.print("message[1:end]:\t");
+    Serial.println(message.substring(1).length());
+  }
 
-  uint16_t pwm_set = map(rpm_set, 0, 750, 0, 255);
+  else if ( option == 1 ) {
+    uint16_t pwm_set = map(rpm_set, 0, 750, 0, 255);
 
-  digitalWrite(VDF_ENABLE, LOW);  //VDF ON
-  analogWrite(PWM_PIN, pwm_set);
+    digitalWrite(VDF_ENABLE, LOW);  //VDF ON
+    analogWrite(PWM_PIN, pwm_set);
+  }
 }
