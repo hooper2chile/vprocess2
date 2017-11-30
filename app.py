@@ -568,7 +568,8 @@ def background_thread2():
         #permite volver a correr el thread una vez terminado un timer
         #thread2 = None
         socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
-        #acá habria que implementar una función que haga la comunicación con uc2
+        thread2 = None	
+	#acá habria que implementar una función que haga la comunicación con uc2
 
 
 
