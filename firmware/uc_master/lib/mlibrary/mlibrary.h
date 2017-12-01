@@ -441,8 +441,8 @@ void heat_exchanger_controller(char option) {
 
 void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
   signal = "";
-  if ( rst2 == 0 ) signal = 'm' + '0' + String(mymix);
-  else             signal = 'm' + '1' + String(mymix);
+  if ( rst2 == 0 ) signal = String(m0) + String(mymix);
+  else             signal = String(m1) + String(mymix);
   return;
 }
 
