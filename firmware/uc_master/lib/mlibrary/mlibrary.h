@@ -492,6 +492,7 @@ void broadcast_setpoint(uint8_t select) {
       new_write = "";
       new_write = message.substring(0,3) + uset_ph + message.substring(7,34) + uset_temp + message.substring(37,55) + "\n";
       mySerial.print(new_write);
+      granotec.println(signal);
       break;
 
     default:
