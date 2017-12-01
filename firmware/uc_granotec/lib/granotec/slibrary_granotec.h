@@ -7,9 +7,6 @@
 */
 
 #include <Arduino.h>
-#include "SoftwareSerial.h"
-SoftwareSerial mySerial(4, 5);  //for control of motor and electro valvules
-
 
 //Electrovalvula AGUA
 #define v1 12
@@ -33,14 +30,6 @@ boolean stringComplete = false;
 void serialEvent() {
   while (Serial.available()) {
     char inChar = (char)Serial.read();
-    message += inChar;
-    if (inChar == '\n') {
-      stringComplete = true;
-    }
-  }
-
-  while (mySerial.available()) {
-    char inChar = (char)mySerial.read();
     message += inChar;
     if (inChar == '\n') {
       stringComplete = true;
@@ -105,7 +94,7 @@ void motor_set() {
   else {
     rpm_set = 0;
     int pwm_set = 0;
-    digitalWrite(VDF_ENABLE, HIGH);  //VDF ON
+    digitalWrite(VDF_ENABLE, HIGH); //VDF ON
     analogWrite(PWM_PIN, pwm_set);  //VDF SPEED SET
   }
 }
