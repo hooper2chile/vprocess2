@@ -7,6 +7,9 @@
 */
 
 #include <Arduino.h>
+#include "SoftwareSerial.h"
+SoftwareSerial mySerial(4, 5);  //for control of motor and electro valvules
+
 
 //Electrovalvula AGUA
 #define v1 12
@@ -35,7 +38,18 @@ void serialEvent() {
       stringComplete = true;
     }
   }
+
+  while (mySerial.available()) {
+    char inChar = (char)mySerial.read();
+    message += inChar;
+    if (inChar == '\n') {
+      stringComplete = true;
+    }
+  }
 }
+
+
+
 
 void bomb() {
   digitalWrite(Bomba1, LOW);  //Contactor bomba on

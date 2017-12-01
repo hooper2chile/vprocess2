@@ -13,6 +13,7 @@ void setup() {
   wdt_disable();
 
   Serial.begin(9600);
+  mySerial.begin(9600);
   pinMode(PWM_PIN, OUTPUT);
 
   //POWER ON INDICATOR

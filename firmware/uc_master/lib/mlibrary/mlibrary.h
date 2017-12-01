@@ -414,7 +414,7 @@ void heat_exchanger_controller() {
   }
 
   //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
-  if ( rst5 == 0 ) {
+  else if ( rst5 == 0 ) {
       if ( Temp1 < mytempset ) signal = "v";
       if ( Temp1 > mytempset ) signal = "a";
   }
