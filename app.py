@@ -547,7 +547,7 @@ def background_thread2():
             if float(measures[2]) >= temp_save:  # "si la temperatura es mayor que la temperatura seteada
                 #Se enciende el intercabiador de calor en modo autoclave
                 communication.cook_autoclave('v')
-                socketio.sleep(1) # 60[s]
+                socketio.sleep(60) # 60[s]
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
