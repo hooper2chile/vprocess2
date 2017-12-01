@@ -14,8 +14,11 @@ void setup() {
 
   Serial.begin(9600);
   pinMode(PWM_PIN, OUTPUT);
+
+  //POWER ON INDICATOR
   pinMode(13, OUTPUT);
   digitalWrite(13, HIGH);
+  //************************
 
   DDRB  = DDRB  | (1<<PB1) | (1<<PB2) | (1<<PB3) | (1<<PB4) | (1<<PB0);  //Pin out setup
   PORTB = PORTB | (1<<PB1) | (1<<PB2) | (1<<PB3) | (1<<PB4) | (1<<PB0);  //pin out high level <=> off relay pin
@@ -48,7 +51,7 @@ void loop() {
             break;
 
           case 'm': //m-otor
-            motor_set(0);
+            motor_message();
             break;
 
           case 'd':
@@ -61,8 +64,7 @@ void loop() {
       stringComplete = false;
       message = "";
   }
-
-  motor_set(1);
+  motor_set();
 
   wdt_reset();
   delay(250);

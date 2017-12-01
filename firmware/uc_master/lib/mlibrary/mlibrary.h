@@ -334,39 +334,6 @@ void daqmx() {
 }
 
 
-/*
-void control_temp() {
-  //for debug
-  //mytemp  = 50;
-
-  //touch my delta temp
-  dTemp = mytempset - Temp1;
-
-  if ( dTemp > 0.0 ) {
-    if ( dTemp <= Gap_temp1 )
-      u_temp = 0.20*umbral_temp;
-
-    else if ( dTemp <= Gap_temp2 )
-      u_temp = 0.35*umbral_temp; //50%
-
-    else if ( dTemp <= Gap_temp3 )
-      u_temp = 0.50*umbral_temp; //75%
-
-    else if ( dTemp <= Gap_temp4 )
-      u_temp = 0.75*umbral_temp; //100%
-
-    else if ( dTemp > Gap_temp4 )
-      u_temp = umbral_temp;
-  }
-  //dTemp < 0 => speed min in actuador temp
-  else if ( dTemp <= 0.0 )
-    u_temp = SPEED_MIN;
-
-  return;
-}
-*/
-
-
 
 void control_ph() {
   //for debug
