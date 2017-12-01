@@ -430,8 +430,7 @@ void heat_exchanger_controller(char option) {
     case 'a': //modo autoclave
       if ( rst5 == 1 ) {
         signal = "";
-        if      ( message[2] == 'v' ) signal = 'v';
-        else if ( message[2] == 'd' ) signal = 'd';
+        signal = 'v';
       }
       break;
   }
