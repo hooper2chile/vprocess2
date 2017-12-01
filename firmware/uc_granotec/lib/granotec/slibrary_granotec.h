@@ -82,7 +82,7 @@ void setup_default() {
 
 uint16_t rpm_set = 50;
 String message_save = "";
-int motor_enable = 0;
+int motor_enable = 1;
 void motor_message() {
   //extraction of speed for vdf/motor
   //                   01|234
