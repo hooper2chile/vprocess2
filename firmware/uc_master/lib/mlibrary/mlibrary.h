@@ -406,6 +406,7 @@ void control_ph() {
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
+char autoclave_flag = 1;
 void heat_exchanger_controller(char option) {
   /*
   if ( rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
@@ -415,7 +416,7 @@ void heat_exchanger_controller(char option) {
   */
   switch ( option ) {
     case 'c': //controlar temperatura
-      if ( rst5 == 1 ) {
+      if ( rst5 == 1 && autoclave_flag == 1) {
         signal = "";
         signal = 'd'; //opcion 'd' (d-efault): modo todo apagado
       }
@@ -429,6 +430,7 @@ void heat_exchanger_controller(char option) {
 
     case 'a': //modo autoclave
       if ( rst5 == 1 ) {
+        autoclave_flag = 0;
         signal = "";
         signal = 'v';
       }
@@ -449,6 +451,7 @@ void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
 void setpoint() {
   //acá se leen los nuevos setpoint para los lazos de control
   write_crumble();
+  autoclave_flag = 1;
   Serial.println("good setpoint");
   return;
 }
