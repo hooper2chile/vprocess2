@@ -406,7 +406,6 @@ void control_ph() {
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
-
 void heat_exchanger_controller() {
   if ( rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
     if      ( message[2] == 'v' ) signal = "v";  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
