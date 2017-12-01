@@ -61,9 +61,9 @@ void loop() {
       stringComplete = false;
       message = "";
   }
+
   motor_set(1);
 
-  //else setup_default();
   wdt_reset();
   delay(250);
 

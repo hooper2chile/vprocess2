@@ -68,17 +68,23 @@ void setup_default() {
 
 uint16_t rpm_set = 0;
 void motor_set(char option) {
+  //extraction of speed for vdf/motor
   if ( option == 0 ) {
-    rpm_set =  message.substring(1).toFloat();
+    //Example: message = m0750
+    rpm_set =  message.substring(2).toFloat();
 
     Serial.print("message[1:end]:\t");
     Serial.println(message.substring(1).length());
   }
 
   else if ( option == 1 ) {
-    uint16_t pwm_set = map(rpm_set, 0, 750, 0, 255);
-
-    digitalWrite(VDF_ENABLE, LOW);  //VDF ON
-    analogWrite(PWM_PIN, pwm_set);
+    if ( message[1] == 0 ) {
+      uint16_t pwm_set = map(rpm_set, 0, 750, 0, 255);
+      digitalWrite(VDF_ENABLE, LOW);  //VDF ON
+      analogWrite(PWM_PIN, pwm_set);
+    }
+    else {
+      digitalWrite(VDF_ENABLE, HIGH); //VDF OFF
+    }
   }
 }

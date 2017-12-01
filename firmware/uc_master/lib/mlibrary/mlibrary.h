@@ -90,7 +90,7 @@ float Byte6 = 0;  char cByte6[15] = "";
 
 // Sensors
 const int SENSOR_PH    = A0;  // Input pin for measuring Vout
-const int SENSOR_TEMP1 = A1;
+const int SENSOR_TEMP1 = A4;  //Original: A1. Lo cambie por que arruine ese pin trabajando.
 const int SENSOR_TEMP2 = A2;
 const int SENSOR_OD    = A3;
 
@@ -456,10 +456,9 @@ void heat_exchanger_controller() {
 
 
 void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
-  if ( rst2 == 0 ) {
-    signal= 'm' + String(mymix);
-    //"motor seteado"
-  }
+  if ( rst2 == 0 ) signal = 'm' + '0' + String(mymix);
+  else             signal = 'm' + '1' + String(mymix);
+
   return;
 }
 
