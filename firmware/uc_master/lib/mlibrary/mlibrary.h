@@ -415,23 +415,23 @@ void heat_exchanger_controller(char option) {
   */
   switch ( option ) {
     case 'c': //controlar temperatura
-      if ( rst5 == 1) {
+      if ( rst5 == 1 ) {
         signal = "";
-        signal = "d"; //opcion 'd' (d-efault): modo todo apagado
+        signal = 'd'; //opcion 'd' (d-efault): modo todo apagado
       }
       //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
       else if ( rst5 == 0 ) {
           signal = "";
-          if      ( Temp1 < mytempset ) signal = "v"; //aumenta temperatura
-          else if ( Temp1 > mytempset ) signal = "a"; //enfria
+          if      ( Temp1 < mytempset ) signal = 'v'; //aumenta temperatura
+          else if ( Temp1 > mytempset ) signal = 'a'; //enfria
       }
       break;
 
     case 'a': //modo autoclave
       if ( rst5 == 1 ) {
         signal = "";
-        if      ( message[2] == 'v' ) signal = "v";
-        else if ( message[2] == 'd' ) signal = "d";
+        if      ( message[2] == 'v' ) signal = 'v';
+        else if ( message[2] == 'd' ) signal = 'd';
       }
       break;
   }
