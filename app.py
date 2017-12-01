@@ -562,13 +562,13 @@ def background_thread2():
 
             #communication.cook_autoclave('v')
 
-       
+
         #El while termina dejando el intercambiador en default (APAGADO, SIN CONTROL TEMPERATURA, SIN MODO AUTOCLAVE)
-        communication.cook_autoclave('d')
+        #communication.cook_autoclave('d')
         #permite volver a correr el thread una vez terminado un timer
         #thread2 = None
         socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
-        thread2 = None	
+        thread2 = None
 	#acá habria que implementar una función que haga la comunicación con uc2
 
 

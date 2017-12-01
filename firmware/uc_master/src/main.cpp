@@ -34,16 +34,15 @@ void loop() {
                 hamilton_sensors();
                 daqmx();
                 control_ph();
-                heat_exchanger_controller();
+                heat_exchanger_controller('c');
                 broadcast_setpoint(0);
                 break;
 
               case 'w':  //setpoints
                 setpoint();
                 control_ph();
-                heat_exchanger_controller();
+                heat_exchanger_controller('c');
                 motor_set();
-
                 broadcast_setpoint(1);
                 break;
 
@@ -57,8 +56,8 @@ void loop() {
 
               case 'a':  //setpoint autoclave
                 //message[2] tiene que ser 'v' para setear vapor para autoclave
-                heat_exchanger_controller();
-                Serial.println("se fijo autoclave con-d"); //"AUTOCLAVE ON");
+                heat_exchanger_controller('a');
+                Serial.println("se fijo autoclave"); //"AUTOCLAVE ON");
                 break;
 
               default:
