@@ -39,7 +39,6 @@ void serialEvent() {
 
 
 
-
 void bomb() {
   digitalWrite(Bomba1, LOW);  //Contactor bomba on
   digitalWrite(Bomba2, LOW);  //Contactor bomba on
@@ -65,6 +64,7 @@ void setup_default() {
 
   digitalWrite(Bomba1, HIGH);  //Contactor bomba off
   digitalWrite(Bomba2, HIGH);  //Contactor bomba off
+
 
   digitalWrite(VDF_ENABLE, HIGH);  //VDF OFF
 }
