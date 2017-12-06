@@ -90,7 +90,7 @@ float Byte6 = 0;  char cByte6[15] = "";
 
 // Sensors
 const int SENSOR_PH    = A0;  // Input pin for measuring Vout
-const int SENSOR_TEMP1 = A4;  //Original: A1. Lo cambie por que arruine ese pin trabajando.
+const int SENSOR_TEMP1 = A1;  //Original: A1. Lo cambie por que arruine ese pin trabajando.
 const int SENSOR_TEMP2 = A2;
 const int SENSOR_OD    = A3;
 
@@ -111,9 +111,9 @@ float n0 = -3.5;
 float m1 = +6.02;
 float n1 = -20.42;
 
-//Temp1=:(m2,n2)
-float m2 = +5.31;//+12.42;
-float n2 = -42.95;//-116.72;
+//Temp1=:(m2,n2)	//temp_ph//temp_pt
+float m2 = +12.42;	// +5.31;// +12.42;
+float n2 = -116.72;	//-42.95;//-116.72;
 
 
 float Iph = 0;
