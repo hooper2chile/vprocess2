@@ -33,7 +33,7 @@ function my_chart(){
 
           //mediciones de ph, OD, Temp. Socket regenera el grafico con cada llamada!!!
           socket.on('Medidas', function(msg) {
-              $('#med1_g').text('ph: '   + msg.data[0]          ).html();
+              $('#med1_g').text('pH: '   + msg.data[0]          ).html();
               $('#med2_g').text('OD: '   + msg.data[1] + ' %'   ).html();
               $('#med3_g').text('Temp: ' + msg.data[2] + ' [C]' ).html();
 
