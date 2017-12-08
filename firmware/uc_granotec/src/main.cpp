@@ -29,7 +29,7 @@ void setup() {
   message.reserve(65);
   setup_default();
 
-  wdt_enable(WDTO_8S);
+  wdt_enable(WDTO_4S);
 }
 
 //Relay with inverter logical
