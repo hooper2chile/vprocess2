@@ -112,8 +112,8 @@ float m1 = +6.02;
 float n1 = -20.42;
 
 //Temp1=:(m2,n2)	//temp_ph//temp_pt
-float m2 = +12.42;	// +5.31;// +12.42;
-float n2 = -116.72;	//-42.95;//-116.72;
+float m2 = +10.07;	// +5.31;// +12.42;
+float n2 = -90.40;	//-42.95;//-116.72;
 
 
 float Iph = 0;
@@ -417,8 +417,8 @@ void heat_exchanger_controller(char option) {
       //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
       else if ( rst5 == 0 ) {
           signal = "";
-          if      ( Temp1 < mytempset ) signal = 'v'; //aumenta temperatura
-          else if ( Temp1 > mytempset ) signal = 'a'; //enfria
+          if      ( Temp1 < mytempset - 2 ) signal = 'v'; //aumenta temperatura
+          else if ( Temp1 > mytempset + 2 ) signal = 'a'; //enfria
       }
       break;
 
