@@ -51,7 +51,7 @@ def login():
     global error
 
     if request.method == 'POST':
-        if request.form['username'] != 'administrador' or request.form['password'] != 'granotec':
+        if request.form['username'] != 'administrador' or request.form['password'] != 'gr4noteC':
             error = "Credencial Invalida"
             return render_template("login.html", error=error)
         else:
@@ -68,7 +68,7 @@ def login():
 def test():
     global error
     if request.method == 'POST':
-        if request.form['username'] != 'administrador' or request.form['password'] != 'granotec':
+        if request.form['username'] != 'administrador' or request.form['password'] != 'gr4noteC':
             error = "Credencial Invalida"
             return render_template("login.html", error=error)
         else:
@@ -612,4 +612,4 @@ def background_thread1():
 
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=False)

@@ -40,7 +40,7 @@ void loop() {
       {
           case 'a': //a-gua fria (enfria con agua de la llave)
             setup_default();
-            //bomb();
+            bomb();
             hot_water_valve();
             break;
 
