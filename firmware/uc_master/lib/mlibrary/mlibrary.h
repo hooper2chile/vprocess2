@@ -408,12 +408,6 @@ void control_ph() {
 //rst5 = : flag for heat heat_exchanger_controller
 char autoclave_flag = 1;
 void heat_exchanger_controller(char option) {
-  /*
-  if ( rst5 == 1 ) { //and flag de autoclave (falta agregarlo)
-    if      ( message[2] == "v" ) signal = "v";  //opcion 'v' (a-uto clave): destinado a operar los relay para vapor ('v')
-    else if ( message[2] == "d" ) signal = "d";  //opcion 'd' (d-efault): modo todo apagado
-  }
-  */
   switch ( option ) {
     case 'c': //controlar temperatura
       if ( rst5 == 1 && autoclave_flag == 1) {

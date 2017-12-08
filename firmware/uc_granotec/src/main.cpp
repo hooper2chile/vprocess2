@@ -35,12 +35,10 @@ void setup() {
 //Relay with inverter logical
 void loop() {
   if ( stringComplete ) {
-      //wdt_reset();
       switch ( message[0] )
       {
           case 'a': //a-gua fria (enfria con agua de la llave)
             setup_default();
-            //bomb();
             hot_water_valve();
             break;
 
@@ -65,8 +63,6 @@ void loop() {
       message = "";
   }
   motor_set();
-
   wdt_reset();
   delay(250);
-
 }
