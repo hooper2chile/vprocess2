@@ -407,7 +407,7 @@ void control_ph() {
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
 char autoclave_flag = 1;
-#define DELTA 0//2
+#define DELTA 2
 void heat_exchanger_controller(char option) {
   switch ( option ) {
     case 'c': //controlar temperatura
