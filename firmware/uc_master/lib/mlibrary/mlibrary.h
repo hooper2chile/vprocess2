@@ -407,6 +407,7 @@ void control_ph() {
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
 char autoclave_flag = 1;
+#define DELTA 0//2
 void heat_exchanger_controller(char option) {
   switch ( option ) {
     case 'c': //controlar temperatura
@@ -417,8 +418,8 @@ void heat_exchanger_controller(char option) {
       //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
       else if ( rst5 == 0 ) {
           signal = "";
-          if      ( Temp1 < mytempset - 2 ) signal = 'v'; //aumenta temperatura
-          else if ( Temp1 > mytempset + 2 ) signal = 'a'; //enfria
+          if      ( Temp1 < mytempset - DELTA ) signal = 'v'; //aumenta temperatura
+          else if ( Temp1 > mytempset + DELTA ) signal = 'a'; //enfria
       }
       break;
 

@@ -65,5 +65,5 @@ void loop() {
   }
   motor_set();
   wdt_reset();
-  delay(250);
+  delay(100);
 }
