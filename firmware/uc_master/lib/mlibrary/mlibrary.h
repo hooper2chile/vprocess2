@@ -199,7 +199,7 @@ void sensor_calibrate(){
   //calibrate function for "message"
   var = message[1];
   m   = message.substring(2,8 ).toFloat();
-  n   = message.substring(8,14).toFloat();
+  n   = message.substring(8).toFloat();
 
   switch (var) {
     case '0': //pH case for calibration
@@ -221,7 +221,8 @@ void sensor_calibrate(){
       break;
   }
 
-  Serial.println("Sensor calibrated");
+  Serial.println( String(var) + '_' + String(m) + '_' + String(n) );
+  //Serial.println("Sensor calibrated");
   return;
 }
 
@@ -569,6 +570,13 @@ int validate() {
         { return 1; }
 
       //Validate CALIBRATE
+
+      else if ( message[0]  == 'c' &&
+               (message[2]  == '+' || message[2] == '-') &&
+               (message[8]  == '+' || message[8] == '-')
+              )
+          return 1;
+      /*
       else if ( message[0]  == 'c' &&
                (message[2]  == '+' || message[2] == '-') &&
                (message[8]  == '+' || message[8] == '-') &&
@@ -577,6 +585,7 @@ int validate() {
                 message.substring(9,14).toFloat() < 100
               )
           return 1;
+      */
 
       //Validete umbral actuador ph: u1a001b001e
       else if ( message[0]  == 'u' && message[1] == '1' &&

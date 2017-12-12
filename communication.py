@@ -73,6 +73,7 @@ def calibrate(var, coef):
     else:
         sign1   = '+'
 
+    ####### coeficiente "m" de la recta ##################
     #Format for coef[0]
     #Poner cero a la izquierda:
     if coef[0] < 10: #ej. coef[0] = 0.7; coef[0] = 1.1
@@ -90,6 +91,8 @@ def calibrate(var, coef):
     elif coef0text[4:] is '':
         coef0text = coef0text + '0'
 
+
+    ####### coeficiente "n" de la recta ##################
     #Format for coef[1]
     #Poner cero a la izquierda:
     if coef[1] < 10: #ej. coef[0] = 0.7; coef[0] = 1.1
@@ -107,7 +110,11 @@ def calibrate(var, coef):
     elif coef1text[4:] is '':
         coef1text = coef1text + '0'
 
-    coef_cook = 'c' + str(var) + sign0 + coef0text + sign1 + coef1text + 'e'
+
+    #se cocina el string de calibracion de sensores
+    coef_cook = 'c' + str(var) + sign0 + coef0text + sign1 + coef1text
+    #coef_cook = 'c' + str(var) + sign0 + coef0text + sign1 + coef1text + 'e'
+
 
     #guardo coef_cook en un archivo para depurar
     try:
