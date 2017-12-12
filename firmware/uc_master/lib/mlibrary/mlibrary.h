@@ -17,7 +17,7 @@ SoftwareSerial granotec(4, 5);  //for control of motor and electro valvules
 
 #define SPEED_MIN 2.0
 #define SPEED_MAX 100     //[RPM]
-#define TEMP_MAX  120     //[ºC]
+#define TEMP_MAX  130     //[ºC]
 
 //#define Ts        1000     //1000ms
 
@@ -282,7 +282,7 @@ void hamilton_sensors() {
      Itemp2 += analogRead(SENSOR_TEMP2);
      delayMicroseconds(200);
   }
-  
+
   if (rst2 == 0)      rst2f = 1;
   else if (rst2 == 1) rst2f = 0;
 

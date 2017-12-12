@@ -16,7 +16,7 @@ tau_zmq_connect = 0.3 #0.3 [s]: no ha funcionado con menos
 
 SPEED_MAX_MIX = 750 #1500
 SPEED_MAX = 100     #150
-TEMP_MAX  = 120     #130
+TEMP_MAX  = 130     #130
 PH_MIN = 0   #0
 PH_MAX = 14  #14
 
