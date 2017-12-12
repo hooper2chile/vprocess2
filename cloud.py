@@ -10,7 +10,7 @@ logging.basicConfig(filename='/home/pi/vprocess2/log/cloud.log', level=logging.I
 
 
 
-TIME_SYNC = 5 #3600 #sync for 3600 [s] = 1 [hr]
+TIME_SYNC = 180 #3600 #sync for 3600 [s] = 1 [hr]
 ID = '1sbAk593Hmgv75sXuyRFn_ObDC8j783Q7'
 
 
@@ -32,3 +32,4 @@ while True:
 
     except:
         logging.info('Fallo al subir a cloud:' + hora)
+	time.sleep(TIME_SYNC)
