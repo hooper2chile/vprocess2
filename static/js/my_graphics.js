@@ -195,7 +195,7 @@ function my_chart(){
                              ticks: {
                                  beginAtZero: true,
                                  min: 0,
-                                 max: 80,
+                                 max: 130,
                               }
                         }]
                     }
