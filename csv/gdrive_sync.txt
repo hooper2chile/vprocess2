@@ -669,3 +669,4 @@ sincronizado: Hora=19:18:56__Fecha=12-12-17
 sincronizado: Hora=19:21:57__Fecha=12-12-17 
 sincronizado: Hora=19:24:59__Fecha=12-12-17 
 sincronizado: Hora=19:28:00__Fecha=12-12-17 
+sincronizado: Hora=19:31:02__Fecha=12-12-17 

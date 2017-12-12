@@ -10,7 +10,7 @@ logging.basicConfig(filename='/home/pi/vprocess2/log/cloud.log', level=logging.I
 
 
 
-TIME_SYNC = 180 #3600 #sync for 3600 [s] = 1 [hr]
+TIME_SYNC = 180 #3600 #sync for 3600 [s] = 1 [hr]; 180 = 3 min
 ID = '1sbAk593Hmgv75sXuyRFn_ObDC8j783Q7'
 
 
