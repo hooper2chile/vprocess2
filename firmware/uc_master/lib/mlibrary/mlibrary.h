@@ -1,6 +1,6 @@
 /*
 uc_master
-Write by: Felipe Hooper
+Writed by: Felipe Hooper
 Electronic Engineer
 */
 
@@ -112,8 +112,8 @@ float m1 = +6.02;
 float n1 = -20.42;
 
 //Temp1=:(m2,n2)	//temp_ph//temp_pt
-float m2 = +10.07;	// +5.31;// +12.42;
-float n2 = -90.40;	//-42.95;//-116.72;
+float m2 = +9.86;	//+10.07;// +5.31;// +12.42;
+float n2 = -103.14;	//-42.95;//-116.72;
 
 
 float Iph = 0;
@@ -267,7 +267,8 @@ void actuador_umbral(){
   return;
 }
 
-
+#define NOISE 0.4
+float rst1f, rst2f, rst3f, rst4f, rst5f, rst6f;
 
 void hamilton_sensors() {
 
@@ -281,11 +282,14 @@ void hamilton_sensors() {
      Itemp2 += analogRead(SENSOR_TEMP2);
      delayMicroseconds(200);
   }
+  
+  if (rst2 == 0)      rst2f = 1;
+  else if (rst2 == 1) rst2f = 0;
 
-  Iph    = (K * Iph  );
-  Itemp1 = (K * Itemp1);
+  Iph    = (K * Iph   ) - (rst2f * NOISE);
+  Itemp1 = (K * Itemp1) - (rst2f * NOISE);
 
-  Iod    = (K * Iod);
+  Iod    = (K * Iod   ) - (rst2f * NOISE);
   Itemp2 = (K * Itemp2);
 
   //Update measures
