@@ -563,7 +563,7 @@ def background_thread2():
             socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
 
     if ac_sets[1] <= 0:
-            ac_sets[1] = 0  #asegurando el valor
+            ac_sets[1] = 0  #asegurando el valor #nada
 
     communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF)
     socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
