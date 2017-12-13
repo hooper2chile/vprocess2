@@ -430,7 +430,7 @@ void heat_exchanger_controller(char option) {
       if ( rst5 == 1 ) {
         autoclave_flag = 0;
         signal = "";
-        signal = (String) message[2];
+        signal = (String) message[2]; //probando
       }
       break;
   }
