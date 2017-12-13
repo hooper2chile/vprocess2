@@ -543,26 +543,26 @@ def autoclave_functions(dato):
 #CONFIGURACION DE THREADS
 def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
-    
-    communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
-    while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
-        if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
-            communication.cook_autoclave('o') # entonces no seguir calentando, ni enfriar, 'n' es solamente recircular
-            socketio.sleep(1) # 60[s]
-            ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
-            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+    while True:
+        communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
+        while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
+            if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
+                communication.cook_autoclave('o') # entonces no seguir calentando, ni enfriar, 'n' es solamente recircular
+                socketio.sleep(1) # 60[s]
+                ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
+                socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
-        else:
-            ac_sets[1] = time_save    # repone el tiempo seteado en caso que rompa la "cadena de calor de autoclavado" para reiniciarlo
-            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
-            communication.cook_autoclave('v') # sino aplicar vapor al intercambiador
-            socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
+            else:
+                ac_sets[1] = time_save    # repone el tiempo seteado en caso que rompa la "cadena de calor de autoclavado" para reiniciarlo
+                socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+                communication.cook_autoclave('v') # sino aplicar vapor al intercambiador
+                socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
 
-    if ac_sets[1] <= 0:
-            ac_sets[1] = 0  #asegurando el valor
+        if ac_sets[1] <= 0:
+                ac_sets[1] = 0  #asegurando el valor
 
-    communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF)
-    socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
+        communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF)
+        socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
 
 
 
