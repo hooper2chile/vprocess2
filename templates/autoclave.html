@@ -6,19 +6,6 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/autoclave.css') }}">
 
 
-<section>
-  <form id="process" method="POST" action='#'>
-  <fieldset>
-      <select name="selection" id="select">
-            <option value="apagar">Apagar AutoClave</option>
-            <option value="autoclave" selected>Activar AutoClave></option>
-      </select>
-
-      <input type="checkbox" id="confirm">
-      <button class="button" type="submit">+</button>
-  </fieldset>
-</form>
-</section>
 
     <!caja1: Temperature Set>
     <div class="caja1">
@@ -35,7 +22,7 @@
             />
 
             <button  type="submit" class="button_apply"> + </button>     <br>
-            <input  type="checkbox" id="temp_enable" style="visibility:hidden" /> <!--habilitar   -->     <br> 
+            <input  type="checkbox" id="temp_enable" style="visibility:hidden" /> <!--habilitar   -->     <br>
     </div>
 
 
