@@ -536,19 +536,15 @@ def autoclave_functions(dato):
 	#logging.info("no se pudo guardar en autoclave.txt")
 
 
-
+#ac_sets[0] =: temperatura de autoclavado
+#ac_sets[1] =: tiempo de autoclavado
+#ac_sets[2] =: flag deshabilitar control temperatura webpage proceso
+#ac_sets[3] =: flag habilitar (AutoClave) webpage esterilizacion
 #CONFIGURACION DE THREADS
 def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
-    flag_autoclave = False
-
-    #ac_sets[0] =: temperatura de autoclavado
-    #ac_sets[1] =: tiempo de autoclavado
-    #ac_sets[2] =: flag deshabilitar control temperatura webpage proceso
-    #ac_sets[3] =: flag habilitar (AutoClave) webpage esterilizacion
-
-
-	communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
+    
+    communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
     while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
         if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
             communication.cook_autoclave('o') # entonces no seguir calentando, ni enfriar, 'n' es solamente recircular
@@ -563,7 +559,7 @@ def background_thread2():
             socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
 
     if ac_sets[1] <= 0:
-            ac_sets[1] = 0  #asegurando el valor #nada
+            ac_sets[1] = 0  #asegurando el valor
 
     communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF)
     socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
