@@ -857,3 +857,10 @@ sincronizado: Hora=00:26:09__Fecha=13-12-17
 sincronizado: Hora=00:29:36__Fecha=13-12-17 
 sincronizado: Hora=00:32:37__Fecha=13-12-17 
 sincronizado: Hora=00:35:38__Fecha=13-12-17 
+sincronizado: Hora=00:38:39__Fecha=13-12-17 
+sincronizado: Hora=00:41:39__Fecha=13-12-17 
+sincronizado: Hora=00:44:25__Fecha=13-12-17 
+sincronizado: Hora=00:44:55__Fecha=13-12-17 
+sincronizado: Hora=00:45:44__Fecha=13-12-17 
+sincronizado: Hora=00:48:45__Fecha=13-12-17 
+sincronizado: Hora=00:51:46__Fecha=13-12-17 
