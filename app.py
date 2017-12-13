@@ -543,33 +543,32 @@ def background_thread2():
     flag_autoclave = True
 
     while flag_autoclave:
-        while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
-            if float(measures[2]) >= temp_save:  # "si la temperatura es mayor que la temperatura seteada
-                #Se enciende el intercabiador de calor en modo autoclave
-                communication.cook_autoclave('v')
-                socketio.sleep(60) # 60[s]
-                ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
-                socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
-
-                #Revisar si necesita dos while anidados.
-                f = open(DIR + "deg.txt","a+")
-                f.write("entre en thread2:\n")
-                f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
-                f.close()
-
+	communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
+        while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"	    
+            if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
+                communication.cook_autoclave('o') # entonces no seguir calentando, ni enfriar, 'n' es solamente recircular
+		socketio.sleep(1) # 60[s]
+             	ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
+             	socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+                
             else:
-                socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
-
-            #communication.cook_autoclave('v')
-
+		#ac_sets[1] = time_save    # repone el tiempo seteado en caso que rompa la "cadena de calor de autoclavado" para reiniciarlo
+		communication.cook_autoclave('v') # sino aplicar vapor al intercambiador
+	        socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada... 
+         
+	    #Revisar si necesita dos while anidados.
+            f = open(DIR + "autoclave_setting.txt","a+")
+            f.write("entre en thread2:\n")
+            f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
+            f.close()
+	
+	if ac_sets[1] <= 0:
+		communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF) 
 
         #El while termina dejando el intercambiador en default (APAGADO, SIN CONTROL TEMPERATURA, SIN MODO AUTOCLAVE)
         #communication.cook_autoclave('d')
         #permite volver a correr el thread una vez terminado un timer
-        #thread2 = None
         socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
-        thread2 = None
-	#acá habria que implementar una función que haga la comunicación con uc2
 
 
 
@@ -612,4 +611,4 @@ def background_thread1():
 
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000, debug=False)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
