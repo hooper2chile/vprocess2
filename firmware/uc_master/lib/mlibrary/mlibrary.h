@@ -17,7 +17,7 @@ SoftwareSerial granotec(4, 5);  //for control of motor and electro valvules
 
 #define SPEED_MIN 2.0
 #define SPEED_MAX 100     //[RPM]
-#define TEMP_MAX  130     //[ºC]
+#define TEMP_MAX  130     //[ºC] //Ajustado para autoclave
 
 //#define Ts        1000     //1000ms
 
@@ -56,6 +56,7 @@ String  svar      = "";
 String signal = "d";  //d: default
 
 //RESET SETUP
+char autoclave_flag = 1;
 char rst1 = 1;  char rst2 = 1;  char rst3 = 1;
 char rst4 = 1;  char rst5 = 1;  char rst6 = 1;
 
@@ -70,10 +71,6 @@ uint8_t myfeed    = 0;
 uint8_t myunload  = 0;
 uint16_t mymix    = 0;
 
-int i = 0;
-int data = 0;
-int data_cero = 0;
-uint16_t s_rpm_save = 0;
 
 float umbral_a = SPEED_MAX;
 float umbral_b = SPEED_MAX;
@@ -134,11 +131,17 @@ float dTemp= 0;
 float dpH  = 0;
 
 
-
-
 //for sensors 4-20mA
 #define mA 1000.0
 #define K  ( mA * ( ( (VOLTAGE_REF/1023.0) / ( 10.0 * RS ) ) / N ) )
+
+#define NOISE 0.4
+float rst1f = 0;
+float rst2f = 0;
+float rst3f = 0;
+float rst4f = 0;
+float rst5f = 0;
+float rst6f = 0;
 
 
 //for hardware serial
@@ -267,14 +270,13 @@ void actuador_umbral(){
   return;
 }
 
-#define NOISE 0.4
-float rst1f, rst2f, rst3f, rst4f, rst5f, rst6f;
 
 void hamilton_sensors() {
 
   Iph    = 0;   Iod    = 0;
   Itemp1 = 0;   Itemp2 = 0;
 
+  //funcion de suma continua de muestras para el promedio
   for (int i = 1; i <= N; i++) {
      Iph    += analogRead(SENSOR_PH);
      Iod    += analogRead(SENSOR_OD);
@@ -299,7 +301,6 @@ void hamilton_sensors() {
 
   return;
 }
-
 
 
 
@@ -341,9 +342,6 @@ void daqmx() {
 
 
 void control_ph() {
-  //for debug
-  //myphset = 7.0;
-
   //touch my delta ph
   dpH = myphset - pH;
 
@@ -411,20 +409,20 @@ void control_ph() {
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
-char autoclave_flag = 1;
-#define DELTA 2
+#define DELTA_TEMP 2
 void heat_exchanger_controller(char option) {
   switch ( option ) {
     case 'c': //controlar temperatura
       if ( rst5 == 1 && autoclave_flag == 1) {
         signal = "";
-        signal = 'd'; //opcion 'd' (d-efault): modo todo apagado
+        signal = 'd'; //opcion 'd' (d-efault): modo apagado de electrovalvulas y bombas
       }
       //opcion 'p' (p-roceso): se switchea las electrovalvulas para controlar temperatura con agua caliente ('a') o vapor ('v')
       else if ( rst5 == 0 ) {
           signal = "";
-          if      ( Temp1 < mytempset - DELTA ) signal = 'v'; //aumenta temperatura
-          else if ( Temp1 > mytempset + DELTA ) signal = 'a'; //enfria
+          if      ( Temp1 < mytempset - DELTA_TEMP ) signal = 'v'; //aumenta temperatura
+          else if ( Temp1 > mytempset + DELTA_TEMP ) signal = 'a'; //enfria
+          else    signal = 'o'; //si la temperatura esta en el entorno  de +- DELTA_TEMP, no hacer nada
       }
       break;
 
@@ -432,10 +430,11 @@ void heat_exchanger_controller(char option) {
       if ( rst5 == 1 ) {
         autoclave_flag = 0;
         signal = "";
-        signal = 'v';
+        signal = (String) message[2];
       }
       break;
   }
+
   return;
 }
 
@@ -444,6 +443,7 @@ void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
   signal = "";
   if ( rst2 == 0 ) signal = "m0" + String(mymix);
   else             signal = "m1" + String(mymix);
+
   return;
 }
 
@@ -453,6 +453,7 @@ void setpoint() {
   write_crumble();
   autoclave_flag = 1;
   Serial.println("good setpoint");
+
   return;
 }
 
@@ -473,7 +474,6 @@ void format_message(int var) {
 
 //Re-transmition commands to slave micro controller
 void broadcast_setpoint(uint8_t select) {
-
   //se prepara el setpoint para el renvio hacia uc slave.
   format_message(u_temp);
   uset_temp = svar; //string variable for control: uset_temp
@@ -519,7 +519,6 @@ void clean_strings() {
   uset_ph   = "";
   ph_select ="";
 }
-
 
 
 
@@ -606,7 +605,7 @@ int validate() {
 
       //Validate actions for autoclave, relay states: Agua o Vapor
       else if ( message[0] == 'a' && message[1] == 'c' &&
-               (message[2] == 'v' || message[2] == 'd' || message[2] == 'a') &&
+               (message[2] == 'v' || message[2] == 'd' || message[2] == 'a' || message[2] == 'o') &&
                 message[3] == 'e'
               )
           return 1;

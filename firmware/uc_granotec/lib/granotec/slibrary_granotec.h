@@ -8,6 +8,7 @@
 
 #include <Arduino.h>
 
+
 //Electrovalvula AGUA
 #define v1 12
 #define v2 11
@@ -29,14 +30,13 @@ boolean stringComplete = false;
 
 void serialEvent() {
   while (Serial.available()) {
-    char inChar = (char)Serial.read();
+    char inChar = (char) Serial.read();
     message += inChar;
     if (inChar == '\n') {
       stringComplete = true;
     }
   }
 }
-
 
 
 void bomb() {
@@ -65,13 +65,12 @@ void setup_default() {
   digitalWrite(Bomba1, HIGH);  //Contactor bomba off
   digitalWrite(Bomba2, HIGH);  //Contactor bomba off
 
-
-  digitalWrite(VDF_ENABLE, HIGH);  //VDF OFF
+//digitalWrite(VDF_ENABLE, HIGH);  //VDF OFF
 }
 
 uint16_t rpm_set = 50;
 String message_save = "";
-int motor_enable = 1;
+int motor_enable = 1;  //esta variable se extrae desde message[1]
 void motor_message() {
   //extraction of speed for vdf/motor
   //                   01|234
@@ -87,7 +86,7 @@ void motor_message() {
 
 void motor_set() {
   if (motor_enable == 0) {
-    uint16_t pwm_set = map(rpm_set, 0, 750, 0, 255);
+    uint16_t pwm_set = map(rpm_set, 50, 750, 0, 255);
     digitalWrite(VDF_ENABLE, LOW);  //VDF ON
     analogWrite(PWM_PIN, pwm_set);  //VDF SPEED SET
   }

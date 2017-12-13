@@ -13,6 +13,7 @@ void setup() {
   wdt_disable();
 
   Serial.begin(9600);
+
   pinMode(PWM_PIN, OUTPUT);
 
   //POWER ON INDICATOR
@@ -27,9 +28,11 @@ void setup() {
   PORTD = PORTB | (1<<PD7) | (1<<PD6);
 
   message.reserve(65);
-  setup_default();
 
-  wdt_enable(WDTO_4S);
+  setup_default();                 //valves and bomb OFF
+  digitalWrite(VDF_ENABLE, HIGH);  //VDF OFF
+
+  wdt_enable(WDTO_2S);
 }
 
 //Relay with inverter logical
@@ -37,6 +40,10 @@ void loop() {
   if ( stringComplete ) {
       switch ( message[0] )
       {
+          case 'd':
+            setup_default();
+            break;
+
           case 'a': //a-gua fria (enfria con agua de la llave)
             setup_default();
             bomb();
@@ -49,21 +56,24 @@ void loop() {
             steam_valve();
             break;
 
+          case 'o':  //no hacer nada mas que recircular
+            setup_default();
+            bomb();
+              break;
+
           case 'm': //m-otor
             motor_message();
             break;
-
-          case 'd':
-            setup_default();
-            break;
       }
-      //Serial.print("uc_granotec command update:\t");
-      Serial.println(message);
+      Serial.print("uc_granotec command update:\t");
+      //Serial.println(message);
 
       stringComplete = false;
       message = "";
-  }
-  motor_set();
-  wdt_reset();
-  delay(100);
+      wdt_reset();
+    }
+
+motor_set();
+//wdt_reset();
+delay(250);
 }

@@ -27,21 +27,21 @@ void setup() {
 void loop() {
   if ( stringComplete  ) {
       if ( validate() ) {
-          PORTB = 1<<PB0;
+          //PORTB = 1<<PB0;
 
           switch ( message[0] ) {
               case 'r':  //lectura de sensores
                 hamilton_sensors();
                 daqmx();
                 control_ph();
-                heat_exchanger_controller('c');
+                heat_exchanger_controller('c');   //control de temperatura
                 broadcast_setpoint(0);
                 break;
 
               case 'w':  //setpoints
                 setpoint();
                 control_ph();
-                heat_exchanger_controller('c');
+                heat_exchanger_controller('c');   //control de temperatura
                 motor_set();
                 broadcast_setpoint(1);
                 break;
@@ -56,7 +56,7 @@ void loop() {
 
               case 'a':  //setpoint autoclave
                 //message[2] tiene que ser 'v' para setear vapor para autoclave
-                heat_exchanger_controller('a');
+                heat_exchanger_controller('a');      //control de estirilizacion
                 Serial.println("se fijo autoclave"); //"AUTOCLAVE ON");
                 broadcast_setpoint(1);
                 break;
@@ -65,7 +65,7 @@ void loop() {
                 break;
           }
 
-          PORTB = 0<<PB0;
+          //PORTB = 0<<PB0;
       }
       else {
         Serial.println("bad validate");
