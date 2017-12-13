@@ -892,3 +892,17 @@ sincronizado: Hora=01:48:54__Fecha=13-12-17
 sincronizado: Hora=01:49:38__Fecha=13-12-17 
 sincronizado: Hora=01:52:40__Fecha=13-12-17 
 sincronizado: Hora=01:55:40__Fecha=13-12-17 
+sincronizado: Hora=01:58:41__Fecha=13-12-17 
+sincronizado: Hora=01:59:30__Fecha=13-12-17 
+sincronizado: Hora=01:59:59__Fecha=13-12-17 
+sincronizado: Hora=02:01:43__Fecha=13-12-17 
+sincronizado: Hora=02:04:44__Fecha=13-12-17 
+sincronizado: Hora=02:06:26__Fecha=13-12-17 
+sincronizado: Hora=02:08:27__Fecha=13-12-17 
+sincronizado: Hora=02:11:29__Fecha=13-12-17 
+sincronizado: Hora=02:12:28__Fecha=13-12-17 
+sincronizado: Hora=02:15:29__Fecha=13-12-17 
+sincronizado: Hora=02:16:39__Fecha=13-12-17 
+sincronizado: Hora=02:18:04__Fecha=13-12-17 
+sincronizado: Hora=02:21:05__Fecha=13-12-17 
+sincronizado: Hora=02:24:06__Fecha=13-12-17 

@@ -548,7 +548,7 @@ def background_thread2():
         while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
             if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
                 communication.cook_autoclave('o') # entonces no seguir calentando, ni enfriar, 'n' es solamente recircular
-                socketio.sleep(1) # 60[s]
+                socketio.sleep(60) # 60[s]
                 ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
                 socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
