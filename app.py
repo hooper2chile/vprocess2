@@ -578,15 +578,11 @@ def background_thread2():
             '''
 
 	if ac_sets[1] <= 0:
-<<<<<<< HEAD
-    		communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF)
-                ac_sets[1] = 0  #asegurando el valor
-=======
             ac_sets[1] = 0  #asegurando el valor
 
     communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF)
->>>>>>> 2c1cf299804adabf22f0a8d85c00adff57deb62a
     socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
+    flag_autoclave = False
 
 
 

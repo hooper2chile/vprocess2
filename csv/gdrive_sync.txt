@@ -875,3 +875,4 @@ sincronizado: Hora=01:15:34__Fecha=13-12-17
 sincronizado: Hora=01:18:35__Fecha=13-12-17 
 sincronizado: Hora=01:19:46__Fecha=13-12-17 
 sincronizado: Hora=01:21:14__Fecha=13-12-17 
+sincronizado: Hora=01:24:15__Fecha=13-12-17 
