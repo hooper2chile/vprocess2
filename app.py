@@ -549,11 +549,12 @@ def background_thread2():
 
     while flag_autoclave:
         #aseguro que se realice con el flag de autoclave
+        '''
         if ac_sets[3] == 'True':
             flag_autoclave = True
         else:
             flag_autoclave = False
-
+        '''
     	communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
         while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
             if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
