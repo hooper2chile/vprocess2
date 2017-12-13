@@ -552,7 +552,8 @@ def background_thread2():
              	socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
                 
             else:
-		#ac_sets[1] = time_save    # repone el tiempo seteado en caso que rompa la "cadena de calor de autoclavado" para reiniciarlo
+		ac_sets[1] = time_save    # repone el tiempo seteado en caso que rompa la "cadena de calor de autoclavado" para reiniciarlo
+		socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 		communication.cook_autoclave('v') # sino aplicar vapor al intercambiador
 	        socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada... 
          
@@ -564,10 +565,7 @@ def background_thread2():
 	
 	if ac_sets[1] <= 0:
 		communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF) 
-
-        #El while termina dejando el intercambiador en default (APAGADO, SIN CONTROL TEMPERATURA, SIN MODO AUTOCLAVE)
-        #communication.cook_autoclave('d')
-        #permite volver a correr el thread una vez terminado un timer
+                ac_sets[1] = 0  #asegurando el valor
         socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
 
 

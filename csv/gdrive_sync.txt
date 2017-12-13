@@ -846,3 +846,14 @@ sincronizado: Hora=23:47:20__Fecha=12-12-17
 sincronizado: Hora=23:50:21__Fecha=12-12-17 
 sincronizado: Hora=23:53:22__Fecha=12-12-17 
 sincronizado: Hora=23:56:22__Fecha=12-12-17 
+sincronizado: Hora=00:05:02__Fecha=13-12-17 
+sincronizado: Hora=00:08:03__Fecha=13-12-17 
+sincronizado: Hora=00:11:04__Fecha=13-12-17 
+sincronizado: Hora=00:14:05__Fecha=13-12-17 
+sincronizado: Hora=00:17:06__Fecha=13-12-17 
+sincronizado: Hora=00:20:07__Fecha=13-12-17 
+sincronizado: Hora=00:23:08__Fecha=13-12-17 
+sincronizado: Hora=00:26:09__Fecha=13-12-17 
+sincronizado: Hora=00:29:36__Fecha=13-12-17 
+sincronizado: Hora=00:32:37__Fecha=13-12-17 
+sincronizado: Hora=00:35:38__Fecha=13-12-17 
