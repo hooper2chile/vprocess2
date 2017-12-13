@@ -540,7 +540,7 @@ def autoclave_functions(dato):
 #CONFIGURACION DE THREADS
 def background_thread2():
     global ac_sets, time_save, temp_save, thread2, measures
-    flag_autoclave = False
+    flag_autoclave = True
 
     #ac_sets[0] =: temperatura de autoclavado
     #ac_sets[1] =: tiempo de autoclavado
@@ -548,13 +548,6 @@ def background_thread2():
     #ac_sets[3] =: flag habilitar (AutoClave) webpage esterilizacion
 
     while flag_autoclave:
-        #aseguro que se realice con el flag de autoclave
-
-        if ac_sets[3] == 'True':
-            flag_autoclave = True
-        else:
-            flag_autoclave = False
-
     	communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
         while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
             if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
@@ -582,7 +575,7 @@ def background_thread2():
 
     communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF)
     socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
-    flag_autoclave = False
+
 
 
 
