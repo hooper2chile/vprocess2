@@ -864,3 +864,12 @@ sincronizado: Hora=00:44:55__Fecha=13-12-17
 sincronizado: Hora=00:45:44__Fecha=13-12-17 
 sincronizado: Hora=00:48:45__Fecha=13-12-17 
 sincronizado: Hora=00:51:46__Fecha=13-12-17 
+sincronizado: Hora=00:54:39__Fecha=13-12-17 
+sincronizado: Hora=00:57:40__Fecha=13-12-17 
+sincronizado: Hora=01:00:41__Fecha=13-12-17 
+sincronizado: Hora=01:03:42__Fecha=13-12-17 
+sincronizado: Hora=01:06:43__Fecha=13-12-17 
+sincronizado: Hora=01:09:32__Fecha=13-12-17 
+sincronizado: Hora=01:12:33__Fecha=13-12-17 
+sincronizado: Hora=01:15:34__Fecha=13-12-17 
+sincronizado: Hora=01:18:35__Fecha=13-12-17 
