@@ -547,42 +547,27 @@ def background_thread2():
     #ac_sets[2] =: flag deshabilitar control temperatura webpage proceso
     #ac_sets[3] =: flag habilitar (AutoClave) webpage esterilizacion
 
-    while flag_autoclave:
-        #aseguro que se realice con el flag de autoclave
 
-        if ac_sets[3] == 'True':
-            flag_autoclave = True
+	communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
+    while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
+        if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
+            communication.cook_autoclave('o') # entonces no seguir calentando, ni enfriar, 'n' es solamente recircular
+            socketio.sleep(1) # 60[s]
+            ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
+            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+
         else:
-            flag_autoclave = False
+            ac_sets[1] = time_save    # repone el tiempo seteado en caso que rompa la "cadena de calor de autoclavado" para reiniciarlo
+            socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+            communication.cook_autoclave('v') # sino aplicar vapor al intercambiador
+            socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
 
-    	communication.cook_autoclave('d')  # partimos poniendo bomba y valvulas a default (OFF)
-        while ac_sets[1] > 0: # "mientras el tiempo continua corriendo"
-            if float(measures[2]) >= temp_save:   # "si la temperatura es mayor que la temperatura seteada"
-                communication.cook_autoclave('o') # entonces no seguir calentando, ni enfriar, 'n' es solamente recircular
-		socketio.sleep(1) # 60[s]
-             	ac_sets[1] -= 1   # ac_sets[1]=: timer set, ac_sets[2]=: temperatura set???
-             	socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
-
-            else:
-       		ac_sets[1] = time_save    # repone el tiempo seteado en caso que rompa la "cadena de calor de autoclavado" para reiniciarlo
-       		socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
-        	communication.cook_autoclave('v') # sino aplicar vapor al intercambiador
-        	socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada...
-
-	    #Revisar si necesita dos while anidados.
-            '''
-            f = open(DIR + "autoclave_setting.txt","a+")
-            f.write("entre en thread2:\n")
-            f.write(str(ac_sets) + ', ' + str(time_save) + ', ' + str(temp_save) + ' ' + measures[2] + '\n')
-            f.close()
-            '''
-
-	if ac_sets[1] <= 0:
+    if ac_sets[1] <= 0:
             ac_sets[1] = 0  #asegurando el valor
 
     communication.cook_autoclave('d')  # terminamos poniendo bomba y valvulas a default (OFF)
     socketio.sleep(0.5) #para no matar el procesador cuando no pasa nada..
-    flag_autoclave = False
+
 
 
 
