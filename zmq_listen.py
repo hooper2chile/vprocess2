@@ -26,6 +26,7 @@ string = ['','','','']
   Byte5 = Itemp1;
   Byte6 = Itemp2;
 '''
+os.system("clear")
 while True:
    
     string = socket_sub.recv().split()
