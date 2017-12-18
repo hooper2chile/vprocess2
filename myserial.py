@@ -109,6 +109,7 @@ def rs232(q1,q2):
 				    
                                     if k == 3:
                                         k = 0
+                                        time.sleep(0.3) #esperar 300ms antes de reenviar setpoint por que acaba de envierase leer
                                         ser.write(save_setpoint+'\n')
 
                                     else:
