@@ -90,13 +90,13 @@ def rs232(q1,q2):
 
             flag = ser.is_open
 
-            if flag:
+            if flag: ####### no deberia ser "if not flag"
                 logging.info('CONEXION SERIAL EXITOSA')
 
             while ser.is_open:
                 try:
                     if not q1.empty():
-                        action = q1.get()
+                        action = q1.get()  #esta accion puede ser "read" o algunas de las setpoint o calibracion
 
                         #Action for read measure from serial port
                         if action == "read":
@@ -108,6 +108,7 @@ def rs232(q1,q2):
 
                                 else:
                                     ser.open()
+
                             except:
                                 #print "no se pudo leer SERIAL_DATA del uc"
                                 logging.error("no se pudo leer SERIAL_DATA del uc")
@@ -130,7 +131,7 @@ def rs232(q1,q2):
                                 save_setpoint = action  #test: veamos si es necesario para cuando ocurre un except, guardar tb el ultimo setpoint
                                 logging.info("The last setpoint save")
                                 ser.close()
-                                flag = False   #test, no deveria ser: flag = True ??? ###########################################################
+                                flag = True #estaba: False #test, no deveria ser: flag = True ??? ###########################################################
 
                     elif q1.empty():
                         time.sleep(tau_serial)
