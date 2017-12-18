@@ -32,7 +32,7 @@ void setup() {
   setup_default();                 //valves and bomb OFF
   digitalWrite(VDF_ENABLE, HIGH);  //VDF OFF
 
-  wdt_enable(WDTO_2S);
+  wdt_enable(WDTO_4S);
 }
 
 //Relay with inverter logical
@@ -47,7 +47,7 @@ void loop() {
           case 'a': //a-gua fria (enfria con agua de la llave)
             setup_default();
             bomb();
-            hot_water_valve();
+            water_valve();
             break;
 
           case 'v': //v-apor (calentar en realidad)
@@ -59,7 +59,7 @@ void loop() {
           case 'o':  //no hacer nada mas que recircular
             setup_default();
             bomb();
-              break;
+            break;
 
           case 'm': //m-otor
             motor_message();

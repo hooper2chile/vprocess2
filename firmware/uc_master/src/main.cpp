@@ -36,6 +36,8 @@ void loop() {
                 control_ph();
                 heat_exchanger_controller('c');   //control de temperatura
                 broadcast_setpoint(0);
+                //TEST: busca evitar las paradas no deseadas del motor
+                resend_motor();
                 break;
 
               case 'w':  //setpoints
@@ -54,8 +56,7 @@ void loop() {
                 actuador_umbral();
                 break;
 
-              case 'a':  //setpoint autoclave
-                //message[2] tiene que ser 'v' para setear vapor para autoclave
+              case 'a':  //setpoint autoclave: message[2] tiene que ser 'v' para setear vapor para autoclave
                 heat_exchanger_controller('a');      //control de estirilizacion
                 Serial.println("se fijo autoclave"); //"AUTOCLAVE ON");
                 broadcast_setpoint(1);

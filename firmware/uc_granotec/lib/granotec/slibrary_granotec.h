@@ -44,9 +44,9 @@ void bomb() {
   digitalWrite(Bomba2, LOW);  //Contactor bomba on
 }
 
-void hot_water_valve() {
-  digitalWrite(v1, LOW);   //Contactor valve hot water on
-  digitalWrite(v2, LOW);   //Contactor valve hot water on
+void water_valve() {
+  digitalWrite(v1, LOW);   //Contactor valve water on
+  digitalWrite(v2, LOW);   //Contactor valve water on
 }
 
 void steam_valve() {
@@ -56,8 +56,8 @@ void steam_valve() {
 
 // default setup:  ALL Contactor OFF (HIGH => OFF)
 void setup_default() {
-  digitalWrite(v1, HIGH);  //Contactor valve hot water on
-  digitalWrite(v2, HIGH);  //Contactor valve hot water on
+  digitalWrite(v1, HIGH);  //Contactor valve water on
+  digitalWrite(v2, HIGH);  //Contactor valve water on
 
   digitalWrite(v3, HIGH);  //Contactor valve steam off
   digitalWrite(v4, HIGH);  //Contactor valve steam off

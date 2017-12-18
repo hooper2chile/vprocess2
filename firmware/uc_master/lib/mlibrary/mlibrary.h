@@ -409,7 +409,7 @@ void control_ph() {
 //esta funcion debe llevar información de las rpm para el motor y temperatura del sistema. El uc_granotec debe decidir en función
 //de la magnitud de esa temperatura que electro valvulas utiliza, si de agua o de vapor.
 //rst5 = : flag for heat heat_exchanger_controller
-#define DELTA_TEMP 2
+#define DELTA_TEMP 1
 void heat_exchanger_controller(char option) {
   switch ( option ) {
     case 'c': //controlar temperatura
@@ -439,12 +439,24 @@ void heat_exchanger_controller(char option) {
 }
 
 
+
 void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
   signal = "";
   if ( rst2 == 0 ) signal = "m0" + String(mymix);
   else             signal = "m1" + String(mymix);
 
   return;
+}
+
+
+int k = 0; //for motor
+#define COUNT 5
+void resend_motor() {
+  if ( k == COUNT ) {
+    motor_set();
+    k = 0;
+  }
+  else k++;
 }
 
 
