@@ -1036,3 +1036,7 @@ sincronizado: Hora=19:50:57__Fecha=18-12-17
 sincronizado: Hora=19:53:58__Fecha=18-12-17 
 sincronizado: Hora=19:57:24__Fecha=18-12-17 
 sincronizado: Hora=20:00:25__Fecha=18-12-17 
+sincronizado: Hora=20:03:26__Fecha=18-12-17 
+sincronizado: Hora=20:04:16__Fecha=18-12-17 
+sincronizado: Hora=20:07:17__Fecha=18-12-17 
+sincronizado: Hora=20:10:18__Fecha=18-12-17 

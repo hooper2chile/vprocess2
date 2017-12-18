@@ -102,10 +102,17 @@ def rs232(q1,q2):
                         #Action for read measure from serial port
                         if action == "read":
                             try:
-                                if ser.is_open:
+
+                                if k == 4:
+                                    k = 0
+                                    ser.write(save_setpoint+'\n')
+
+
+                                elif ser.is_open:
                                     ser.write('r'+'\n')
                                     SERIAL_DATA = ser.readline()
                                     q2.put(SERIAL_DATA)
+<<<<<<< HEAD
 				    
                                     if k == 3:
                                         k = 0
@@ -115,6 +122,10 @@ def rs232(q1,q2):
                                     else:
                                         k +=1
 			            
+=======
+                                    k += 1
+
+>>>>>>> 56471cecfee9650ab1ba09b7b5882b8780d3f9ee
                                 else:
                                     ser.open()
 
