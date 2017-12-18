@@ -454,8 +454,8 @@ void setpoint() {
   //acá se leen los nuevos setpoint para los lazos de control
   write_crumble();
   autoclave_flag = 1;
-  Serial.println("good setpoint");
-
+  //Serial.println("good setpoint");
+  
   return;
 }
 
