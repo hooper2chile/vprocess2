@@ -86,11 +86,6 @@ def rs232(q1,q2):
                 logging.info("Reenviando ultimo SETPOINT %s", save_setpoint)
                 ser.write(save_setpoint+'\n')
                 result = ser.readline().split()
-                ### uc granotec default ##########
-                #time.sleep(1)
-                #ser.write('acde'+'\n')
-                #result = ser.readline().split()
-                ##################################
                 logging.info(result)
 
             flag = ser.is_open
@@ -132,8 +127,10 @@ def rs232(q1,q2):
                             except:
                                 #print "no se pudo escribir al uc"
                                 logging.info("no se pudo escribir al uc")
+                                save_setpoint = action  #test: veamos si es necesario para cuando ocurre un except, guardar tb el ultimo setpoint
+                                logging.info("The last setpoint save")
                                 ser.close()
-                                flag = False
+                                flag = False   #test, no deveria ser: flag = True ??? ###########################################################
 
                     elif q1.empty():
                         time.sleep(tau_serial)
