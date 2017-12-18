@@ -596,10 +596,14 @@ def background_thread1():
             #### TEST ######
             if k == 8:
                 k = 0
-                communication.cook_setpoint(save_set_data)
+                communication.cook_setpoint(set_data)
+                f = open(DIR + "motor_resend.txt","a+")
+             	f.write(set_data + '\n')
+            	f.close()
+
             else:
                 k += 1
-            #################    
+            #################
 
             #logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
 
