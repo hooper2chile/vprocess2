@@ -569,7 +569,8 @@ def background_thread2():
 
 def background_thread1():
     save_set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
-
+    k = 0
+    
     global set_data, measures
     while True:
         #se emiten las mediciones y setpoints para medir y graficar
