@@ -27,7 +27,7 @@ void setup() {
 void loop() {
   if ( stringComplete  ) {
       if ( validate() ) {
-          //PORTB = 1<<PB0;
+          PORTB = 1<<PB0;
 
           switch ( message[0] ) {
               case 'r':  //lectura de sensores
@@ -65,7 +65,7 @@ void loop() {
                 break;
           }
 
-          //PORTB = 0<<PB0;
+          PORTB = 0<<PB0;
       }
       else {
         Serial.println("bad validate");
