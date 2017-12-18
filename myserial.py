@@ -131,7 +131,7 @@ def rs232(q1,q2):
                                 save_setpoint = action  #test: veamos si es necesario para cuando ocurre un except, guardar tb el ultimo setpoint
                                 logging.info("The last setpoint save")
                                 ser.close()
-                                flag = True #estaba: False #test, no deveria ser: flag = True ??? ###########################################################
+                                flag = False
 
                     elif q1.empty():
                         time.sleep(tau_serial)
