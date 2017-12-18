@@ -102,18 +102,17 @@ def rs232(q1,q2):
                         #Action for read measure from serial port
                         if action == "read":
                             try:
-                                if ser.is_open:
+
+                                if k == 4:
+                                    k = 0
+                                    ser.write(save_setpoint+'\n')
+
+
+                                elif ser.is_open:
                                     ser.write('r'+'\n')
                                     SERIAL_DATA = ser.readline()
                                     q2.put(SERIAL_DATA)
-
-                                    if k == 3:
-                                        k = 0
-                                        time.sleep(0.3) #esperar 300ms antes de reenviar setpoint por que acaba de envierase leer
-                                        ser.write(save_setpoint+'\n')
-
-                                    else:
-                                        k +=1
+                                    k += 1
 
                                 else:
                                     ser.open()
