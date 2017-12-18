@@ -37,7 +37,7 @@ void loop() {
                 heat_exchanger_controller('c');   //control de temperatura
                 broadcast_setpoint(0);
                 //TEST: busca evitar las paradas no deseadas del motor
-                resend_motor();
+                motor_set();
                 break;
 
               case 'w':  //setpoints

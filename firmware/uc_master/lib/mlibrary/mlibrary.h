@@ -449,15 +449,6 @@ void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
 }
 
 
-int k = 0; //for motor
-#define COUNT 5
-void resend_motor() {
-  if ( k == COUNT ) {
-    motor_set();
-    k = 0;
-  }
-  else k++;
-}
 
 
 void setpoint() {
