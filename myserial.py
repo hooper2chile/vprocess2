@@ -10,7 +10,7 @@ tau_zmq_connect     = 0.5   # 0.3=300 [ms]
 tau_zmq_while_write = 0.5   # 0.3=300 [ms]
 tau_zmq_while_read  = 0.5   # 0.3=300 [ms]
 tau_serial          = 0.02  # 0.01=10 [ms]
-
+k = 0
 ##### Queue data: q1 is for put data to   serial port #####
 ##### Queue data: q2 is for get data from serial port #####
 def listen(q1):
@@ -64,6 +64,7 @@ def speak(q1,q2):
 def rs232(q1,q2):
     save_setpoint = 'wph00.0feed000unload000mix0000temp000rst111111dir111111'
     flag = False
+    global k
     while not flag:
         try:
             ser = serial.Serial(port='/dev/ttyUSB0', baudrate=9600)
@@ -90,24 +91,33 @@ def rs232(q1,q2):
 
             flag = ser.is_open
 
-            if flag:
+            if flag: ####### no deberia ser "if not flag"
                 logging.info('CONEXION SERIAL EXITOSA')
 
             while ser.is_open:
                 try:
                     if not q1.empty():
-                        action = q1.get()
+                        action = q1.get()  #esta accion puede ser "read" o algunas de las setpoint o calibracion
 
                         #Action for read measure from serial port
                         if action == "read":
                             try:
-                                if ser.is_open:
+
+                                if k == 4:
+                                    k = 0
+                                    ser.write(save_setpoint+'\n')
+				    SERIAL_DATA = ser.readline()
+
+
+                                elif ser.is_open:
                                     ser.write('r'+'\n')
                                     SERIAL_DATA = ser.readline()
                                     q2.put(SERIAL_DATA)
+                                    k +=1
 
                                 else:
                                     ser.open()
+
                             except:
                                 #print "no se pudo leer SERIAL_DATA del uc"
                                 logging.error("no se pudo leer SERIAL_DATA del uc")
@@ -124,13 +134,13 @@ def rs232(q1,q2):
                                 #print result
                                 logging.info(result)
 
-                            except:
+                            except: #except 4
                                 #print "no se pudo escribir al uc"
-                                logging.info("no se pudo escribir al uc")
+                                logging.info("no se pudo escribir al uc, ocurrio except 4, flag=True")
                                 save_setpoint = action  #test: veamos si es necesario para cuando ocurre un except, guardar tb el ultimo setpoint
                                 logging.info("The last setpoint save")
                                 ser.close()
-                                flag = False   #test, no deveria ser: flag = True ??? ###########################################################
+                                flag = False
 
                     elif q1.empty():
                         time.sleep(tau_serial)

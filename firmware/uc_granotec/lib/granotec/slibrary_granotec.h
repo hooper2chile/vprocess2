@@ -76,8 +76,8 @@ void motor_message() {
   //                   01|234
   //Example: message = m0|750
   message_save = message;
-  motor_enable = message_save.substring(1,2).toFloat();
-  rpm_set = message_save.substring(2).toFloat();
+  motor_enable = message_save.substring(1,2).toInt();
+  rpm_set = message_save.substring(2).toInt();
 
   Serial.print("new rpm_set:\t");
   Serial.println(rpm_set);

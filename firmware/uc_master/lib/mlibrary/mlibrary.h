@@ -87,7 +87,7 @@ float Byte6 = 0;  char cByte6[15] = "";
 
 // Sensors
 const int SENSOR_PH    = A0;  // Input pin for measuring Vout
-const int SENSOR_TEMP1 = A1;  //Original: A1. Lo cambie por que arruine ese pin trabajando.
+const int SENSOR_TEMP1 = A4;  //Original: A1. Lo cambie por que arruine ese pin trabajando.
 const int SENSOR_TEMP2 = A2;
 const int SENSOR_OD    = A3;
 
@@ -154,7 +154,6 @@ void serialEvent() {
     }
   }
 }
-
 
 
 //desmenuza el string de comandos
@@ -449,22 +448,13 @@ void motor_set() {  //opcion "m" motor: destinado a operar las rpm del motor
 }
 
 
-int k = 0; //for motor
-#define COUNT 5
-void resend_motor() {
-  if ( k == COUNT ) {
-    motor_set();
-    k = 0;
-  }
-  else k++;
-}
 
 
 void setpoint() {
   //acá se leen los nuevos setpoint para los lazos de control
   write_crumble();
   autoclave_flag = 1;
-  Serial.println("good setpoint");
+  //Serial.println("good setpoint");
 
   return;
 }

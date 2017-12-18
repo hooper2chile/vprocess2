@@ -569,6 +569,7 @@ def background_thread2():
 
 def background_thread1():
     save_set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
+    k = 0
 
     global set_data, measures
     while True:
@@ -592,6 +593,20 @@ def background_thread1():
                 if save_set_data[i] != set_data[i]:
                     communication.cook_setpoint(set_data)
                     save_set_data = set_data
+
+            #### TEST ######
+            '''
+            if k == 8:
+                k = 0
+                communication.cook_setpoint(save_set_data)
+                f = open(DIR + "motor_resend.txt","a+")
+             	f.write(str(set_data) + '\n')
+            	f.close()
+
+            else:
+                k += 1
+            '''
+            #################
 
             #logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
 

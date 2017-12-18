@@ -27,7 +27,7 @@ void setup() {
 void loop() {
   if ( stringComplete  ) {
       if ( validate() ) {
-          //PORTB = 1<<PB0;
+          PORTB = 1<<PB0;
 
           switch ( message[0] ) {
               case 'r':  //lectura de sensores
@@ -36,8 +36,6 @@ void loop() {
                 control_ph();
                 heat_exchanger_controller('c');   //control de temperatura
                 broadcast_setpoint(0);
-                //TEST: busca evitar las paradas no deseadas del motor
-                resend_motor();
                 break;
 
               case 'w':  //setpoints
@@ -46,6 +44,7 @@ void loop() {
                 heat_exchanger_controller('c');   //control de temperatura
                 motor_set();
                 broadcast_setpoint(1);
+                daqmx();
                 break;
 
               case 'c':  //calibracion de sensores
@@ -66,7 +65,7 @@ void loop() {
                 break;
           }
 
-          //PORTB = 0<<PB0;
+          PORTB = 0<<PB0;
       }
       else {
         Serial.println("bad validate");
