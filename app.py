@@ -593,6 +593,14 @@ def background_thread1():
                     communication.cook_setpoint(set_data)
                     save_set_data = set_data
 
+            #### TEST ######
+            if k == 8:
+                k = 0
+                communication.cook_setpoint(save_set_data)
+            else:
+                k += 1
+            #################    
+
             #logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
 
         except:

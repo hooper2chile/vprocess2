@@ -125,9 +125,9 @@ def rs232(q1,q2):
                                 #print result
                                 logging.info(result)
 
-                            except:
+                            except: #except 4
                                 #print "no se pudo escribir al uc"
-                                logging.info("no se pudo escribir al uc")
+                                logging.info("no se pudo escribir al uc, ocurrio except 4, flag=True")
                                 save_setpoint = action  #test: veamos si es necesario para cuando ocurre un except, guardar tb el ultimo setpoint
                                 logging.info("The last setpoint save")
                                 ser.close()

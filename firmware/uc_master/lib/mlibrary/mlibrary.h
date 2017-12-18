@@ -156,7 +156,6 @@ void serialEvent() {
 }
 
 
-
 //desmenuza el string de comandos
 void write_crumble() {
   //Serial.println("good");
