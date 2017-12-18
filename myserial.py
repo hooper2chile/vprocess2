@@ -106,14 +106,14 @@ def rs232(q1,q2):
                                     ser.write('r'+'\n')
                                     SERIAL_DATA = ser.readline()
                                     q2.put(SERIAL_DATA)
-				    '''
+				    
                                     if k == 3:
                                         k = 0
                                         ser.write(save_setpoint+'\n')
 
                                     else:
                                         k +=1
-			            '''
+			            
                                 else:
                                     ser.open()
 
