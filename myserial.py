@@ -10,7 +10,6 @@ tau_zmq_connect     = 0.5   # 0.3=300 [ms]
 tau_zmq_while_write = 0.5   # 0.3=300 [ms]
 tau_zmq_while_read  = 0.5   # 0.3=300 [ms]
 tau_serial          = 0.02  # 0.01=10 [ms]
-k = 0
 
 ##### Queue data: q1 is for put data to   serial port #####
 ##### Queue data: q2 is for get data from serial port #####
@@ -65,6 +64,7 @@ def speak(q1,q2):
 def rs232(q1,q2):
     save_setpoint = 'wph00.0feed000unload000mix0000temp000rst111111dir111111'
     flag = False
+    k = 0
     while not flag:
         try:
             ser = serial.Serial(port='/dev/ttyUSB0', baudrate=9600)
@@ -110,9 +110,7 @@ def rs232(q1,q2):
                                     if k == 8:
                                         k = 0
                                         ser.write(save_setpoint+'\n')
-                                        f = open("/home/pi/vprocess2/" + "motor_resend.txt","a+")
-                                     	f.write(str(save_setpoint) + '\n')
-                                    	f.close()
+                    
                                     else:
                                         k +=1
 
