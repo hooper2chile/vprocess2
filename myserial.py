@@ -10,7 +10,7 @@ tau_zmq_connect     = 0.5   # 0.3=300 [ms]
 tau_zmq_while_write = 0.5   # 0.3=300 [ms]
 tau_zmq_while_read  = 0.5   # 0.3=300 [ms]
 tau_serial          = 0.1  # 0.01=10 [ms]
-
+k = 0
 ##### Queue data: q1 is for put data to   serial port #####
 ##### Queue data: q2 is for get data from serial port #####
 def listen(q1):
@@ -64,7 +64,7 @@ def speak(q1,q2):
 def rs232(q1,q2):
     save_setpoint = 'wph00.0feed000unload000mix0000temp000rst111111dir111111'
     flag = False
-    k = 0
+    global k
     while not flag:
         try:
             ser = serial.Serial(port='/dev/ttyUSB0', baudrate=9600)
