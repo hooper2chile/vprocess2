@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #--*- coding: utf-8 -*--
 
-import zmq, time
+import zmq, time, os
 
 tau_zmq_connect     = 0.5
 
@@ -17,8 +17,19 @@ time.sleep(tau_zmq_connect)
 
 string = ['','','','']
 
+'''
+  Byte0 = pH;
+  Byte1 = oD;
+  Byte2 = Temp1;
+  Byte3 = Iph;
+  Byte4 = Iod;
+  Byte5 = Itemp1;
+  Byte6 = Itemp2;
+'''
 while True:
     string = socket_sub.recv().split()
-    print "\n         pH,    oD,    Temp1,     Iph,   Iod,   Itemp1,   Itemp2"
-    print string
-    time.sleep(0.05)
+
+    print "\n   pH,     oD,     Temp1,     Iph,    Iod,    Itemp1,   Itemp2"
+    print string[1:8]
+    time.sleep(0.5)
+    os.system("clear")
