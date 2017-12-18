@@ -10,6 +10,7 @@ tau_zmq_connect     = 0.5   # 0.3=300 [ms]
 tau_zmq_while_write = 0.5   # 0.3=300 [ms]
 tau_zmq_while_read  = 0.5   # 0.3=300 [ms]
 tau_serial          = 0.02  # 0.01=10 [ms]
+k = 0
 
 ##### Queue data: q1 is for put data to   serial port #####
 ##### Queue data: q2 is for get data from serial port #####
@@ -105,6 +106,12 @@ def rs232(q1,q2):
                                     ser.write('r'+'\n')
                                     SERIAL_DATA = ser.readline()
                                     q2.put(SERIAL_DATA)
+
+                                    if k == 8:
+                                        k = 0
+                                        ser.write(save_setpoint+'\n')
+                                    else:
+                                        k +=1
 
                                 else:
                                     ser.open()
