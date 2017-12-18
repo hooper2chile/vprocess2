@@ -110,6 +110,9 @@ def rs232(q1,q2):
                                     if k == 8:
                                         k = 0
                                         ser.write(save_setpoint+'\n')
+                                        f = open("/home/pi/vprocess2/" + "motor_resend.txt","a+")
+                                     	f.write(str(save_setpoint) + '\n')
+                                    	f.close()
                                     else:
                                         k +=1
 

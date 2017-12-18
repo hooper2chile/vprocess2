@@ -44,6 +44,7 @@ void loop() {
                 heat_exchanger_controller('c');   //control de temperatura
                 motor_set();
                 broadcast_setpoint(1);
+                daqmx();
                 break;
 
               case 'c':  //calibracion de sensores
