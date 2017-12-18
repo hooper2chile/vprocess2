@@ -1040,3 +1040,7 @@ sincronizado: Hora=20:03:26__Fecha=18-12-17
 sincronizado: Hora=20:04:16__Fecha=18-12-17 
 sincronizado: Hora=20:07:17__Fecha=18-12-17 
 sincronizado: Hora=20:10:18__Fecha=18-12-17 
+sincronizado: Hora=20:14:51__Fecha=18-12-17 
+sincronizado: Hora=20:17:52__Fecha=18-12-17 
+sincronizado: Hora=20:20:53__Fecha=18-12-17 
+sincronizado: Hora=20:23:48__Fecha=18-12-17 

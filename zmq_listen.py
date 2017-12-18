@@ -27,9 +27,9 @@ string = ['','','','']
   Byte6 = Itemp2;
 '''
 while True:
+   
     string = socket_sub.recv().split()
-
+    os.system("clear")
     print "\n   pH,     oD,     Temp1,     Iph,    Iod,    Itemp1,   Itemp2"
     print string[1:8]
-    time.sleep(0.5)
-    os.system("clear")
+    time.sleep(0.25)
