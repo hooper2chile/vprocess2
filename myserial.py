@@ -112,20 +112,8 @@ def rs232(q1,q2):
                                     ser.write('r'+'\n')
                                     SERIAL_DATA = ser.readline()
                                     q2.put(SERIAL_DATA)
-<<<<<<< HEAD
-				    
-                                    if k == 3:
-                                        k = 0
-                                        time.sleep(0.3) #esperar 300ms antes de reenviar setpoint por que acaba de envierase leer
-                                        ser.write(save_setpoint+'\n')
+                                    k +=1
 
-                                    else:
-                                        k +=1
-			            
-=======
-                                    k += 1
-
->>>>>>> 56471cecfee9650ab1ba09b7b5882b8780d3f9ee
                                 else:
                                     ser.open()
 
