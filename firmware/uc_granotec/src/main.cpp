@@ -32,7 +32,7 @@ void setup() {
   setup_default();                 //valves and bomb OFF
   digitalWrite(VDF_ENABLE, HIGH);  //VDF OFF
 
-  wdt_enable(WDTO_4S);
+  wdt_enable(WDTO_8S);
 }
 
 //Relay with inverter logical
