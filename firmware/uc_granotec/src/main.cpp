@@ -74,5 +74,5 @@ void loop() {
     }
 
 motor_set();
-delay(150);
+delay(50);
 }
