@@ -1129,3 +1129,16 @@ sincronizado: Hora=20:20:53__Fecha=18-12-17
 sincronizado: Hora=20:23:48__Fecha=18-12-17 
 sincronizado: Hora=20:28:19__Fecha=18-12-17 
 >>>>>>> 5a74ed8a70293c43509390426959d5769c600c62
+sincronizado: Hora=20:35:41__Fecha=18-12-17 
+sincronizado: Hora=20:38:09__Fecha=18-12-17 
+sincronizado: Hora=20:41:12__Fecha=18-12-17 
+sincronizado: Hora=20:44:17__Fecha=18-12-17 
+sincronizado: Hora=20:47:23__Fecha=18-12-17 
+sincronizado: Hora=20:50:28__Fecha=18-12-17 
+sincronizado: Hora=20:53:33__Fecha=18-12-17 
+sincronizado: Hora=20:56:38__Fecha=18-12-17 
+sincronizado: Hora=20:59:43__Fecha=18-12-17 
+sincronizado: Hora=21:02:48__Fecha=18-12-17 
+sincronizado: Hora=21:05:53__Fecha=18-12-17 
+sincronizado: Hora=21:08:59__Fecha=18-12-17 
+sincronizado: Hora=21:12:04__Fecha=18-12-17 
