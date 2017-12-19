@@ -106,7 +106,7 @@ def rs232(q1,q2):
                                 if k == 4:
                                     k = 0
                                     ser.write(save_setpoint+'\n')
-				    SERIAL_DATA = ser.readline()
+                                    SERIAL_DATA = ser.readline()
 
 
                                 elif ser.is_open:
@@ -128,8 +128,8 @@ def rs232(q1,q2):
                         else:
                             try:
                                 ser.write(action+'\n')
-                                logging.info(action)
                                 result = ser.readline().split()
+                                logging.info(action)
                                 save_setpoint = action
                                 #print result
                                 logging.info(result)

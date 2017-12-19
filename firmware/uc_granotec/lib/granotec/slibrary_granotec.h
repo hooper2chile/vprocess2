@@ -86,7 +86,7 @@ void motor_message() {
 
 void motor_set() {
   if (motor_enable == 0) {
-    uint16_t pwm_set = map(rpm_set, 50, 750, 0, 255);
+    uint16_t pwm_set = map(rpm_set, 50, 750, 40, 255);
     digitalWrite(VDF_ENABLE, LOW);  //VDF ON
     analogWrite(PWM_PIN, pwm_set);  //VDF SPEED SET
   }

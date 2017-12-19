@@ -87,7 +87,7 @@ float Byte6 = 0;  char cByte6[15] = "";
 
 // Sensors
 const int SENSOR_PH    = A0;  // Input pin for measuring Vout
-const int SENSOR_TEMP1 = A4;  //Original: A1. Lo cambie por que arruine ese pin trabajando.
+const int SENSOR_TEMP1 = A1;  //Original: A1. Lo cambie por que arruine ese pin trabajando.
 const int SENSOR_TEMP2 = A2;
 const int SENSOR_OD    = A3;
 
