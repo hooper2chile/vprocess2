@@ -1128,6 +1128,7 @@ sincronizado: Hora=20:17:52__Fecha=18-12-17
 sincronizado: Hora=20:20:53__Fecha=18-12-17 
 sincronizado: Hora=20:23:48__Fecha=18-12-17 
 sincronizado: Hora=20:28:19__Fecha=18-12-17 
+<<<<<<< HEAD
 >>>>>>> 5a74ed8a70293c43509390426959d5769c600c62
 sincronizado: Hora=20:35:41__Fecha=18-12-17 
 sincronizado: Hora=20:38:09__Fecha=18-12-17 
@@ -1142,3 +1143,19 @@ sincronizado: Hora=21:02:48__Fecha=18-12-17
 sincronizado: Hora=21:05:53__Fecha=18-12-17 
 sincronizado: Hora=21:08:59__Fecha=18-12-17 
 sincronizado: Hora=21:12:04__Fecha=18-12-17 
+=======
+sincronizado: Hora=20:31:20__Fecha=18-12-17 
+sincronizado: Hora=20:34:21__Fecha=18-12-17 
+sincronizado: Hora=20:37:21__Fecha=18-12-17 
+sincronizado: Hora=20:40:22__Fecha=18-12-17 
+sincronizado: Hora=20:43:23__Fecha=18-12-17 
+sincronizado: Hora=20:46:24__Fecha=18-12-17 
+sincronizado: Hora=20:49:25__Fecha=18-12-17 
+sincronizado: Hora=20:52:26__Fecha=18-12-17 
+sincronizado: Hora=20:55:27__Fecha=18-12-17 
+sincronizado: Hora=20:58:27__Fecha=18-12-17 
+sincronizado: Hora=21:01:28__Fecha=18-12-17 
+sincronizado: Hora=21:04:29__Fecha=18-12-17 
+sincronizado: Hora=21:07:30__Fecha=18-12-17 
+sincronizado: Hora=21:10:31__Fecha=18-12-17 
+>>>>>>> 3bece8b3a373ceb32573ff7a6f155c5cf70a3c15
