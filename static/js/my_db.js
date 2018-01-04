@@ -61,7 +61,7 @@ $(document).ready(function() {
           }
 
           if(msg.var=='temp'){
-            var var_options = {animation: {duration: 0}, scales: {yAxes: [{ticks: {beginAtZero: true, min: 0, max:  80,}}]}}
+            var var_options = {animation: {duration: 0}, scales: {yAxes: [{ticks: {beginAtZero: true, min: 0, max:  150,}}]}}
             var data_set     = {       labels: time_ax,
                                       datasets: [{
                                                     label: msg.var,
